@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_09_192053) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_09_194925) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_09_192053) do
     t.date "start_date"
     t.date "end_date"
     t.string "message"
-    t.string "status"
+    t.boolean "status", default: false
     t.bigint "pet_id", null: false
     t.bigint "service_id", null: false
     t.datetime "created_at", null: false
