@@ -29,12 +29,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_09_192053) do
 
   create_table "pets", force: :cascade do |t|
     t.string "name"
-    t.string "type"
+    t.string "specie"
     t.string "description"
     t.string "likes"
     t.string "dislikes"
     t.integer "age"
-    t.integer "weight"
+    t.float "weight"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
