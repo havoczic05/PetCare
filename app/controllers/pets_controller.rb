@@ -9,6 +9,9 @@ class PetsController < ApplicationController
     @pet = Pet.new
   end
 
+  def edit
+  end
+
   def create
     @pet = Pet.new(pet_params)
     @pet.user = current_user
@@ -18,9 +21,6 @@ class PetsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-  
-   def edit
   end
 
   def update
@@ -37,11 +37,11 @@ class PetsController < ApplicationController
   private
 
   def pet_params
-    params.require(:pet).permit(:name, :type, :description, :likes, :dislikes, :age, :weight)
-  end 
-  
+    params.require(:pet).permit(:name, :specie, :description, :likes, :dislikes, :age, :weight)
+  end
+
   def set_pets
-    params@pet = Pet.find(params[:id])
+    @pet = Pet.find(params[:id])
   end
 
 end
