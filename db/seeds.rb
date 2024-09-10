@@ -96,10 +96,10 @@ def create_user
   url = "https://randomuser.me/api/?page=1&results=4&seed=abc"
   users = JSON.parse(URI.open(url).read)["results"]
   users.each do |user|
-    # file_name = user["id"]["value"] || user["name"]["first"]
-    # file = URI.parse(user["picture"]["large"]).open
+    file_name = user["id"]["value"] || user["name"]["first"]
+    file = URI.parse(user["picture"]["large"]).open
     user_content = base_user(user)
-    # user_content.photo.attach(io: file, filename: file_name, content_type: "image/png")
+    user_content.photo.attach(io: file, filename: file_name, content_type: "image/png")
     user_content.save
   end
 end
@@ -131,11 +131,18 @@ def base_pet(animal, name_pet)
   return Pet.new(initial_pet)
 end
 
+def set_photo(query)
+  url_base = "https://api.unsplash.com/search/photos"
+  url = "#{url_base}?query=#{query}&client_id=#{ENV['API_TOKEN_UNSPLASH']}&per_page=1"
+end
+
 puts "Creating pets..."
 2.times do
   %w[dog cat rabbit birds reptiles].each do |animal|
+    file_name = set_photo(animal)
     name_pet = animal == "dog" ? Faker::Creature::Dog.name : Faker::Creature::Cat.name
     pet = base_pet(animal, name_pet)
+    pet.photo.attach(io: file, filename: name_pet, content_type: "image/png")
     pet.save
   end
 end
