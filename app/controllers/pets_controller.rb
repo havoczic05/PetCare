@@ -1,6 +1,26 @@
 class PetsController < ApplicationController
   before_action :set_pets, only: %i[edit update destroy]
-  def edit
+
+  def index
+    @pets = Pet.all
+  end
+
+  def new
+    @pet = Pet.new
+  end
+
+  def create
+    @pet = Pet.new(pet_params)
+    @pet.user = current_user
+
+    if @pet.save
+      redirect_to "/", notice: 'Pet was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+  
+   def edit
   end
 
   def update
@@ -13,7 +33,13 @@ class PetsController < ApplicationController
     redirect_to pets_path
   end
 
+
   private
+
+  def pet_params
+    params.require(:pet).permit(:name, :type, :description, :likes, :dislikes, :age, :weight)
+  end 
+  
   def set_pets
     params@pet = Pet.find(params[:id])
   end
