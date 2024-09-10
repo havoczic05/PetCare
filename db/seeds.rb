@@ -18,6 +18,51 @@ DESCRIPTION_USERS = [
   "Person, the exotic pet owner. Person has always been fascinated by exotic pets. she owns a colorful parrot named Rio and a bearded dragon named Spike. she spends his time ensuring their environments are as close to their natural habitats as possible. Person is known for his knowledge of reptiles and birds, and he's always eager to share tips with fellow exotic pet enthusiasts."
 ]
 
+DESCRIPTION_PETS = {
+  cat: {
+    description: "I'm a cat. I’m independent but enjoy your company when I feel like it. I love exploring, napping in the sun, and being pampered – but only when I say so. Purr when I’m happy!",
+    likes: "I enjoy sunbathing, hunting toys, and quiet, cozy corners. Oh, and head scratches.",
+    dislikes: "I dislike being bothered when I’m not in the mood, loud people, and getting wet."
+  },
+  dog: {
+    description: "I'm a dog, and I'm your loyal best friend. I love playing, going for walks, and learning new tricks. I'm always by your side, ready for cuddles or to protect you. Let’s have some fun!",
+    likes: "I love running, playing fetch, belly rubs, and being with my human!",
+    dislikes: "I don't like being alone for too long, loud noises, or not getting enough attention."
+  },
+  rabbit: {
+    description: "I’m a rabbit! I love hopping around, munching on veggies, and finding cozy spots to hide. I’m curious but a little shy, so I like to feel safe. Oh, and I’m super soft!",
+    likes: "I love munching on fresh veggies, hopping around, and digging little burrows.",
+    dislikes: "I don’t like loud noises, being picked up too quickly, or being left in an open space without hiding spots."
+  },
+  birds: {
+    description: "Tweet tweet! We are birds, and we love to fly and sing. Some of us have beautiful feathers, and others, sweet voices. We enjoy the freedom of the sky, but we can be great companions too!",
+    likes: "We enjoy flying, singing, and having a high perch to watch the world!",
+    dislikes: "We don’t like small, cramped cages, sudden movements, or being ignored."
+  },
+  reptiles: {
+    description: "I'm a reptile. I might not be fluffy, but I'm fascinating! I love basking in the sun, staying calm, and enjoying peaceful environments. Whether I’m a snake, lizard, or turtle, I’m a chill companion.",
+    likes: "I enjoy basking in the sun, having a warm habitat, and staying calm and relaxed.",
+    dislikes: "I don’t like cold environments, being handled too much, or loud, stressful spaces."
+  }
+}
+
+DESCRIPTION_SERVICES = [
+  {
+    description: "Take care of cats. Administer Injections, Administer Medicine, Special Care, Experience with elderly pets",
+    restrictions: "Only care for sterilized females. Extra restriction: Preferably not aggressive",
+    house_description: "Lives in: House, 24 hour supervision: Yes, Do they smoke inside the house: No, Children present: No, Pets at home: Dogs, Free space: Front garden, Garage, Patio/terrace"
+  },
+  {
+    description: "Take care of dogs. Administer Injections, Administer Medicine, Special Care, Experience with elderly pets",
+    restrictions: "Does not accept females in heat, Does not accept puppies",
+    house_description: "Lives in: House, 24 hour supervision: Yes, Do they smoke inside the house: No, Children present: No, Free space: Balcony, Patio/terrace"
+  },
+  {
+    description: "Take care of dogs. Administer Medicine, Special Care",
+    restrictions: "Only care for sterilized females, Only care for sterilized males, Only accept 1 client at a time, Extra restriction: Live with other dogs. Not aggressive.",
+    house_description: "Lives in: House, 24 hour supervision: No, Do they smoke inside the house: No, Children present: No, Pets at home: Dogs, Free space: Garage, Patio/terrace"
+  }
+]
 def clean_database
   User.destroy_all
 end
@@ -57,10 +102,68 @@ def create_user
   end
 end
 
-users_count = User.all.count
+users = User.all
 
-if users_count.zero?
+if users.count.zero?
   puts "Creating users..."
   create_user
   puts "Users: #{User.all.count}"
+end
+
+USERS = User.all
+
+def set_description_pet(animal, name)
+  "Hi, #{name} #{DESCRIPTION_PETS[animal.to_sym][:description]}"
+end
+
+def base_pet(animal, name_pet)
+  initial_pet = {
+    name: name_pet, specie: animal,
+    description: set_description_pet(animal, name_pet),
+    likes: DESCRIPTION_PETS[animal.to_sym][:likes],
+    dislikes: DESCRIPTION_PETS[animal.to_sym][:dislikes],
+    age: Faker::Number.within(range: 1..15),
+    weight: Faker::Number.within(range: 1..10),
+    user_id: USERS.flat_map { |u| u[:id] }.sample
+  }
+  return Pet.new(initial_pet)
+end
+
+puts "Creating pets..."
+2.times do
+  %w[dog cat rabbit birds reptiles].each do |animal|
+    name_pet = animal == "dog" ? Faker::Creature::Dog.name : Faker::Creature::Cat.name
+    pet = base_pet(animal, name_pet)
+    pet.save
+  end
+end
+puts "Pets: #{Pet.all.count}"
+
+def base_service(user, random)
+  return {
+    price: Faker::Number.within(range: 60..320),
+    description: random[:description],
+    address: Faker::Address.full_address,
+    latitude: user["location"]["coordinates"]["latitude"],
+    longitude: user["location"]["coordinates"]["longitude"],
+    restrictions: random[:restrictions],
+    house_description: random[:house_description],
+    user_id: USERS.flat_map { |u| u[:id] }.sample
+  }
+end
+
+def create_service
+  url = "https://randomuser.me/api/?page=1&results=4&seed=abc"
+  users = JSON.parse(URI.open(url).read)["results"]
+  users.each do |user|
+    random_details = DESCRIPTION_SERVICES.sample
+    Service.create(base_service(user, random_details))
+  end
+end
+
+services = Service.all.count
+if services.zero?
+  puts "Creating services..."
+  create_service
+  puts "Services: #{Service.all.count}"
 end
