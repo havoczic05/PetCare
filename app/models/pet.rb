@@ -1,6 +1,7 @@
 class Pet < ApplicationRecord
   belongs_to :user
-  validates :name, presence: true,length: { in: 2..20 }
+  has_one_attached :photo
+  validates :name, presence: true, length: { in: 2..20 }
   validates :specie, inclusion: { in: %w[dog cat rabbit birds reptiles others] }, presence: true
   validates :description, presence: true, length: { maximum: 500 }
   validates :age, presence: true, length: { maximum: 3 }, numericality: { only_integer: true }
