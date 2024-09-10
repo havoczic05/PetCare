@@ -18,7 +18,7 @@ class ServicesController < ApplicationController
     @service.destroy
     redirect_to services_path
   end
-  
+
   private
 
   def set_services
