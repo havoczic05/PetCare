@@ -1,5 +1,24 @@
 class ServicesController < ApplicationController
-  before_action :set_services, only: %i[show edit update destroy]
+  # before_action :set_user
+  before_action :set_service, only: %i[show edit update destroy]
+  def index
+    @services = Service.all
+  end
+
+  def new
+    @service = Service.new
+  end
+
+  def create
+    @service = Service.new(service_params)
+    @service.user_id = current_user.id
+    if @service.save
+      redirect_to @service, notice: 'Service was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   def show
   end
 
@@ -21,11 +40,12 @@ class ServicesController < ApplicationController
 
   private
 
-  def set_services
+  def set_service
     @service = Service.find(params[:id])
   end
 
   def service_params
     params.require(:service).permit(:name, :description)
   end
+
 end
