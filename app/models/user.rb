@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :pets
-  belongs_to :service
+  has_many :services
 
   validates :first_name, :last_name, :address, :phone_number, :description, presence: true
 end
