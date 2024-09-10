@@ -1,2 +1,39 @@
-<h1>Services#show</h1>
-<p>Find me in app/views/services/show.html.erb</p>
+<h1>Service Details</h1>
+
+<p>
+  <strong>Price:</strong>
+  <%= number_to_currency(@service.price) %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @service.description %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @service.address %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @service.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @service.longitude %>
+</p>
+
+<p>
+  <strong>Restrictions:</strong>
+  <%= @service.restrictions %>
+</p>
+
+<p>
+  <strong>House Description:</strong>
+  <%= @service.house_description %>
+</p>
+
+<%= link_to 'Edit', edit_service_path(@service) %> |
+<%= link_to 'Back to Services List', services_path %>
