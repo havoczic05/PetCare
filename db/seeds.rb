@@ -64,6 +64,8 @@ DESCRIPTION_SERVICES = [
   }
 ]
 def clean_database
+  Service.destroy_all
+  Pet.destroy_all
   User.destroy_all
 end
 
