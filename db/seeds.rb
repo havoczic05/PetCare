@@ -131,15 +131,17 @@ def base_pet(animal, name_pet)
   return Pet.new(initial_pet)
 end
 
-def set_photo(query)
+def get_photo(query)
   url_base = "https://api.unsplash.com/search/photos"
   url = "#{url_base}?query=#{query}&client_id=#{ENV['API_TOKEN_UNSPLASH']}&per_page=1"
+  response = JSON.parse(URI.open(url).read)["results"]
+  return response[0][]
 end
 
 puts "Creating pets..."
 2.times do
   %w[dog cat rabbit birds reptiles].each do |animal|
-    file_name = set_photo(animal)
+    file_name = get_photo(animal)
     name_pet = animal == "dog" ? Faker::Creature::Dog.name : Faker::Creature::Cat.name
     pet = base_pet(animal, name_pet)
     pet.photo.attach(io: file, filename: name_pet, content_type: "image/png")
