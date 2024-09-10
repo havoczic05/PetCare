@@ -1,4 +1,5 @@
 // Specific CSS for your home-page
+
 .text-justify {
   text-align: justify;
 }
@@ -16,4 +17,8 @@
   text-align: center;
   line-height: 50px; /* Centra verticalmente el texto */
   margin: 0 auto;
+}
+
+* {
+  font-family: Poppins !important;
 }

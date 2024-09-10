@@ -75,3 +75,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# Open-uri
+gem 'open-uri'
+# Faker
+gem 'faker'

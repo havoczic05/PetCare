@@ -1,0 +1,56 @@
+<h1>New Service</h1>
+
+<%= form_with(model: [@user, @service], local: true) do |form| %>
+  <% if @service.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
+
+      <ul>
+        <% @service.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :latitude %>
+    <%= form.number_field :latitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :longitude %>
+    <%= form.number_field :longitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :restrictions %>
+    <%= form.text_area :restrictions %>
+  </div>
+
+  <div class="field">
+    <%= form.label :house_description %>
+    <%= form.text_area :house_description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Create Service' %>
+  </div>
+<% end %>
+
+<%= link_to 'Add New Service', new_service_path %>
