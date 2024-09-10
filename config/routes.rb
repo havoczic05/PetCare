@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'services/show'
+  get 'services/edit'
   get 'pets/edit'
   get 'pets/update'
   get 'pets/destroy'
