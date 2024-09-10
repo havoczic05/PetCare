@@ -1,0 +1,19 @@
+<h1>Services</h1>
+
+<% if @services.any? %>
+  <ul>
+    <% @services.each do |service| %>
+      <li>
+        <strong>Description:</strong> <%= service.description %><br>
+        <strong>Price:</strong> <%= number_to_currency(service.price) %><br>
+        <strong>Address:</strong> <%= service.address %><br>
+        <strong>Restrictions:</strong> <%= service.restrictions %><br>
+        <%= link_to 'View Details', service_path(service) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No services available.</p>
+<% end %>
+
+<%= link_to 'Add New Service', new_user_service_path(@user) %>
