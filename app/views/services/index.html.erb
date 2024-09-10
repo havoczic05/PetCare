@@ -8,7 +8,9 @@
         <strong>Price:</strong> <%= number_to_currency(service.price) %><br>
         <strong>Address:</strong> <%= service.address %><br>
         <strong>Restrictions:</strong> <%= service.restrictions %><br>
-        <%= link_to 'View Details', service_path(service) %>
+        <%= link_to 'View Details', service_path(service) %> |
+        <%= link_to 'Edit', edit_service_path(service) %> |
+        <%= link_to 'Delete', service_path(service), method: :delete, data: { confirm: 'Are you sure?' } %>
       </li>
     <% end %>
   </ul>
@@ -16,4 +18,4 @@
   <p>No services available.</p>
 <% end %>
 
-<%= link_to 'Add New Service', new_user_service_path(@user) %>
+<%= link_to 'Add New Service', new_service_path %>
