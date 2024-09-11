@@ -7,7 +7,7 @@
 
 .user-container {
   height: 75vh;
-  font-size: 13px;
+  font-size: 10px;
 }
 
 .button-group * {
@@ -30,9 +30,26 @@
 .form-control {
   border-radius: 8px;
   background: transparent;
-  &:focus {
+  font-size: 10px;
+    &:focus {
     border: 1px solid #FD8522;
     box-shadow: 0 0 0 1px #FD8522;
     background: transparent;
+    &::placeholder {
+      color: transparent;
+    }
   }
+}
+
+@media (max-width: 768px) {
+  .login-img-container {
+    display: none;
+  }
+  .user-container {
+    max-width: 80vw;
+  }
+}
+
+.form-control::placeholder {
+  color: #333;
 }
