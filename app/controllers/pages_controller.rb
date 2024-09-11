@@ -1,6 +1,14 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home ]
+  before_action :redirect_authenticated_user, only: [:home]
 
   def home
+  end
+
+  private
+
+  def redirect_authenticated_user
+    if user_signed_in?
+      redirect_to services_path
+    end
   end
 end

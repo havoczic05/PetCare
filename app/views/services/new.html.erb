@@ -30,12 +30,12 @@
 
   <div class="field">
     <%= form.label :latitude %>
-    <%= form.number_field :latitude %>
+    <%= form.number_field :latitude, step: :any %>
   </div>
 
   <div class="field">
     <%= form.label :longitude %>
-    <%= form.number_field :longitude %>
+    <%= form.number_field :longitude, step: :any %>
   </div>
 
   <div class="field">
@@ -46,6 +46,11 @@
   <div class="field">
     <%= form.label :house_description %>
     <%= form.text_area :house_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :photo %>
+    <%= form.file_field :photo, required: true, as: :file %>
   </div>
 
   <div class="actions">

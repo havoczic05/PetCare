@@ -33,15 +33,13 @@ class PetsController < ApplicationController
     redirect_to pets_path
   end
 
-
   private
 
   def pet_params
-    params.require(:pet).permit(:name, :specie, :description, :likes, :dislikes, :age, :weight)
+    params.require(:pet).permit(:name, :photo, :specie, :description, :likes, :dislikes, :age, :weight)
   end
 
   def set_pets
     @pet = Pet.find(params[:id])
   end
-
 end

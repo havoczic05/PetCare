@@ -6,10 +6,10 @@
       <%= f.error_notification %>
         <div class="form-inputs px-4 py-1 mx-5">
           <%= f.input :first_name,
-                      autofocus: true,
-                      input_html: { autocomplete: "given-name" } %>
+                input_html: { autocomplete: "given-name" } %>
           <%= f.input :last_name,
                       input_html: { autocomplete: "last-name" } %>
+          <%= f.input :photo, required: true, as: :file %>
           <%= f.input :phone_number,
                       input_html: { autocomplete: "phone_number" } %>
           <%= f.input :address,
@@ -19,6 +19,7 @@
                       input_html: { autocomplete: "address" } %>
           <%= f.input :email,
                       required: true,
+                      autofocus: true,
                       input_html: { autocomplete: "email" }%>
           <%= f.input :password,
                       required: true,
@@ -28,7 +29,6 @@
                       required: true,
                       input_html: { autocomplete: "new-password" } %>
         </div>
-
         <div class="form-actions d-grid gap-2 px-4 mx-5">
           <%= f.button :submit, "Sign up", class: "btn btn-warning text-white" %>
         </div>
