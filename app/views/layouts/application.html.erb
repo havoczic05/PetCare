@@ -11,12 +11,15 @@
   </head>
 
   <body>
-    <% unless current_page?(root_path) %>
+    <% unless current_page?(root_path) || current_page?('/users/sign_up') || current_page?('/users/sign_in') %>
       <%= render "shared/navbar" %>
     <% end %>
     <%= render "shared/flashes" %>
 
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
+
     <%= render "shared/footer" %>
   </body>
 </html>

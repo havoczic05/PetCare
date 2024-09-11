@@ -2,6 +2,11 @@ class ServicesController < ApplicationController
   # before_action :set_user
   before_action :set_service, only: %i[show edit update destroy]
   def index
+    @services = Service.where(user: current_user)
+    @bookings = @services.map(&:bookings).flatten
+  end
+
+  def landing
     @services = Service.all
   end
 
