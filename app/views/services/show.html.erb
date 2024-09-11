@@ -35,6 +35,9 @@
   <%= @service.house_description %>
 </p>
 
-<%= link_to 'Edit', edit_service_path(@service) %>
-<%= link_to 'Back to Services List', services_path %> |
-<%= link_to 'Booking', service_bookings_path(@service) %>
+<div>
+  <%= cl_image_tag @service.photo.key, crop: :fill %>
+</div>
+
+<%= link_to 'Edit', edit_service_path(@service) %> |
+<%= link_to 'Back to Services List', services_path %>

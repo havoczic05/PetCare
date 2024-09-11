@@ -1,2 +1,93 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)), url(<%= asset_path 'banner.png' %>);">
+  <div class="container">
+    <h6><strong>PetCare</strong></h6>
+    <h1><strong>If animals could talk,</strong></h1>
+    <h1><strong>they'd talk about us!</strong></h1>
+    <p class="mt-4 mb-5">Join the largest network of pet sitters in Latin America.</p>
+    <a class="btn btn-dark" href="<%= new_user_registration_path %>">Sign Up</a>
+    <a class="btn btn-secondary ms-2" href="<%= new_user_session_path %>">Login</a>
+  </div>
+</div>
+
+<div style="background-color: white;">
+  <div class="container text-center">
+    <h2 class="pt-5">What do you need to be a pet sitter?</h2>
+    <div class="my-4">
+      <div class="row">
+        <div class="col-3">
+          <i class="fa-regular fa-id-card" style="font-size: 50px; color: #FD8522;"></i>
+          <h5 class="mt-2"><strong>Be of age</strong></h5>
+          <p>You must be at least 18 years old.</p>
+        </div>
+
+        <div class="col-3">
+          <i class="fa-solid fa-house-user" style="font-size: 50px; color: #FD8522;"></i>
+          <h5 class="mt-2"><strong>Photos of your space</strong></h5>
+          <p>Take photos of your tidy and spacious space.</p>
+        </div>
+
+         <div class="col-3">
+          <i class="fa-regular fa-circle-question" style="font-size: 50px; color: #FD8522;"></i>
+          <h5 class="mt-2"><strong>Contact information</strong></h5>
+          <p>You need an active cell phone where we can communicate.</p>
+        </div>
+
+         <div class="col-3">
+          <i class="fa-regular fa-user" style="font-size: 50px; color: #FD8522;"></i>
+          <h5 class="mt-2"><strong>Proof of identity</strong></h5>
+          <p>It can be your INE, Passport or driver's license.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container py-5 mx-auto">
+    <div class="row justify-content-around">
+      <div class="col-5">
+        <div class="card-home border rounded shadow-sm">
+          <img src="<%= asset_path('review2.jpg') %>" class="card-img-top" alt="...">
+          <div class="card-body p-4">
+            <p class="card-text text-justify">Being a pet sitter has given me many learnings and also company for both me and my dog. We enjoyed time with the pets and getting to know them as if they were my own for a few days.</p>
+            <p class="text-end">Andrea - Mexico City</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="card-home border rounded shadow-sm">
+          <img src="<%= asset_path('review3.jpg') %>" class="card-img-top" alt="...">
+          <div class="card-body p-4">
+            <p class="card-text text-justify">Finding the perfect caregiver was a breeze. My dog was well-cared for, and I felt confident knowing he was in good hands. Highly recommend <strong style="color: #FD8522">PetCare</strong> for anyone seeking trustworthy pet sitters.</p>
+            <p class="text-end">Juan - Guadalajara</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <div class="container text-center pb-3">
+    <h2>How does it work?</h2>
+    <div class="my-4">
+      <div class="row">
+        <div class="col-3">
+          <p class="circle-number text-center">1</p>
+          <h5 class="mt-3">Review service announcements posted by other users.</h5>
+        </div>
+
+        <div class="col-3">
+          <p class="circle-number text-center">2</p>
+          <h5 class="mt-3">Choose the pet sitter that best suits your needs.</h5>
+        </div>
+
+         <div class="col-3">
+          <p class="circle-number text-center">3</p>
+          <h5 class="mt-3">Wait for the sitter to accept the request.</h5>
+        </div>
+
+         <div class="col-3">
+          <p class="circle-number text-center">4</p>
+          <h5 class="mt-3">Set your pet's calendars</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
