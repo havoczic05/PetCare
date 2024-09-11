@@ -48,19 +48,28 @@ DESCRIPTION_PETS = {
 
 DESCRIPTION_SERVICES = [
   {
+    slug: "cats",
     description: "Take care of cats. Administer Injections, Administer Medicine, Special Care, Experience with elderly pets",
     restrictions: "Only care for sterilized females. Extra restriction: Preferably not aggressive",
     house_description: "Lives in: House, 24 hour supervision: Yes, Do they smoke inside the house: No, Children present: No, Pets at home: Dogs, Free space: Front garden, Garage, Patio/terrace"
   },
   {
+    slug: "dogs",
     description: "Take care of dogs. Administer Injections, Administer Medicine, Special Care, Experience with elderly pets",
     restrictions: "Does not accept females in heat, Does not accept puppies",
     house_description: "Lives in: House, 24 hour supervision: Yes, Do they smoke inside the house: No, Children present: No, Free space: Balcony, Patio/terrace"
   },
   {
-    description: "Take care of dogs. Administer Medicine, Special Care",
-    restrictions: "Only care for sterilized females, Only care for sterilized males, Only accept 1 client at a time, Extra restriction: Live with other dogs. Not aggressive.",
-    house_description: "Lives in: House, 24 hour supervision: No, Do they smoke inside the house: No, Children present: No, Pets at home: Dogs, Free space: Garage, Patio/terrace"
+    slug: "rabbit",
+    description: "Take care of rabbits. Administer Medicine, Provide Special Care.",
+    restrictions: "Only care for sterilized females, Only care for sterilized males, Only accept 1 rabbit at a time, Extra restriction: Lives with other pets. Not aggressive.",
+    house_description: "Lives in: House, 24-hour supervision: No, Do they smoke inside the house: No, Children present: No, Pets at home: Dogs, Free space: Garage, Patio/terrace."
+  },
+  {
+    slug: "bird",
+    description: "Take care of birds. Provide Special Diets, Offer Flight Training.",
+    restrictions: "Only accept caged birds, Birds must be non-aggressive, Only accept 1 bird at a time, Extra restriction: Cannot care for large parrots.",
+    house_description: "Lives in: House, 24-hour supervision: No, Do they smoke inside the house: No, Children present: No, Pets at home: Dogs, Free space: Balcony, Patio/terrace."
   }
 ]
 def clean_database
@@ -96,10 +105,10 @@ def create_user
   url = "https://randomuser.me/api/?page=1&results=4&seed=abc"
   users = JSON.parse(URI.open(url).read)["results"]
   users.each do |user|
-    # file_name = user["id"]["value"] || user["name"]["first"]
-    # file = URI.parse(user["picture"]["large"]).open
+    file_name = user["id"]["value"] || user["name"]["first"]
+    file = URI.parse(user["picture"]["large"]).open
     user_content = base_user(user)
-    # user_content.photo.attach(io: file, filename: file_name, content_type: "image/png")
+    user_content.photo.attach(io: file, filename: file_name, content_type: "image/png")
     user_content.save
   end
 end
@@ -131,11 +140,19 @@ def base_pet(animal, name_pet)
   return Pet.new(initial_pet)
 end
 
+def get_photo(query)
+  url = "https://unsplash.com/napi/search/photos?page=1&per_page=1&query=#{query}"
+  response = JSON.parse(URI.open(url).read)["results"]
+  return response.sample["urls"]["regular"]
+end
+
 puts "Creating pets..."
 2.times do
   %w[dog cat rabbit birds reptiles].each do |animal|
+    file = URI.parse(get_photo(animal)).open
     name_pet = animal == "dog" ? Faker::Creature::Dog.name : Faker::Creature::Cat.name
     pet = base_pet(animal, name_pet)
+    pet.photo.attach(io: file, filename: name_pet, content_type: "image/png")
     pet.save
   end
 end
@@ -157,9 +174,13 @@ end
 def create_service
   url = "https://randomuser.me/api/?page=1&results=4&seed=abc"
   users = JSON.parse(URI.open(url).read)["results"]
-  users.each do |user|
-    random_details = DESCRIPTION_SERVICES.sample
-    Service.create(base_service(user, random_details))
+  users.each_with_index do |user, index|
+    file_name = user["id"]["value"] || user["name"]["first"]
+    details = DESCRIPTION_SERVICES[index]
+    query = "person+take+care+#{details[:slug]}"
+    file = URI.parse(get_photo(query)).open
+    service = Service.create!(base_service(user, details))
+    service.photo.attach(io: file, filename: file_name, content_type: "image/png")
   end
 end
 
