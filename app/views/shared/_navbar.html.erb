@@ -1,38 +1,47 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
-    <% end %>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
-          </li>
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon navbar-customer">
+  <div class="container-fluid py-2">
+    <%#  text-orange %>
+    <% list = [
+      {name: "Pets", route: "/pets"},
+      {name: "Services", route: "/services"},
+      {name: "Booking", route: "/booking"}
+      ] %>
+    <div class="d-flex justify-content-between w-100">
+      <%= link_to "/", class: "navbar-brand", style: "width: 150px" do %>
+        <%= render "shared/logo"  %>
+      <% end %>
+      <% if user_signed_in? %>
+        <ul class="navbar-nav d-none d-md-flex">
+          <% list.each do |item| %>
+            <% active_class = current_page?(item[:route]) ? 'active' : '' %>
+            <li class="nav-item">
+              <%= link_to item[:name], item[:route], class: "nav-link px-4 #{active_class}" %>
+            </li>
+          <% end %>
+        </ul>
+        <ul class="navbar-nav">
           <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= cl_image_tag current_user.photo.key, class: "avatar mx-2", alt: "dropdown menu", crop: :fill %>
-          </a>
+            <div class="d-flex align-items-center gap-2 cursor-pointer" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <p class="fw-bold m-0"><%= current_user.first_name %> <%= current_user.last_name %></p>
+              <a href="#" class="avatar" >
+                <%= cl_image_tag current_user.photo.key, class: "avatar mx-2", alt: "dropdown menu", crop: :fill %>
+              </a>
+            </div>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
+              <% list.each_with_index do |item, index| %>
+                <% active_class = current_page?(item[:route]) ? 'active' : '' %>
+                <%= link_to item[:name], item[:route], class: "dropdown-item #{active_class} d-block d-md-none" %>
+              <% end %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
-      </ul>
+        </ul>
+      <% else %>
+        <div>
+          <%= link_to "Login", new_user_session_path, class: "btn btn-orange text-white" %>
+        </div>
+      <% end %>
     </div>
+
   </div>
 </div>
