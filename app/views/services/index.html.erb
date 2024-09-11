@@ -10,7 +10,7 @@
         <strong>Restrictions:</strong> <%= service.restrictions %><br>
         <%= link_to 'View Details', service_path(service) %> |
         <%= link_to 'Edit', edit_service_path(service) %> |
-        <%= link_to 'Delete', service_path(service), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to "delete", service, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
       </li>
     <% end %>
   </ul>
