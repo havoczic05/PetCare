@@ -28,20 +28,15 @@
   </div>
 
   <div class="field">
-    <%# Solo seleccionar el pet.id del dueño logeado %>
     <%= form.label :pet_id %>
-    <%= form.collection_select :pet_id, Pet.all, :id, :name %>
+    <%= form.collection_select :pet_id, Pet.where(user: current_user), :id, :name %>
   </div>
 
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.check_box :status %>
-  </div>
 
   <div class="actions">
     <%= form.submit 'Create Booking' %>
   </div>
 <% end %>
 
-<%= link_to 'Back to Bookings List', service_bookings_path(@service) %>
+<%= link_to 'Back to Bookings List', service_bookings_path(@service) %> |
 <%= link_to 'Back to Service Details', service_path(@service) %>
