@@ -5,6 +5,10 @@ class ServicesController < ApplicationController
     @services = Service.all
   end
 
+  def landing
+    @services = Service.all
+  end
+
   def new
     @service = Service.new
   end
