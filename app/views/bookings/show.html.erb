@@ -1,0 +1,29 @@
+<h1>Booking Details</h1>
+
+<p>
+  <strong>Start Date:</strong>
+  <%= @booking.start_date %>
+</p>
+
+<p>
+  <strong>End Date:</strong>
+  <%= @booking.end_date %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @booking.message %>
+</p>
+
+<p>
+  <strong>Pet:</strong>
+  <%= @booking.pet.name %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @booking.service.description %>
+</p>
+
+<%= link_to 'Back to Bookings List', service_bookings_path(@service) %>
+<%= link_to 'Back to Service Details', service_path(@service) %>
