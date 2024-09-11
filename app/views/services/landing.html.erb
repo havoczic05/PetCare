@@ -3,7 +3,7 @@
     <h2 class="py-3 text-center">Find your ideal Pet Sitter</h2>
     <div class="r-added-cards">
       <% if @services.any? %>
-        <% @services.each do |service| %>
+        <% @services.reverse.each do |service| %>
         <%= link_to service_path(service), class: "card-link" do %>
           <div class="card-service ">
             <%= cl_image_tag service.photo.key, height: 300, width: 400, crop: :fill %>
