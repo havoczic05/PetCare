@@ -2,15 +2,28 @@
   background-image: url(https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
   background-size: cover;
   background-position: center;
+  height: 80vh;
+  overflow-y: hidden;
 
 }
 
 .container {
-  height: 80vh;
+  height: 100%;
 }
 
 .button-group * {
    text-decoration: none;
   padding: 10px;
 
+}
+
+.row {
+  max-width: 1340px;
+  max-height: 100%;
+
+}
+
+.form-card {
+  max-height: 80vh;
+  overflow-y: scroll;
 }
