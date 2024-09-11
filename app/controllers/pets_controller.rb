@@ -2,7 +2,7 @@ class PetsController < ApplicationController
   before_action :set_pets, only: %i[edit update destroy]
 
   def index
-    @pets = Pet.all
+    @pets = Pet.where(user: current_user)
   end
 
   def new
@@ -28,7 +28,7 @@ class PetsController < ApplicationController
   end
 
   def destroy
-    @vpet.destroy
+    @pet.destroy
     flash[:notice] = 'Pet was deleted.'
     redirect_to pets_path
   end
