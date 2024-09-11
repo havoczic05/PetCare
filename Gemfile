@@ -80,3 +80,5 @@ end
 gem 'open-uri'
 # Faker
 gem 'faker'
+# Cloudinary
+gem "cloudinary"
