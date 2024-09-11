@@ -3,6 +3,7 @@ class Service < ApplicationRecord
   has_many :booking
   has_one_attached :photo
 
+  validates :specie, inclusion: { in: %w[Dog Cat Rabbit Birds Reptiles Others] }, presence: true
   validates :price, presence: true, numericality: true
   validates :description, presence: true, length: { maximum: 500 }
   validates :address, presence: true, length: { maximum: 200 }

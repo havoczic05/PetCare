@@ -48,26 +48,30 @@ DESCRIPTION_PETS = {
 
 DESCRIPTION_SERVICES = [
   {
+    specie: "Cat",
     slug: "cats",
-    description: "Take care of cats. Administer Injections, Administer Medicine, Special Care, Experience with elderly pets",
+    description: "Administer Injections, Administer Medicine, Special Care, Experience with elderly pets",
     restrictions: "Only care for sterilized females. Extra restriction: Preferably not aggressive",
     house_description: "Lives in: House, 24 hour supervision: Yes, Do they smoke inside the house: No, Children present: No, Pets at home: Dogs, Free space: Front garden, Garage, Patio/terrace"
   },
   {
+    specie: "Dog",
     slug: "dogs",
-    description: "Take care of dogs. Administer Injections, Administer Medicine, Special Care, Experience with elderly pets",
+    description: "Administer Injections, Administer Medicine, Special Care, Experience with elderly pets",
     restrictions: "Does not accept females in heat, Does not accept puppies",
     house_description: "Lives in: House, 24 hour supervision: Yes, Do they smoke inside the house: No, Children present: No, Free space: Balcony, Patio/terrace"
   },
   {
+    specie: "Rabbit",
     slug: "rabbit",
-    description: "Take care of rabbits. Administer Medicine, Provide Special Care.",
+    description: "Administer Medicine, Provide Special Care.",
     restrictions: "Only care for sterilized females, Only care for sterilized males, Only accept 1 rabbit at a time, Extra restriction: Lives with other pets. Not aggressive.",
     house_description: "Lives in: House, 24-hour supervision: No, Do they smoke inside the house: No, Children present: No, Pets at home: Dogs, Free space: Garage, Patio/terrace."
   },
   {
+    specie: "Birds",
     slug: "bird",
-    description: "Take care of birds. Provide Special Diets, Offer Flight Training.",
+    description: "Provide Special Diets, Offer Flight Training.",
     restrictions: "Only accept caged birds, Birds must be non-aggressive, Only accept 1 bird at a time, Extra restriction: Cannot care for large parrots.",
     house_description: "Lives in: House, 24-hour supervision: No, Do they smoke inside the house: No, Children present: No, Pets at home: Dogs, Free space: Balcony, Patio/terrace."
   }
@@ -167,6 +171,7 @@ def base_service(user, random)
     longitude: user["location"]["coordinates"]["longitude"],
     restrictions: random[:restrictions],
     house_description: random[:house_description],
+    specie: random[:specie],
     user_id: USERS.flat_map { |u| u[:id] }.sample
   }
 end
