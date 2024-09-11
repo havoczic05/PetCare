@@ -13,7 +13,7 @@
 
 .navbar-customer {
   .active {
-    color: $orange !important;
+    color: #FD8522 !important;
     font-weight: 500;
     border-bottom: 2px solid;
     background-color: transparent;
@@ -31,4 +31,9 @@
 }
 .cursor-pointer {
   cursor: pointer;
+}
+
+.nav-route :hover {
+  color: #FD8522;
+  border-bottom: 2px solid;
 }

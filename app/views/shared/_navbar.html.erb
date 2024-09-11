@@ -14,7 +14,7 @@
         <ul class="navbar-nav d-none d-md-flex">
           <% list.each do |item| %>
             <% active_class = current_page?(item[:route]) ? 'active' : '' %>
-            <li class="nav-item">
+            <li class="nav-item nav-route">
               <%= link_to item[:name], item[:route], class: "nav-link px-4 #{active_class}" %>
             </li>
           <% end %>
