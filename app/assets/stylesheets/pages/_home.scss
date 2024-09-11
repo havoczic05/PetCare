@@ -8,17 +8,27 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 2px solid black; /* Contorno del círculo */
+  border: 2px solid black;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px; /* Tamaño del texto */
+  font-size: 24px;
   font-weight: bold;
   text-align: center;
-  line-height: 50px; /* Centra verticalmente el texto */
+  line-height: 50px; 
   margin: 0 auto;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 body {
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
 }

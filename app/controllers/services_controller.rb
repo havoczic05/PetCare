@@ -6,6 +6,10 @@ class ServicesController < ApplicationController
     @bookings = @services.map(&:bookings).flatten
   end
 
+  def landing
+    @services = Service.all
+  end
+
   def new
     @service = Service.new
   end
