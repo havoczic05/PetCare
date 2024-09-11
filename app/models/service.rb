@@ -1,6 +1,6 @@
 class Service < ApplicationRecord
   belongs_to :user
-  has_many :booking
+  has_many :bookings, dependent: :destroy
   has_one_attached :photo
 
   validates :price, presence: true, numericality: true

@@ -18,4 +18,16 @@
   <p>No services available.</p>
 <% end %>
 
-<%= link_to 'Add New Service', new_service_path %>
+<h2> Bookings</h2>
+    <div>
+      <ul>
+        <% @bookings.each do |booking| %>
+        <li>
+          Status:<%= booking.status %> <br>
+          Message:<%= booking.message %> <br>
+          <%= button_to 'Confirm booking', accept_booking_path(booking), method: :patch %> <br>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  <%= link_to 'Add New Service', new_service_path %>
