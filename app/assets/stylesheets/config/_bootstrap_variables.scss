@@ -11,22 +11,26 @@ $body-bg:                $light-gray;
 $font-size-base:         1rem;
 
 // Colors
-// $body-color: $gray;
-// $primary:    $blue;
-// $success:    $green;
-// $info:       $yellow;
-// $danger:     $red;
-// $warning:    $orange;
-// $orange:    $orange-primary;
+$body-color: $gray;
+$primary: $blue;
+$secondary: $gray-600;
+$success: $green;
+$info: $cyan;
+$warning: $orange;
+$danger: $red;
+$light: $gray-100;
+$dark: $gray-900;
+
 $theme-colors: (
-  "body-color": $gray,
-  "primary": $blue,
-  "success": $green,
-  "info": $yellow,
-  "danger": $red,
-  "warning": $orange
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
 );
-$orange: $orange-primary;
 
 // Buttons & inputs' radius
 $border-radius-sm:            .0625rem;
