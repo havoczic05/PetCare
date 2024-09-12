@@ -1,6 +1,31 @@
-<h1>Servicios</h1>
-<ul>
-  <% @services.each do |service| %>
-    <li><%= service.description %></li>
-  <% end %>
-</ul>
+<div class="" style="background-color: white;">
+  <div class="container pb-5">
+    <h2 class="py-3 text-center">Find your ideal Pet Sitter</h2>
+    <div class="r-added-cards">
+      <% if @services.any? %>
+        <% @services.reverse.each do |service| %>
+        <%= link_to service_path(service), class: "card-link" do %>
+          <div class="card-service ">
+            <%= cl_image_tag service.photo.key, height: 300, width: 400, crop: :fill %>
+            <div class="card-service-infos pb-3">
+              <div>
+                <div class="d-flex py-1 align-items-center">
+                  <%= cl_image_tag service.user.photo.key, class: "avatar mx-2", alt: "dropdown menu", crop: :fill %>
+                  <h2><%= service.user.first_name %> <%= service.user.last_name %></h2>
+                </div>
+                <h4 class="pt-3 pb-1 m-0">Takes care of: <strong style="color: #FD8522"><%= service.specie %></strong></h4>
+                <p><%= service.address%></p>
+              </div>
+            </div>
+            <div class="d-flex pb-3">
+              <h2 class="ms-auto me-4">$ <%= service.price %> per day</h2>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <% else %>
+        <em>Sorry, no sitters found.</em>
+      <% end %>
+    </div>
+  </div>
+</div>
