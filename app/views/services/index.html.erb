@@ -1,4 +1,4 @@
-<h1>Services</h1>
+<h1> My Services</h1>
 
 <% if @services.any? %>
   <ul>
@@ -17,8 +17,10 @@
 <% else %>
   <p>No services available.</p>
 <% end %>
+  <%= link_to 'Add New Service', new_service_path %>
+  <br>
 
-<h2> Bookings</h2>
+<h2> Hired Services </h2>
     <div>
       <ul>
         <% @bookings.each do |booking| %>
@@ -30,4 +32,3 @@
         <% end %>
       </ul>
     </div>
-  <%= link_to 'Add New Service', new_service_path %>

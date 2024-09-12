@@ -1,5 +1,17 @@
-<ul>
-  <% @pets.each do |pet| %>
-    <li><%= pet.name %></li>
-  <% end %>
-</ul>
+<h1>Pets List</h1>
+
+<% if @pets.any? %>
+  <ul>
+    <% @pets.each do |pet| %>
+      <li>
+        <%= pet.name %> <br>
+        <%= link_to 'Edit', edit_pet_path(pet), class: 'btn btn-primary' %>
+        <%= button_to 'Delete', pet_path(pet), method: :delete, data: { confirm: 'Are you sure you want to delete this pet?' }, class: 'btn btn-danger', form: { data: { turbo_confirm: 'Are you sure you want to delete this pet?' } } %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No pets found.</p>
+<% end %>
+
+<%= link_to 'Add New Pet', new_pet_path, class: 'btn btn-success' %>

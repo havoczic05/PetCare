@@ -4,17 +4,18 @@
     <% list = [
       {name: "Pets", route: "/pets"},
       {name: "Services", route: "/services"},
-      {name: "Booking", route: "/booking"}
+      {name: "Booking", route: "/bookings"}
       ] %>
     <div class="d-flex justify-content-between w-100">
-      <%= link_to "/", class: "navbar-brand", style: "width: 150px" do %>
+      <% active_class = current_page?("/landing") ? 'text-orange' : '' %>
+      <%= link_to "/", class: "navbar-brand #{active_class}", style: "width: 150px" do %>
         <%= render "shared/logo"  %>
       <% end %>
       <% if user_signed_in? %>
         <ul class="navbar-nav d-none d-md-flex">
           <% list.each do |item| %>
             <% active_class = current_page?(item[:route]) ? 'active' : '' %>
-            <li class="nav-item">
+            <li class="nav-item nav-route">
               <%= link_to item[:name], item[:route], class: "nav-link px-4 #{active_class}" %>
             </li>
           <% end %>

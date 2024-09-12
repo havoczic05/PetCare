@@ -1,20 +1,66 @@
-<h2>Add a new pet</h2>
+<div class="bg-white">
+  <div class="container p-4">
+    <div class="row g-0 justify-content-center align-items-stretch">
 
-<%= simple_form_for(@pet) do |f| %>
-  <%= f.error_notification %>
+      <div class="col-md-5 d-flex flex-column rounded shadow bg-light p-4">
+        <h1 class="mb-4 text-center">Add a new pet</h1>
+        <%= simple_form_for(@pet) do |f| %>
+          <% if @pet.errors.any? %>
+            <div id="error_explanation" class="alert alert-danger">
+              <h2><%= pluralize(@pet.errors.count, "error") %> prohibited this pet from being saved:</h2>
+              <ul>
+                <% @pet.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :photo, required: true, as: :file %>
-    <%= f.input :specie, as: :select, collection: %w[dog cat rabbit birds reptiles others], prompt: "Select a specie" %>
-    <%= f.input :description %>
-    <%= f.input :likes %>
-    <%= f.input :dislikes %>
-    <%= f.input :age %>
-    <%= f.input :weight %>
+          <div class="form-group">
+            <%= f.input :name, as: :string, label: "What is your pet's name?", label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+          </div>
+
+          <div class="form-group">
+            <%= f.input :specie, as: :select, collection: %w[Dog Cat Rabbit Birds Reptiles Others], prompt: 'Select a specie', label: 'Whats your pet specie?', label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-lg-6">
+              <%= f.input :age, label: "How old is your pet?", label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+            </div>
+
+            <div class="col-lg-6">
+              <%= f.input :weight, label: "What's your pet's weight?", label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.input :photo, label: "Please load a photo related to your pet", as: :file, required: true, label_html: { class: 'form-label' }, input_html: { class: 'form-control-file', style: 'font-size: 14px;' }%>
+          </div>
+
+          <div class="form-group">
+            <%= f.input :description, :as => :text, label: "How would you describe your pet?", label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;'} %>
+          </div>
+
+          <div class="form-group">
+            <%= f.input :likes, :as => :text, label: "What things does your pet like?", label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+          </div>
+
+          <div class="form-group">
+          <%= f.input :dislikes, :as => :text, label: "What things does your pet dislikes?", label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+          </div>
+
+          <div class="form-group text-center d-grid">
+            <%= f.button :submit, 'Create Pet', class: 'btn btn-warning text-white' %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-md-5 d-flex rounded shadow p-4" style="
+        background-image: url(<%= asset_path 'cat_and_dogs.jpg' %>);
+        background-size: cover;
+        background-position: center;">
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions text-center">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+</div>

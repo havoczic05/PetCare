@@ -2,7 +2,7 @@ class PetsController < ApplicationController
   before_action :set_pets, only: %i[edit update destroy]
 
   def index
-    @pets = Pet.all
+    @pets = Pet.where(user: current_user)
   end
 
   def new
@@ -17,7 +17,7 @@ class PetsController < ApplicationController
     @pet.user = current_user
 
     if @pet.save
-      redirect_to "/", notice: 'Pet was successfully created.'
+      redirect_to "/pets", notice: 'Pet was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class PetsController < ApplicationController
   end
 
   def destroy
-    @vpet.destroy
+    @pet.destroy
     flash[:notice] = 'Pet was deleted.'
     redirect_to pets_path
   end

@@ -1,56 +1,60 @@
-<h1>New Service</h1>
+<div class="bg-white">
+  <div class="container p-4">
+    <div class="row g-0 justify-content-center align-items-stretch">
 
-<%= form_with(model: [@user, @service], local: true) do |form| %>
-  <% if @service.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
+      <div class="col-md-5 d-flex flex-column rounded shadow bg-light p-4">
+        <h1 class="mb-4 text-center">New Service</h1>
+        <%= simple_form_for([@user, @service]) do |f| %>
+          <% if @service.errors.any? %>
+            <div id="error_explanation" class="alert alert-danger">
+              <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
+              <ul>
+                <% @service.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
 
-      <ul>
-        <% @service.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+          <div class="form-group">
+            <%= f.input :specie, as: :select, collection: %w[Dog Cat Rodent Bird Reptile Others], prompt: 'Select a specie', label: 'What kind of pet are you sitting?', label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+          </div>
+
+          <div class="form-group">
+            <%= f.input :price, as: :string, label: "What's the price per day?", label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+          </div>
+
+          <div class="form-group">
+            <%= f.input :description, label: 'Tell us more about the service', label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+          </div>
+
+          <div class="form-group">
+            <%= f.input :address, label: "What is the address where the pet will be cared for?", label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+          </div>
+
+          <div class="form-group">
+            <%= f.input :restrictions, label: "What are your restrictions as a caregiver?", label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+          </div>
+
+          <div class="form-group">
+            <%= f.input :house_description, label: "Tell us more about your place", label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+          </div>
+
+          <div class="form-group">
+            <%= f.input :photo, label: "Please load a photo related to your service", as: :file, required: true, label_html: { class: 'form-label' }, input_html: { class: 'form-control-file', style: 'font-size: 14px;' } %>
+          </div>
+
+          <div class="form-group text-center d-grid">
+            <%= f.button :submit, 'Create Service', class: 'btn btn-warning text-white' %>
+          </div>
         <% end %>
-      </ul>
+      </div>
+
+      <div class="col-md-5 d-flex rounded shadow p-4" style="
+        background-image: url('<%= asset_path 'care1.jpeg' %>');
+        background-size: cover;
+        background-position: center;">
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :specie %>
-    <%= form.select :specie, options_for_select([['Dog', 'dog'], ['Cat', 'cat'], ['Rabbit', 'rabbit'], ['Birds', 'birds'], ['Reptiles', 'reptiles'], ['Others', 'others']]), prompt: 'Select a specie' %>
   </div>
-  
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= form.label :restrictions %>
-    <%= form.text_area :restrictions %>
-  </div>
-
-  <div class="field">
-    <%= form.label :house_description %>
-    <%= form.text_area :house_description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :photo %>
-    <%= form.file_field :photo, required: true, as: :file %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit 'Create Service' %>
-  </div>
-<% end %>
-
-<%= link_to 'Add New Service', new_service_path %>
+</div>

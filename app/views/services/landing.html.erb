@@ -1,9 +1,54 @@
 <div class="" style="background-color: white;">
   <div class="container pb-5">
     <h2 class="py-3 text-center">Find your ideal Pet Sitter</h2>
+    <div class="row pb-5">
+      <div class="col-2">
+        <%= link_to landing_path(specie: 'Dog'), class: 'card-link' do %>
+          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path 'dog.png' %>)">
+            Dogs
+          </div>
+        <% end %>
+      </div>
+      <div class="col-2">
+        <%= link_to landing_path(specie: 'Cat'), class: 'card-link' do %>
+          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path 'cat.jpg' %>)">
+            Cats
+          </div>
+        <% end %>
+      </div>
+      <div class="col-2">
+        <%= link_to landing_path(specie: 'Rodent'), class: 'card-link' do %>
+          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path 'rabbit.png' %>)">
+            Rodents
+          </div>
+        <% end %>
+      </div>
+      <div class="col-2">
+        <%= link_to landing_path(specie: 'Bird'), class: 'card-link' do %>
+          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path 'bird2.png' %>)">
+            Birds
+          </div>
+        <% end %>
+      </div>
+      <div class="col-2">
+        <%= link_to landing_path(specie: 'Reptile'), class: 'card-link' do %>
+          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path 'reptile.png' %>)">
+            Reptiles
+          </div>
+        <% end %>
+      </div>
+      <div class="col-2">
+        <%= link_to landing_path(specie: 'Others'), class: 'card-link' do %>
+          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path 'fish.png' %>)">
+            Others
+          </div>
+        <% end %>
+      </div>
+    </div>
+
     <div class="r-added-cards">
       <% if @services.any? %>
-        <% @services.each do |service| %>
+        <% @services.reverse.each do |service| %>
         <%= link_to service_path(service), class: "card-link" do %>
           <div class="card-service ">
             <%= cl_image_tag service.photo.key, height: 300, width: 400, crop: :fill %>
@@ -13,7 +58,7 @@
                   <%= cl_image_tag service.user.photo.key, class: "avatar mx-2", alt: "dropdown menu", crop: :fill %>
                   <h2><%= service.user.first_name %> <%= service.user.last_name %></h2>
                 </div>
-                <h4 class="pt-3 pb-1 m-0">Takes care of: <strong style="color: #FD8522"><%= service.specie %></strong></h4>
+                <h4 class="pt-3 pb-1 m-0">Takes care of a: <strong style="color: #FD8522"><%= service.specie %></strong></h4>
                 <p><%= service.address%></p>
               </div>
             </div>

@@ -1,40 +1,3 @@
-<div class="d-none">
-<h1>Service Details</h1>
-
-<p>
-  <strong>Price:</strong>
-  <%= number_to_currency(@service.price) %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @service.description %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @service.address %>
-</p>
-
-<p>
-  <strong>Restrictions:</strong>
-  <%= @service.restrictions %>
-</p>
-
-<p>
-  <strong>House Description:</strong>
-  <%= @service.house_description %>
-</p>
-
-
-<%= link_to 'Edit', edit_service_path(@service) %> |
-<%= link_to 'Back to Services List', services_path %> |
-<%= link_to 'Book', service_bookings_path(@service) %>
-</div>
-
-
-
-
 <div class="bg-white mx-4 mt-2">
         <div class="row shadow-custom rounded-custom">
           <!-- Product Image Section -->
@@ -92,3 +55,4 @@
           </div>
         </div>
       </div>
+
