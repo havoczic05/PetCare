@@ -1,0 +1,96 @@
+/* Custom shadow for card */
+.shadow-custom {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Rounded corners for entire card */
+.rounded-custom {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+/* Image Section Styling */
+.image-section {
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px 0 0 15px;
+  min-height: 400px;
+}
+
+/* Product Details Section Styling */
+.details-section {
+  background-color: #ffffff;
+
+}
+
+/* Titles */
+.service-title {
+  font-size: 2rem;
+  color: #333;
+}
+
+/* User Info */
+.user-info {
+  color: #555;
+}
+
+.user-name {
+  color: #333;
+  font-weight: 500;
+}
+
+/* Rating Info */
+.rating-info span.rating {
+  color: #FD8522;
+}
+
+/* Badge Styling */
+.badge-custom {
+  background-color: #FD8522;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Section Titles */
+.section-title {
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+
+}
+
+/* Descriptions */
+.description {
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+/* Icons */
+.icon-custom {
+  color: #25A0A9;
+  margin-right: 8px;
+}
+
+/* Price Styling */
+.price {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* Book Now Button */
+.book-btn {
+  background-color: #FD8522;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 30px;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.book-btn:hover {
+  background-color: #e67e22;
+}
