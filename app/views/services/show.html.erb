@@ -1,31 +1,59 @@
-<h1>Service Details</h1>
+<div class="bg-white mx-4 mt-2">
+        <div class="row shadow-custom rounded-custom">
+          <!-- Product Image Section -->
+          <div class="col-lg-6 p-5 image-section" style="background-image: url(<%= cl_image_path @service.photo.key, crop: :fill %>);"></div>
 
-<p>
-  <strong>Price:</strong>
-  <%= number_to_currency(@service.price) %>
-</p>
+          <!-- Product Details Section -->
+          <div class="col-lg-6 py-5 px-4 d-flex flex-column justify-content-between details-section">
+            <!-- Header -->
+            <h1 class="text-center mb-4 fw-bold service-title"><%= @service.user.first_name %>'s Pet Sitting Service</h1>
 
-<p>
-  <strong>Description:</strong>
-  <%= @service.description %>
-</p>
+            <!-- Rating and User Info -->
+            <div class="d-flex justify-content-center align-items-center mb-4 user-info">
+              <div class="d-flex align-items-center mx-3">
+                <%= cl_image_tag @service.user.photo.key, class: "rounded-circle me-2", width: "50px", height: "50px" %>
+                <p class="m-0 user-name"><%= @service.user.first_name %> <%= @service.user.last_name %></p>
+              </div>
+              <div class="d-flex align-items-center mx-3 rating-info">
+                <span class="me-2 fw-bold">Rating:</span>
+                <span class="rating">4.8</span>
+              </div>
+            </div>
 
-<p>
-  <strong>Address:</strong>
-  <%= @service.address %>
-</p>
+            <!-- Badge -->
+            <div class="text-center mb-4">
+              <span class="badge-custom">Top 10 Rated</span>
+            </div>
 
-<p>
-  <strong>Restrictions:</strong>
-  <%= @service.restrictions %>
-</p>
+            <!-- Overview -->
+            <div class="px-4">
+              <h4 class="fw-bold section-title"><i class="fa-solid fa-circle-up me-2"></i>Service Description</h4>
+              <p class="description"><%= @service.description %></p>
+            </div>
 
-<p>
-  <strong>House Description:</strong>
-  <%= @service.house_description %>
-</p>
+            <div class="px-4">
+              <h4 class="fw-bold section-title"><i class="fa-solid fa-circle-up me-2"></i>Service Restrictions</h4>
+              <p class="description"><%= @service.restrictions %></p>
+            </div>
+
+            <!-- House Info -->
+            <div class="px-4">
+              <h4 class="fw-bold section-title"><i class="fa-solid fa-circle-up me-2"></i>House Info</h4>
+              <ul class="list-unstyled description">
+                <li><i class="fa-solid fa-location-dot icon-custom"></i><strong>Address:</strong> <%= @service.address %></li>
+                <li><i class="fa-solid fa-book icon-custom"></i><strong>Description:</strong> <%= @service.house_description %></li>
+              </ul>
+            </div>
+
+            <!-- Quantity and Price -->
+            <h3 class="text-center mb-3 fw-bold price"><%= number_to_currency(@service.price) %> <span class="fs-5 text-muted">/day</span></h3>
+
+            <!-- Book Now Button -->
+            <div class="text-center">
+              <button class="btn btn-warning btn-lg px-5 text-white book-btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
-<%= link_to 'Edit', edit_service_path(@service) %> |
-<%= link_to 'Back to Services List', services_path %> |
-<%= link_to 'Book', service_bookings_path(@service) %>

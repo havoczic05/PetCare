@@ -1,34 +1,65 @@
-<h1> My Services</h1>
+<div class="container py-5">
+  <h1 class="mb-4 text-center">My Services</h1>
 
-<% if @services.any? %>
-  <ul>
-    <% @services.each do |service| %>
-      <li>
-        <strong>Description:</strong> <%= service.description %><br>
-        <strong>Price:</strong> <%= number_to_currency(service.price) %><br>
-        <strong>Address:</strong> <%= service.address %><br>
-        <strong>Restrictions:</strong> <%= service.restrictions %><br>
-        <%= link_to 'View Details', service_path(service) %> |
-        <%= link_to 'Edit', edit_service_path(service) %> |
-        <%= link_to "delete", service, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No services available.</p>
-<% end %>
-  <%= link_to 'Add New Service', new_service_path %>
-  <br>
+  <div class="text-center my-4">
+    <%= link_to 'Add New Service', new_service_path, class: 'btn btn-warning text-white rounded-pill px-4 py-2' %>
+  </div>
 
-<h2> Hired Services </h2>
-    <div>
-      <ul>
-        <% @bookings.each do |booking| %>
-        <li>
-          Status:<%= booking.status %> <br>
-          Message:<%= booking.message %> <br>
-          <%= button_to 'Confirm booking', accept_booking_path(booking), method: :patch %> <br>
-        </li>
-        <% end %>
-      </ul>
+  <% if @services.any? %>
+    <div class="row">
+      <% @services.each do |service| %>
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm border-0 rounded overflow-hidden">
+            <% if service.photo.present? %>
+              <%= image_tag(service.photo, alt: 'Service Photo', class: 'card-img-top', style: 'height: 300px; width: 400px; object-fit: cover;') %>
+            <% else %>
+              <img src="<%= asset_path('default_service_photo.jpg') %>" alt="Default Photo" class="card-img-top" style="height: 300px; width: 400px; object-fit: cover;">
+            <% end %>
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex align-items-center mb-3">
+
+                <h5 class="card-title mb-0">
+                  <span class="fw-bold">Service by</span> <%= service.user.first_name %> <%= service.user.last_name %>
+                </h5>
+              </div>
+              <p class="card-text mb-3">
+                <span class="fw-bold">Description:</span> <%= service.description %><br>
+                <span class="fw-bold">Price:</span> <span style="color: #FD8522;"><%= number_to_currency(service.price) %></span><br>
+                <span class="fw-bold">Address:</span> <%= service.address %><br>
+                <span class="fw-bold">Restrictions:</span> <%= service.restrictions %>
+              </p>
+              <div class="mt-auto d-flex justify-content-between">
+                <%= link_to 'View Details', service_path(service), class: 'btn btn-primary btn-sm rounded-pill px-3' %>
+                <%= link_to 'Edit', edit_service_path(service), class: 'btn btn-secondary btn-sm rounded-pill px-3' %>
+                <%= link_to 'Delete', service, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm rounded-pill px-3' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
+  <% else %>
+    <p class="text-center">No services available.</p>
+  <% end %>
+
+  <h2 class="mt-5">Hired Services</h2>
+  <div class="row">
+    <% @bookings.each do |booking| %>
+      <div class="col-md-6 mb-4">
+        <div class="card shadow-sm border-0 rounded overflow-hidden">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title mb-3">
+              <span class="fw-bold">Status:</span> <%= booking.status %>
+            </h5>
+            <p class="card-text mb-3">
+              <span class="fw-bold">Message:</span> <%= booking.message %>
+            </p>
+            <div class="mt-auto">
+              <%= button_to 'Confirm Booking', accept_booking_path(booking), method: :patch, class: 'btn btn-success rounded-pill px-4 py-2' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,31 +1,32 @@
-<div class="container user-container d-flex align-items-center justify-content-center my-4">
-  <div class="row justify-content-center w-100 h-100">
-    <div class="col-md-5 shadow p-2 bg-white rounded">
-      <h2 class="fs-1 text-center mt-3 p-3">Login</h2>
-      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="form-inputs px-4 py-2 mx-5">
-        <%= f.input :email,
-                    required: false,
-                    autofocus: true,
-                    input_html: { autocomplete: "email" } %>
-        <%= f.input :password,
-                    required: false,
-                    input_html: { autocomplete: "current-password" } %>
-        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+<div class="bg-white">
+  <div class="container px-4 py-5">
+    <div class="row g-0 justify-content-center align-items-stretch">
+      <div class="col-md-5 d-flex flex-column rounded shadow bg-light p-4">
+        <h2 class="fs-1 text-center ">Login</h2>
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="form-inputs px-4 py-3 mx-5">
+          <%= f.input :email,
+                      required: false,
+                      autofocus: true,
+                      input_html: { autocomplete: "email", style: 'font-size: 14px;' } %>
+          <%= f.input :password,
+                      required: false,
+                      input_html: { autocomplete: "current-password", style: 'font-size: 14px;'  } %>
+          <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+        </div>
+        <div class="form-actions d-grid gap-2 px-4 mx-5">
+          <%= f.button :submit, "Log in", class: "btn btn-warning text-white" %>
+        </div>
+        <% end %>
+        <div class="button-group mt-4 mb-4 text-center">
+          <%= render "devise/shared/links" %>
+        </div>
       </div>
-      <div class="form-actions d-grid gap-2 px-4 mx-5">
-        <%= f.button :submit, "Log in", class: "btn btn-warning text-white" %>
-      </div>
-      <% end %>
-      <div class="button-group mt-3 text-center">
-        <%= render "devise/shared/links" %>
+      <div class="col-md-5 d-flex rounded shadow p-4" style="
+        background-image: url('https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=600&w=1000');
+        background-size: cover;
+        background-position: center;">
       </div>
     </div>
-
-  <div class="col-md-5 login-img-container shadow p-2 rounded">
-    </div>
-
-
-    </div>
-
   </div>
+</div>

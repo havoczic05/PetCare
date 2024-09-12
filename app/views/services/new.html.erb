@@ -17,7 +17,7 @@
           <% end %>
 
           <div class="form-group">
-            <%= f.input :specie, as: :select, collection: %w[Dog Cat Rabbit Birds Reptiles Others], prompt: 'Select a specie', label: 'What kind of pet are you sitting?', label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+            <%= f.input :specie, as: :select, collection: %w[Dog Cat Rodent Bird Reptile Others], prompt: 'Select a specie', label: 'What kind of pet are you sitting?', label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
           </div>
 
           <div class="form-group">
@@ -44,14 +44,14 @@
             <%= f.input :photo, label: "Please load a photo related to your service", as: :file, required: true, label_html: { class: 'form-label' }, input_html: { class: 'form-control-file', style: 'font-size: 14px;' } %>
           </div>
 
-          <div class="form-group text-center">
+          <div class="form-group text-center d-grid">
             <%= f.button :submit, 'Create Service', class: 'btn btn-warning text-white' %>
           </div>
         <% end %>
       </div>
 
       <div class="col-md-5 d-flex rounded shadow p-4" style="
-        background-image: url(<%= asset_path 'care1.jpg' %>);
+        background-image: url('<%= asset_path 'care1.jpeg' %>');
         background-size: cover;
         background-position: center;">
       </div>
