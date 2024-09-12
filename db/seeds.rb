@@ -29,17 +29,17 @@ DESCRIPTION_PETS = {
     likes: "I love running, playing fetch, belly rubs, and being with my human!",
     dislikes: "I don't like being alone for too long, loud noises, or not getting enough attention."
   },
-  rabbit: {
+  rodent: {
     description: "I’m a rabbit! I love hopping around, munching on veggies, and finding cozy spots to hide. I’m curious but a little shy, so I like to feel safe. Oh, and I’m super soft!",
     likes: "I love munching on fresh veggies, hopping around, and digging little burrows.",
     dislikes: "I don’t like loud noises, being picked up too quickly, or being left in an open space without hiding spots."
   },
-  birds: {
+  bird: {
     description: "Tweet tweet! We are birds, and we love to fly and sing. Some of us have beautiful feathers, and others, sweet voices. We enjoy the freedom of the sky, but we can be great companions too!",
     likes: "We enjoy flying, singing, and having a high perch to watch the world!",
     dislikes: "We don’t like small, cramped cages, sudden movements, or being ignored."
   },
-  reptiles: {
+  reptile: {
     description: "I'm a reptile. I might not be fluffy, but I'm fascinating! I love basking in the sun, staying calm, and enjoying peaceful environments. Whether I’m a snake, lizard, or turtle, I’m a chill companion.",
     likes: "I enjoy basking in the sun, having a warm habitat, and staying calm and relaxed.",
     dislikes: "I don’t like cold environments, being handled too much, or loud, stressful spaces."
@@ -62,14 +62,14 @@ DESCRIPTION_SERVICES = [
     house_description: "Lives in: House, 24 hour supervision: Yes, Do they smoke inside the house: No, Children present: No, Free space: Balcony, Patio/terrace"
   },
   {
-    specie: "Rabbit",
+    specie: "Rodent",
     slug: "rabbit",
     description: "Administer Medicine, Provide Special Care.",
     restrictions: "Only care for sterilized females, Only care for sterilized males, Only accept 1 rabbit at a time, Extra restriction: Lives with other pets. Not aggressive.",
     house_description: "Lives in: House, 24-hour supervision: No, Do they smoke inside the house: No, Children present: No, Pets at home: Dogs, Free space: Garage, Patio/terrace."
   },
   {
-    specie: "Birds",
+    specie: "Bird",
     slug: "bird",
     description: "Provide Special Diets, Offer Flight Training.",
     restrictions: "Only accept caged birds, Birds must be non-aggressive, Only accept 1 bird at a time, Extra restriction: Cannot care for large parrots.",
@@ -128,20 +128,28 @@ end
 USERS = User.all
 
 def set_description_pet(animal, name)
-  "Hi, #{name} #{DESCRIPTION_PETS[animal.to_sym][:description]}"
+  description_data = DESCRIPTION_PETS[animal.to_sym]
+  if description_data
+    "Hi, #{name} #{description_data[:description]}"
+  else
+    "Description not available"
+  end
 end
 
 def base_pet(animal, name_pet)
+  animal_sym = animal.downcase.to_sym
+  description_data = DESCRIPTION_PETS[animal_sym]
   initial_pet = {
-    name: name_pet, specie: animal,
-    description: set_description_pet(animal, name_pet),
-    likes: DESCRIPTION_PETS[animal.to_sym][:likes],
-    dislikes: DESCRIPTION_PETS[animal.to_sym][:dislikes],
+    name: name_pet,
+    specie: animal.capitalize,
+    description: description_data ? set_description_pet(animal_sym, name_pet) : "No description",
+    likes: description_data ? description_data[:likes] : "No likes data",
+    dislikes: description_data ? description_data[:dislikes] : "No dislikes data",
     age: Faker::Number.within(range: 1..15),
     weight: Faker::Number.within(range: 1..10),
     user_id: USERS.flat_map { |u| u[:id] }.sample
   }
-  return Pet.new(initial_pet)
+  Pet.new(initial_pet)
 end
 
 def get_photo(query)
@@ -152,7 +160,7 @@ end
 
 puts "Creating pets..."
 2.times do
-  %w[dog cat rabbit birds reptiles].each do |animal|
+  %w[Dog Cat Rodent Bird Reptile].each do |animal|
     file = URI.parse(get_photo(animal)).open
     name_pet = animal == "dog" ? Faker::Creature::Dog.name : Faker::Creature::Cat.name
     pet = base_pet(animal, name_pet)

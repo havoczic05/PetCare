@@ -7,7 +7,11 @@ class ServicesController < ApplicationController
   end
 
   def landing
-    @services = Service.all
+    @services = if params[:specie]
+                  Service.where(specie: params[:specie])
+                else
+                  Service.all
+                end
   end
 
   def new
