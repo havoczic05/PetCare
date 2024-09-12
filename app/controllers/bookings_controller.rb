@@ -1,10 +1,10 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_service, except: :accept_booking
+  before_action :set_service, except: %i[accept_booking index]
   before_action :set_booking, only: %i[show]
 
   def index
-    @bookings = @service.bookings
+    @bookings = Booking.joins(pet: :user).where(pets: { user_id: current_user.id })
   end
 
   def new
