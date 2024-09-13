@@ -27,9 +27,9 @@
             <span class="fw-medium fs-7 text-secondary">
               <i class="fa-regular fa-calendar"></i>&nbsp; From:
             </span>
-            <%= @booking.start_date.strftime("%d de %B del %Y") %>
+            <%= @booking.start_date.strftime("%B %d, %Y") %>
             <span class="fw-medium fs-7 text-secondary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To:</span>
-            <%= @booking.end_date.strftime("%d de %B del %Y") %>
+            <%= @booking.end_date.strftime("%B %d, %Y") %>
           </p>
 
           <div>
@@ -65,7 +65,7 @@
       <h3 class="text-orange fs-6 m-0 p-3 bg-orange bg-opacity-25 border-orange border-bottom">Pet</h3>
         <div class="d-flex flex-column gap-3 p-3">
 
-          <div>
+          <div class="d-flex align-items-center gap-2">
             <% if @booking.pet.photo && @booking.pet.photo.key.present? %>
                 <%= cl_image_tag @booking.pet.photo.key, class: "card-box__thumbnail", alt: "#{@booking.pet.name}", crop: :fill %>
             <% end %>
@@ -114,7 +114,13 @@
           <div>
             <p class="fw-medium fs-7 text-secondary m-0">
               <i class="fa-solid fa-user"></i>&nbsp; By: </p>
-            <p class="m-0"><%= @booking.service.user.first_name %> <%= @booking.service.user.last_name %></p>
+
+            <div class="d-flex align-items-center gap-2">
+              <% if @booking.service.user.photo &&  @booking.service.user.photo.key.present? %>
+                <%= cl_image_tag  @booking.service.user.photo.key, class: "card-box__thumbnail", alt: "#{ @booking.service.user.first_name}", crop: :fill %>
+              <% end %>
+              <p class="m-0"><%= @booking.service.user.first_name %> <%= @booking.service.user.last_name %></p>
+            </div>
           </div>
 
           <div>
