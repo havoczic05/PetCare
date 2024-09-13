@@ -1,42 +1,66 @@
-<h1>New Booking for <%= @service.description %></h1>
+ <div class="booking-container">
+    <div class="row">
+      <!-- Left Column -->
+      <div class="col-md-7">
+        <h2 class="booking-title text-center">Just one more step</h2>
+          <%= form_with(model: [@service, @booking], local: true) do |form| %>
+            <% if @booking.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+                <ul>
+                  <% @booking.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+          <!-- Start and End Date -->
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <%= form.label :start_date %>
+              <%= form.date_field :start_date, class: "form-control", id: "start-date" %>
+            </div>
+            <div class="col-md-6 form-group">
+              <%= form.label :end_date%>
+              <%= form.date_field :end_date, class: "form-control", id: "end-date" %>
+            </div>
+          </div>
 
-<%= form_with(model: [@service, @booking], local: true) do |form| %>
-  <% if @booking.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
-      <ul>
-        <% @booking.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+          <!-- Pet selection -->
+          <div class="form-group">
+            <%= form.label :pet_id, class: "form-label" %>
+            <%= form.collection_select :pet_id, Pet.where(user: current_user), :id, :name, prompt: "Select a pet", class: "form-control" %>
+          </div>
+
+          <!-- Message -->
+          <div class="form-group">
+            <%= form.label :message %>
+            <%= form.text_area :message, class: "form-control"%>
+          </div>
+
+          <!-- Submit Button -->
+          <%= form.submit 'Create Booking', class:"btn-submit" %>
         <% end %>
-      </ul>
+        <div class="booking-back-links">
+          <%= link_to 'Back to Bookings List', service_bookings_path(@service) %> |
+          <%= link_to 'Back to Service Details', service_path(@service) %>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="col-md-5">
+        <!-- Reservation Box -->
+        <div class="reservation-box mb-4">
+          <p>Reservation for: <strong></strong>days</p>
+          <p>Total price: <strong>$400</strong></p>
+        </div>
+
+        <!-- Info Box -->
+        <div class="info-box">
+          <%= cl_image_tag @service.user.photo.key, class: "card-box__thumbnail", crop: :fill %>
+          <p><strong><%=@service.user.first_name%></strong> will take care of your pet!</p>
+        </div>
+      </div>
+
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :start_date %>
-    <%= form.date_field :start_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :end_date %>
-    <%= form.date_field :end_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :message %>
-    <%= form.text_area :message %>
-  </div>
-
-  <div class="field">
-    <%= form.label :pet_id %>
-    <%= form.collection_select :pet_id, Pet.where(user: current_user), :id, :name %>
-  </div>
-
-
-  <div class="actions">
-    <%= form.submit 'Create Booking' %>
-  </div>
-<% end %>
-
-<%= link_to 'Back to Bookings List', service_bookings_path(@service) %> |
-<%= link_to 'Back to Service Details', service_path(@service) %>
+</div>
