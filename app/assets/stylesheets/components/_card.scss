@@ -1,0 +1,32 @@
+.fw-medium {
+  font-weight: 500;
+}
+.fs-7{
+  font-size: 14px;
+}
+
+.card-container {
+  @extend .card.rounded-4.border-warning.bg-white;
+  .card-box {
+    @extend .border.border-warning.rounded-4.py-2.px-3.text-center.bg-white.bg-opacity-75;
+
+    &__title {
+      @extend .m-0.text-orange.fs-7;
+    }
+    &__content {
+      @extend .m-0.fw-medium.pb-1;
+    }
+    &__btn {
+      @extend .text-orange.fs-5.border-0.bg-transparent;
+
+      &:hover {
+        @extend .text-opacity-75;
+      }
+    }
+    &__thumbnail {
+      width: 30px;
+      height: 30px;
+      @extend .rounded-circle;
+    }
+  }
+}
