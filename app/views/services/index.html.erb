@@ -18,8 +18,13 @@
               <p><strong><i class="fa-solid fa-notdef"></i>&nbsp; Your restrictions as a caregiver:</strong>&nbsp; <%= service.restrictions %></p>
               <p><strong><i class="fa-solid fa-house"></i>&nbsp; Your place description:</strong>&nbsp; <%= service.house_description %> </p>
               <div class="d-flex">
-                <%= link_to 'Edit', edit_service_path(service), class: 'btn btn-secondary btn-sm rounded-pill px-3 me-3' %>
-                <%= link_to 'Delete', service, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'text-white btn btn-danger btn-sm rounded-pill px-3' %>
+                <%= link_to edit_service_path(service), class: 'px-3 me-2', style: 'color: #FD8522; font-size: 24px;' do %>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                <% end %>
+
+                <%= link_to service, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'px-3', style: 'color: #FD8522; font-size: 24px;'  do %>
+                  <i class="fa-solid fa-trash"></i>
+                <% end %>
               </div>
             </div>
           </div>
@@ -62,9 +67,11 @@
                   <%= booking.status ? 'CONFIRMED' : 'PENDING' %>
                 </strong>
               </p>
-              <div class="d-flex">
-                <%= button_to 'Confirm Booking', accept_booking_path(booking), method: :patch, class: 'btn btn-success rounded-pill px-4 py-2 text-white' %>
-              </div>
+              <% unless booking.status %>
+                <div class="d-flex">
+                  <%= button_to 'Confirm Booking', accept_booking_path(booking), method: :patch, class: 'btn btn-success rounded-pill px-4 py-2 text-white' %>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
