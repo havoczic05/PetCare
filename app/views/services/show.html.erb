@@ -43,9 +43,12 @@
         </ul>
       </section>
 
-      <footer class="text-center d-flex justify-content-center align-items-center mt-3">
-        <h4 class="me-3 fw-bold price"><%= number_to_currency(@service.price) %> <span class="fs-6 text-muted">/day</span></h4>
+        <footer class="text-center d-flex justify-content-center align-items-center mt-3">
+          <h4 class="me-3 fw-bold price"><%= number_to_currency(@service.price) %> <span class="fs-6 text-muted">/day</span></h4>
+
+      <% unless @service.user == current_user %>
          <%= link_to 'Book Now', new_service_booking_path(@service), class: 'btn btn-warning btn-sm px-3 text-white book-btn', style: 'margin-left: 10px;' %>
+      <% end %>
       </footer>
     </div>
   </div>
