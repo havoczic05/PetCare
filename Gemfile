@@ -82,3 +82,5 @@ gem 'open-uri'
 gem 'faker'
 # Cloudinary
 gem "cloudinary"
+# Calendars
+gem 'simple_calendar'

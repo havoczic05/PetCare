@@ -1,0 +1,17 @@
+<h1>Pets Calendar</h1>
+
+<%= calendar attribute: :start_date do |date, activities| %>
+  <% activities = @activities[date] || [] %>
+  <% if activities.any? %>
+    <div class="day">
+      <h2><%= date.strftime("%d %B %Y") %></h2>
+      <% activities.each do |activity| %>
+        <div class="activity">
+          <strong><%= activity.name %></strong><br>
+          <%= activity.description %><br>
+          <%= activity.start_time.strftime("%H:%M") %> - <%= activity.end_time.strftime("%H:%M") %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
