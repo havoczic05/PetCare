@@ -15,3 +15,14 @@
     transform: scale(1.1);
   }
 }
+
+
+// transiciones a la vista de /services
+.card-hover {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  }
+}
