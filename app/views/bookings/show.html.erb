@@ -1,6 +1,7 @@
-<h1>Booking Details</h1>
+<div class="container my-5">
+  <h1>Booking Details</h1>
 
-<p>
+  <p>
   <strong>Start Date:</strong>
   <%= @booking.start_date %>
 </p>
@@ -31,3 +32,5 @@
 
 <%= link_to 'Back to Bookings List', service_bookings_path(@service) %>
 <%= link_to 'Back to Service Details', service_path(@service) %>
+
+</div>
