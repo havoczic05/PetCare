@@ -1,56 +1,65 @@
-<h1>Editing Service</h1>
+<div class="bg-white">
+  <div class="container p-4">
+    <div class="row g-0 justify-content-center align-items-stretch">
 
-<%= form_with(model: [@user, @service], local: true) do |form| %>
-  <% if @service.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
+      <div class="col-md-6 d-flex rounded shadow p-4" style="
+        background-image: url('<%= asset_path 'bird2.png' %>');
+        background-size: cover;
+        background-position: center;">
+      </div>
 
-      <ul>
-        <% @service.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+      <div class="col-md-6 d-flex flex-column rounded shadow bg-light p-4">
+        <h1 class="mb-4 text-center">Editing Service</h1>
+
+        <%= form_with(model: [@user, @service], local: true) do |form| %>
+          <% if @service.errors.any? %>
+            <div id="error_explanation" class="alert alert-danger mb-4">
+              <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
+              <ul>
+                <% @service.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="form-group mb-3">
+            <%= form.label :price, class: 'form-label' %>
+            <%= form.number_field :price, class: 'form-control', style: 'font-size: 14px;' %>
+          </div>
+
+          <div class="form-group mb-3">
+            <%= form.label :description, class: 'form-label' %>
+            <%= form.text_area :description, class: 'form-control', style: 'font-size: 14px;' %>
+          </div>
+
+          <div class="form-group mb-3">
+            <%= form.label :address, class: 'form-label' %>
+            <%= form.text_field :address, class: 'form-control', style: 'font-size: 14px;' %>
+          </div>
+
+          <div class="form-group mb-3">
+            <%= form.label :restrictions, class: 'form-label' %>
+            <%= form.text_area :restrictions, class: 'form-control', style: 'font-size: 14px;' %>
+          </div>
+
+          <div class="form-group mb-3">
+            <%= form.label :house_description, class: 'form-label' %>
+            <%= form.text_area :house_description, class: 'form-control', style: 'font-size: 14px;' %>
+          </div>
+
+          <div class="form-group text-center d-grid">
+            <%= form.submit 'Update Service', class: 'btn btn-warning text-white' %>
+          </div>
         <% end %>
-      </ul>
+
+        <div class="text-center mt-4">
+          <%= link_to 'Back', services_path, class: 'btn btn-secondary rounded-pill px-4 py-2' %>
+        </div>
+      </div>
+
+
+
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price %>
   </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= form.label :latitude %>
-    <%= form.number_field :latitude %>
-  </div>
-
-  <div class="field">
-    <%= form.label :longitude %>
-    <%= form.number_field :longitude %>
-  </div>
-
-  <div class="field">
-    <%= form.label :restrictions %>
-    <%= form.text_area :restrictions %>
-  </div>
-
-  <div class="field">
-    <%= form.label :house_description %>
-    <%= form.text_area :house_description %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit 'Update Service' %>
-  </div>
-<% end %>
-
-<%= link_to 'Back', services_path %>
+</div>

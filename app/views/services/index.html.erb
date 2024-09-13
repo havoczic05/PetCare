@@ -1,8 +1,7 @@
 <div class="bg-white">
   <div class="container pb-4">
     <h1 class="text-center mb-4">My offered services</h1>
-
-    <% @services.reverse.each do |service| %>
+     <% @services.reverse.each do |service| %>
       <div class="card-custom card bg-white shadow-lg mb-3">
         <div class="card card-body" style="background-color: white;">
           <p class="m-0"><strong style="color: #FD8522">Created at: <%= service.created_at.strftime("%d de %B del %Y") %></strong></p>
