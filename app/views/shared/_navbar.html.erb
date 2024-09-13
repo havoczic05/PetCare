@@ -1,10 +1,9 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon navbar-customer">
   <div class="container-fluid py-2">
-    <%#  text-orange %>
     <% list = [
       {name: "Pets", route: "/pets"},
       {name: "Services", route: "/services"},
-      {name: "Booking", route: "/bookings"}
+      {name: "Bookings", route: "/bookings"}
       ] %>
     <div class="d-flex justify-content-between w-100">
       <% active_class = current_page?("/landing") ? 'text-orange' : '' %>
