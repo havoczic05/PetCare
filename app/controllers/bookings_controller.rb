@@ -21,7 +21,17 @@ class BookingsController < ApplicationController
     end
   end
 
+  def total_days(booking)
+    return 1 unless booking.start_date && booking.end_date
+    (booking.end_date - booking.start_date).to_i
+  end
+
+  def total_price(booking)
+    return (booking.service.price * total_days(booking)).to_f
+  end
+
   def show
+    @total_price = total_price(@booking)
   end
 
   def accept_booking

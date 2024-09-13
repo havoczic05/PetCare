@@ -1,36 +1,138 @@
-<div class="container my-5">
-  <h1>Booking Details</h1>
+<div class="container my-5 booking-detail">
 
-  <p>
-  <strong>Start Date:</strong>
-  <%= @booking.start_date %>
-</p>
+  <%= link_to service_bookings_path(@service), class: "d-flex gap-2 align-items-center text-secondary text-decoration-none" do %>
+     <i class="fa-solid fa-chevron-left"></i>
+     <p class="m-0 fw-medium">Back to bookings</p>
+  <% end %>
 
-<p>
-  <strong>End Date:</strong>
-  <%= @booking.end_date %>
-</p>
+  <div class="text-center d-flex flex-column justify-content-center align-items-center gap-3">
+    <div class="icon-box">
+      <div class="icon-box__context">
+        <i class="fa-solid fa-paw"></i>
+      </div>
+    </div>
+    <h1 class="m-0">Request created!</h1>
+    <p class="m-0 text-secondary">You need to wait for the caregiver to approve your service request. 🎉</p>
+  </div>
 
-<p>
-  <strong>Message:</strong>
-  <%= @booking.message %>
-</p>
+  <h2 class="m-0 fs-5 text-secondary">Booking details</h2>
 
-<p>
-  <strong>Pet:</strong>
-  <%= @booking.pet.name %>
-</p>
+  <div class="row g-4">
+    <div class="col-md-7 col-lg-5">
+      <div class="bg-white border border-orange rounded-4 shadow">
+        <h3 class="text-orange fs-6 m-0 p-3 bg-orange bg-opacity-25 border-orange border-bottom">Summary</h3>
+        <div class="d-flex flex-column gap-3 p-3">
 
-<p>
-  <strong>Service:</strong>
-  <%= @booking.service.description %>
-</p>
+          <p class="m-0">
+            <span class="fw-medium fs-7 text-secondary">
+              <i class="fa-regular fa-calendar"></i>&nbsp; From:
+            </span>
+            <%= @booking.start_date.strftime("%d de %B del %Y") %>
+            <span class="fw-medium fs-7 text-secondary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To:</span>
+            <%= @booking.end_date.strftime("%d de %B del %Y") %>
+          </p>
 
-<% if @booking.status == false %>
-  <%= link_to 'Accept Booking', service_booking_path(@service, @booking), method: :patch, data: { confirm: 'Are you sure you want to accept this booking?' } %>
-<% end %>
+          <div>
+            <p class="fw-medium fs-7 text-secondary m-0">
+              <i class="fa-regular fa-comment"></i>&nbsp; Message: </p>
+            <p class="m-0"><%= @booking.message %></p>
+          </div>
 
-<%= link_to 'Back to Bookings List', service_bookings_path(@service) %>
-<%= link_to 'Back to Service Details', service_path(@service) %>
+          <div>
+            <p class="fw-medium fs-7 text-secondary m-0">
+              <i class="fa-solid fa-location-dot"></i>&nbsp; The address: </p>
+            <p class="m-0"><%= @booking.service.address %></p>
+          </div>
+
+          <div>
+            <p class="fw-medium fs-7 text-secondary m-0">
+              <i class="fa-regular fa-credit-card"></i>&nbsp; Price per day: </p>
+
+            <p class="m-0"><i class="fa-solid fa-dollar-sign"></i> <%= @booking.service.price.to_f  %></p>
+          </div>
+        </div>
+        <div class="fs-6 m-0 px-3 py-2 bg-orange bg-opacity-50 border-orange border-top d-flex justify-content-between align-items-center fw-bold">
+          <p class="m-0">Total</p>
+          <p class="m-0">
+            <i class="fa-solid fa-dollar-sign"></i></i>
+            <%= @total_price %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5 col-lg-3">
+      <div class="bg-white border border-orange rounded-4 shadow card-container">
+      <h3 class="text-orange fs-6 m-0 p-3 bg-orange bg-opacity-25 border-orange border-bottom">Pet</h3>
+        <div class="d-flex flex-column gap-3 p-3">
+
+          <div>
+            <% if @booking.pet.photo && @booking.pet.photo.key.present? %>
+                <%= cl_image_tag @booking.pet.photo.key, class: "card-box__thumbnail", alt: "#{@booking.pet.name}", crop: :fill %>
+            <% end %>
+            <h4 class="card-title m-0 fs-6"><%= @booking.pet.name %></h4>
+          </div>
+
+          <div class="d-flex flex-wrap gap-3">
+            <div class="card-box__invert">
+              <p class="card-box__content"><%= @booking.pet.age %> years</p>
+              <p class="m-0 text-secondary fs-7">Age</p>
+            </div>
+            <div class="card-box__invert">
+              <p class="card-box__content"><%= @booking.pet.weight %> kg</p>
+              <p class="m-0 text-secondary fs-7">Weight</p>
+            </div>
+            <div class="card-box__invert">
+              <p class="card-box__content"><%= @booking.pet.specie %></p>
+              <p class="m-0 text-secondary fs-7">Specie</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="d-flex gap-2 fw-medium fs-7 text-secondary align-items-center pb-1">
+              <i class="fa-solid fa-heart"></i>
+              <h6 class="m-0"> Likes </h6>
+            </div>
+            <p class="m-0"><%= @booking.pet.likes %></p>
+          </div>
+
+          <div>
+            <div class="d-flex gap-2 fw-medium fs-7 text-secondary align-items-center pb-1">
+              <i class="fa-solid fa-heart-crack"></i>
+              <h6 class="m-0 "> Dislikes</h6>
+            </div>
+
+            <p class="m-0"><%= @booking.pet.dislikes %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7 col-lg-4">
+      <div class="bg-white border border-orange rounded-4 shadow card-container">
+        <h3 class="text-orange fs-6 m-0 p-3 bg-orange bg-opacity-25 border-orange border-bottom">Service</h3>
+        <div class="d-flex flex-column gap-3 p-3">
+
+          <div>
+            <p class="fw-medium fs-7 text-secondary m-0">
+              <i class="fa-solid fa-user"></i>&nbsp; By: </p>
+            <p class="m-0"><%= @booking.service.user.first_name %> <%= @booking.service.user.last_name %></p>
+          </div>
+
+          <div>
+            <p class="fw-medium fs-7 text-secondary m-0">
+              <i class="fa-solid fa-triangle-exclamation"></i>&nbsp; Restrictions: </p>
+            <p class="m-0"><%= @booking.service.restrictions %></p>
+          </div>
+
+          <div>
+            <p class="fw-medium fs-7 text-secondary m-0">
+              <i class="fa-solid fa-house"></i>&nbsp; Place description: </p>
+            <p class="m-0"><%= @booking.service.house_description %></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 </div>
