@@ -1,11 +1,9 @@
 class ActivitiesController < ApplicationController
   def index
     @booking = Booking.find(params[:booking_id])
-    @start_date = Date.parse(@booking.start_date.strftime)
-    @end_date = Date.parse(@booking.end_date.strftime)
-    @activities = Activity.all.group_by {|activity| activity.start_time.to_date}
-    #debugger
-    #@activities = Activity.joins(:booking).where("booking.start_date")
+    @start_date = @booking.start_date
+    @end_date = @booking.end_date
+    @activities = @booking.activities.group_by { |activity| activity.date }
   end
 
   def new
