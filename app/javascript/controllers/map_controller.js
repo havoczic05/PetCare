@@ -17,7 +17,6 @@ export default class extends Controller {
   }
 
   #addMarkersToMap () {
-    console.log({m: this.markerValue})
     this.marker = JSON.parse(this.markerValue)
     const popup = new mapboxgl.Popup().setHTML(this.marker.info_window_html)
     new mapboxgl.Marker()

@@ -2,7 +2,7 @@
 <div class="show-container mx-4 mt-2 d-flex flex-column gap-5">
   <div class="row shadow-custom rounded-custom">
     <div class="col-lg-6 p-3 d-flex justify-content-center align-items-start">
-      <%= cl_image_tag @service.photo.key, crop: :fill, alt: "Service Image", class: "rounded-4", style: "width: 80%; height: auto; object-fit: cover;" %>
+      <%= cl_image_tag @service.photo.key, crop: :fill, alt: "Service Image", class: "rounded-4", style: "width: 80%; height: auto; max-height: 250px; object-fit: cover;" %>
     </div>
 
     <div class="col-lg-6 py-3 px-2 d-flex flex-column justify-content-between details-section">
@@ -58,13 +58,14 @@
         <p class="description" style="font-size: .8rem;"><%= @service.restrictions %></p>
       </section>
 
-      <div class="col-10 px-4">
-        <div style="height: 400px;" class="w-full rounded-4"
-          data-controller="map"
-          data-map-marker-value="<%= @marker.to_json %>"
-          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-      </div>
-
+      <% unless @service.latitude.nil? && @service.longitude.nil? %>
+        <div class="col-10 px-4">
+          <div style="height: 400px;" class="w-full rounded-4"
+            data-controller="map"
+            data-map-marker-value="<%= @marker.to_json %>"
+            data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
