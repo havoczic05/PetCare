@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_11_195313) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_13_165719) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_195313) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "activities", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.time "start_time"
+    t.time "end_time"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "booking_id"
+    t.index ["booking_id"], name: "index_activities_on_booking_id"
+  end
+
   create_table "bookings", force: :cascade do |t|
     t.date "start_date"
     t.date "end_date"
@@ -62,7 +74,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_195313) do
     t.string "likes"
     t.string "dislikes"
     t.integer "age"
-    t.float "weight"
+    t.integer "weight"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -103,6 +115,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_195313) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "activities", "bookings"
   add_foreign_key "bookings", "pets"
   add_foreign_key "bookings", "services"
   add_foreign_key "pets", "users"

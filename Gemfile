@@ -85,3 +85,5 @@ gem 'faker'
 gem "cloudinary"
 # Gemfile
 gem "geocoder"
+# Calendars
+gem 'simple_calendar'
