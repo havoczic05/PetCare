@@ -24,11 +24,6 @@
     border-radius: 0.125rem;
   }
   .suggestions {
-    // @extend .list-group;
-
-    // li, a {
-    //   @extend .list-group-item.list-group-item-action;
-    // }
     .mapboxgl-ctrl-geocoder--powered-by {
       @extend .d-none;
     }
