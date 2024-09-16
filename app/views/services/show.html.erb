@@ -1,8 +1,8 @@
 
-<div class="show-container mx-4 mt-2">
+<div class="show-container mx-4 mt-2 d-flex flex-column gap-5">
   <div class="row shadow-custom rounded-custom">
     <div class="col-lg-6 p-3 d-flex justify-content-center align-items-start">
-      <img src="<%= cl_image_path @service.photo.key, crop: :fill %>" alt="Service Image" class="rounded-16" style="width: 80%; height: auto; object-fit: contain; border-radius: 16px;">
+      <%= cl_image_tag @service.photo.key, crop: :fill, alt: "Service Image", class: "rounded-4", style: "width: 80%; height: auto; max-height: 250px; object-fit: cover;" %>
     </div>
 
     <div class="col-lg-6 py-3 px-2 d-flex flex-column justify-content-between details-section">
@@ -25,17 +25,22 @@
         <span class="badge-custom ">Top 10 Rated</span>
       </section>
 
-      <section class="detail-info pe-5">
-        <h5 class="fw-bold section-title"><i class="fa-solid fa-circle-up me-1"></i>Service Description</h5>
-        <p class="description" style="font-size: .8rem;"><%= @service.description %></p>
-      </section>
+      <footer class="text-center d-flex justify-content-center align-items-center mt-3">
+        <h4 class="m-0 fw-bold price">
+          <%= number_to_currency(@service.price) %>
+          <span class="fs-6 text-muted">/day</span>
+          </h4>
 
-      <section class="detail-info pe-5">
-        <h5 class="fw-bold section-title"><i class="fa-solid fa-circle-up me-1"></i>Service Restrictions</h5>
-        <p class="description" style="font-size: .8rem;"><%= @service.restrictions %></p>
-      </section>
+        <% unless @service.user == current_user %>
+          <%= link_to 'Book Now', new_service_booking_path(@service), class: 'btn btn-warning btn-sm px-3 text-white book-btn', style: 'margin-left: 10px;' %>
+        <% end %>
+      </footer>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row justify-content-md-center gap-4">
 
-      <section class="detail-info pe-5">
+      <section class="col-3 detail-info pe-5 bg-light">
         <h5 class="fw-bold section-title"><i class="fa-solid fa-circle-up me-1"></i>House Info</h5>
         <ul class="list-unstyled description" style="font-size: .8rem;">
           <li><i class="fa-solid fa-location-dot icon-custom"></i><strong>Address:</strong> <%= @service.address %></li>
@@ -43,13 +48,24 @@
         </ul>
       </section>
 
-        <footer class="text-center d-flex justify-content-center align-items-center mt-3">
-          <h4 class="me-3 fw-bold price"><%= number_to_currency(@service.price) %> <span class="fs-6 text-muted">/day</span></h4>
+      <section class="col-3 detail-info pe-5 bg-light">
+        <h5 class="fw-bold section-title"><i class="fa-solid fa-circle-up me-1"></i>Service Description</h5>
+        <p class="description" style="font-size: .8rem;"><%= @service.description %></p>
+      </section>
 
-      <% unless @service.user == current_user %>
-         <%= link_to 'Book Now', new_service_booking_path(@service), class: 'btn btn-warning btn-sm px-3 text-white book-btn', style: 'margin-left: 10px;' %>
+      <section class="col-3 detail-info pe-5 bg-light">
+        <h5 class="fw-bold section-title"><i class="fa-solid fa-circle-up me-1"></i>Service Restrictions</h5>
+        <p class="description" style="font-size: .8rem;"><%= @service.restrictions %></p>
+      </section>
+
+      <% unless @service.latitude.nil? && @service.longitude.nil? %>
+        <div class="col-10 px-4">
+          <div style="height: 400px;" class="w-full rounded-4"
+            data-controller="map"
+            data-map-marker-value="<%= @marker.to_json %>"
+            data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+        </div>
       <% end %>
-      </footer>
     </div>
   </div>
 </div>

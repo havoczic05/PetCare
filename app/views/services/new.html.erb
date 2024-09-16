@@ -29,7 +29,21 @@
           </div>
 
           <div class="form-group">
-            <%= f.input :address, label: "What is the address where the pet will be cared for?", label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+            <%= f.hidden_field :latitude %>
+            <%= f.hidden_field :longitude %>
+            <%= f.input :address,
+                        required: true,
+                        label: "What is the address where the pet will be cared for?",
+                        label_html: { class: 'form-label' },
+                        wrapper_html: {
+                          data: {
+                            controller: 'address-autocomplete',
+                            address_autocomplete_api_key_value: ENV['MAPBOX_API_KEY']
+                          }
+                        },
+                        input_html: {
+                          data: { address_autocomplete_target: 'address' },
+                          class: 'd-none' } %>
           </div>
 
           <div class="form-group">

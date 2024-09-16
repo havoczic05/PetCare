@@ -24,7 +24,7 @@
             <div class="d-flex align-items-center gap-2 cursor-pointer" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <p class="fw-bold m-0"><%= current_user.first_name %> <%= current_user.last_name %></p>
               <a href="#" class="avatar" >
-                <%= cl_image_tag current_user.photo.key, class: "avatar mx-2", alt: "dropdown menu", crop: :fill %>
+                <%= cl_image_tag current_user.photo.key, class: "avatar", alt: "dropdown menu", crop: :fill, style: "object-fit: cover; height: 40px;" %>
               </a>
             </div>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
