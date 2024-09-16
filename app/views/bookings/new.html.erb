@@ -1,7 +1,7 @@
  <div class="booking-container">
-    <div class="row">
+    <div class="row" data-controller="hello">
       <!-- Left Column -->
-      <div class="col-md-7">
+      <div class="col-md-7" >
         <h2 class="booking-title text-center">Just one more step</h2>
           <%= form_with(model: [@service, @booking], local: true) do |form| %>
             <% if @booking.errors.any? %>
@@ -18,19 +18,16 @@
           <div class="row">
             <div class="col-md-6 form-group">
               <%= form.label :start_date %>
-              <%= form.date_field :start_date, class: "form-control", id: "start-date" %>
+              <%= form.date_field :start_date, class: "form-control", id: "start-date", data: { target: "hello.startDate", action: "input->hello#calculateDays" }, min: Date.today %>
             </div>
             <div class="col-md-6 form-group">
               <%= form.label :end_date%>
-              <%= form.date_field :end_date, class: "form-control", id: "end-date" %>
+              <%= form.date_field :end_date, class: "form-control", id: "end-date", data: { target: "hello.endDate", action: "input->hello#calculateDays" }, min: Date.today %>
             </div>
           </div>
 
           <!-- Pet selection -->
-          <div class="form-group">
-            <%= form.label :pet_id, class: "form-label" %>
-            <%= form.collection_select :pet_id, Pet.where(user: current_user), :id, :name, prompt: "Select a pet", class: "form-control" %>
-          </div>
+          <div class="form-group"> <%= form.label :pet_id, class: "form-label" %> <select name="pet_id" id="pet_id" class="form-control" data-target="hello.petSelect" data-action="change->hello#updatePetName"> <option value="">Select a pet</option> <% Pet.where(user: current_user).each do |pet| %> <option value="<%= pet.id %>" data-photo="<%= cl_image_path(pet.photo.key) %>"> <%= pet.name %> </option> <% end %> </select> </div>
 
           <!-- Message -->
           <div class="form-group">
@@ -41,24 +38,24 @@
           <!-- Submit Button -->
           <%= form.submit 'Create Booking', class:"btn-submit" %>
         <% end %>
-        <div class="booking-back-links">
-          <%= link_to 'Back to Bookings List', service_bookings_path(@service) %> |
-          <%= link_to 'Back to Service Details', service_path(@service) %>
+        <div class="booking-back-links mt-2">
+         <%= link_to 'Back to Service Details', service_path(@service) %>
         </div>
       </div>
 
       <!-- Right Column -->
-      <div class="col-md-5">
+      <div class="col-md-5 mt-5">
         <!-- Reservation Box -->
         <div class="reservation-box mb-4">
-          <p>Reservation for: <strong></strong>days</p>
-          <p>Total price: <strong>$400</strong></p>
+          <p class="d-none"> Price per day: <strong data-target="hello.price"><%= @service.price %></strong></p>
+          <span data-target="hello.output">0</span><span> days</span>
+          <p>Total price: $<strong data-target="hello.totalPrice"></strong></p>
         </div>
 
         <!-- Info Box -->
-        <div class="info-box">
-          <%= cl_image_tag @service.user.photo.key, class: "card-box__thumbnail", crop: :fill %>
-          <p><strong><%=@service.user.first_name%></strong> will take care of your pet!</p>
+        <div class="info-box h-50">
+        <div id="petPhotoDisplay" class="pet-photo-container"> <!-- Initial Image (Optional) --> <img id="petPhoto" src="<%= cl_image_path("https://res.cloudinary.com/dgbg8nxyq/image/upload/v1726517312/shadow_yw4zen") %>" /> </div>
+          <p id="petNameDisplay"></p>
         </div>
       </div>
 
