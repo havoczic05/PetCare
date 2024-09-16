@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_service, except: %i[accept_booking index]
+  before_action :set_service, except: %i[accept_booking reject_booking index]
   before_action :set_booking, only: %i[show]
 
   def index
@@ -13,7 +13,7 @@ class BookingsController < ApplicationController
 
   def create
     @booking = @service.bookings.new(booking_params)
-    @booking.status = false
+    @booking.status = "pending"
     if @booking.save
       redirect_to service_booking_path(@service, @booking), notice: 'Booking was successfully created.'
     else
@@ -23,6 +23,7 @@ class BookingsController < ApplicationController
 
   def total_days(booking)
     return 0 unless booking.start_date && booking.end_date
+
     (booking.end_date - booking.start_date).to_i
   end
 
@@ -38,9 +39,17 @@ class BookingsController < ApplicationController
   end
 
   def accept_booking
+    puts "accept_booking"
     @booking = Booking.find(params[:id])
-    @booking.update(status: true)
+    @booking.update(status: "confirmed")
     redirect_to services_path, notice: 'Booking was successfully accepted.'
+  end
+
+  def reject_booking
+    puts "reject_booking"
+    @booking = Booking.find(params[:id])
+    @booking.update(status: "rejected")
+    redirect_to services_path, notice: 'Booking was successfully rejected.'
   end
 
   private
