@@ -1,5 +1,5 @@
 class Booking < ApplicationRecord
-  has_many :activities
+  has_many :activities, dependent: :destroy
   belongs_to :pet
   belongs_to :service
 
