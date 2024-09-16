@@ -4,7 +4,7 @@
 
       <div class="col-md-5 d-flex flex-column rounded shadow bg-light p-4">
         <h1 class="mb-4 text-center">New Service</h1>
-        <%= simple_form_for([@user, @service]) do |f| %>
+        <%= simple_form_for([@user, @service], html: {data: {turbo: false}}) do |f| %>
           <% if @service.errors.any? %>
             <div id="error_explanation" class="alert alert-danger">
               <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
