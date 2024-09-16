@@ -1,0 +1,9 @@
+.table th, .table td {
+  width: calc(100% / var(--column-count));
+  text-align: center;
+}
+
+.table {
+  table-layout: fixed;
+}
+
