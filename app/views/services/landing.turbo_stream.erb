@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "services_frame" do %>
+  <%= render partial: "services_list", locals: { services: @services } %>
+<% end %>

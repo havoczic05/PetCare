@@ -7,11 +7,20 @@ class ServicesController < ApplicationController
   end
 
   def landing
+    @services = Service.all
     @services = if params[:specie]
                   Service.where(specie: params[:specie])
                 else
                   Service.all
                 end
+    if params[:query].present?
+      @services = @services.where('address ILIKE ?', "%#{params[:query]}%")
+      # @services = @services.where(address: params[:query])
+    end
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def new
