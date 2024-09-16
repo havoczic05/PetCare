@@ -3,8 +3,9 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["startDate", "endDate", "output", "petSelect", "price", "totalPrice"];
   connect() {
-    console.log("Hello, Stimulus!")
-    console.log(this.petSelectTarget.options[this.petSelectTarget.selectedIndex].text)
+    const petPhotoDisplay = document.getElementById("petPhoto");
+    petPhotoDisplay.classList.add("d-none")
+
   }
 
   calculateDays() {
@@ -40,6 +41,11 @@ export default class extends Controller {
       petNameDisplay.textContent = selectedPetName;
     }
 
-    if (petPhotoURL) { petPhotoDisplay.src = petPhotoURL; } else { petPhotoDisplay.src = "";  }
+    if (petPhotoURL) {
+      petPhotoDisplay.src = petPhotoURL;
+      petPhotoDisplay.classList.remove("d-none");
+    } else {
+      petPhotoDisplay.classList.add("d-none");
+    }
   }
 }
