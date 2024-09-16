@@ -1,6 +1,6 @@
 <h1>Pets Calendar</h1>
 
-<%= calendar attribute: :start_date do |date, activities| %>
+<%= render SimpleCalendar::BookingCalendar.new(self) do |date, activities| %>
   <% activities_for_day = @activities[date] || [] %>
   <div class="day">
     <% if activities_for_day.any? %>
