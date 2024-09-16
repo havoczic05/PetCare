@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   patch "bookings/:id", to: "bookings#accept_booking", as: :accept_booking
   get "bookings", to: "bookings#index", as: :bookings
   get 'landing', to: 'services#landing'
-
+  resources :bookings, only: [] do
+    resources :activities
+  end
   resources :pets
 end

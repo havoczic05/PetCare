@@ -1,0 +1,57 @@
+.booking-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-box, .info-box {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.info-box img {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+
+.booking-title {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.btn-submit {
+  width: 100%;
+  background-color: #FD8522;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.btn-submit:hover {
+  background-color: #F9C735;
+}
+
+.booking-back-links {
+  display: flex;
+  justify-content: center;
+
+ & * {
+  text-decoration: none;
+  margin-right: 10px;
+  color: #6c757d;
+  background-color: #e9ecef;
+  border-color: #e9ecef;
+ }
+
+}

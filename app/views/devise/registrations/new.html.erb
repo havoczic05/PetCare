@@ -17,7 +17,15 @@
                         input_html: { autocomplete: "phone_number", style: 'font-size: 14px;' } %>
             <%= f.input :address,
                         label: "Enter your address here",
-                        input_html: { autocomplete: "address", style: 'font-size: 14px;' } %>
+                        wrapper_html: {
+                          data: {
+                            controller: 'address-autocomplete',
+                            address_autocomplete_api_key_value: ENV['MAPBOX_API_KEY']
+                          }
+                        },
+                        input_html: {
+                          data: { address_autocomplete_target: 'address' },
+                          class: 'd-none' } %>
             <%= f.input :description,
                         label: "Tell us more about yourself",
                         input_html: { autocomplete: "address", style: 'font-size: 14px;' } %>
@@ -38,8 +46,8 @@
                             input_html: { autocomplete: "new-password", style: 'font-size: 14px;'} %>
 
           </div>
-          <div class="form-actions d-grid gap-2 px-4 mx-5">
-            <%= f.button :submit, "Sign up", class: "btn btn-warning text-white rounded", style: 'font-size: 14px;' %>
+          <div class="form-actions d-grid mx-5 mt-3">
+            <%= f.button :submit, "Sign up", class: "btn btn-warning text-white rounded-3" %>
           </div>
         <% end %>
       </div>

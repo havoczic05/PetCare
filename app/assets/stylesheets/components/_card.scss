@@ -10,6 +10,9 @@
   .card-box {
     @extend .border.border-warning.rounded-4.py-2.px-3.text-center.bg-white.bg-opacity-75;
 
+    &__invert {
+      @extend .rounded-4.py-2.px-3.text-center.border-0.bg-light;
+    }
     &__title {
       @extend .m-0.text-orange.fs-7;
     }
@@ -26,6 +29,7 @@
     &__thumbnail {
       width: 30px;
       height: 30px;
+      object-fit: cover;
       @extend .rounded-circle;
     }
   }

@@ -38,6 +38,11 @@ class ServicesController < ApplicationController
   end
 
   def show
+    @marker = {
+      lat: @service.latitude,
+      lng: @service.longitude,
+      info_window_html: render_to_string(partial: "info_window", locals: { service: @service })
+    }
   end
 
   def edit
@@ -63,6 +68,6 @@ class ServicesController < ApplicationController
   end
 
   def service_params
-    params.require(:service).permit(:price, :description, :address, :specie, :restrictions, :house_description, :photo)
+    params.require(:service).permit(:price, :description, :address, :specie, :restrictions, :house_description, :photo, :longitude, :latitude)
   end
 end
