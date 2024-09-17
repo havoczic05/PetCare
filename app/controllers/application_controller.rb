@@ -11,13 +11,15 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def after_sign_in_path_for(resource)
+    landing_path
+  end
   def home_page?
-    params[:controller] == 'pages' && params[:action] == 'home'
+    [:controller] == 'pages' && params[:action] == 'home'
   end
 
+
   def redirect_authenticated_user
-    if user_signed_in?
-      redirect_to landing_path
-    end
+    redirect_to landing_path if request.path != landing_path
   end
 end
