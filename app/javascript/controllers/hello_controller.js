@@ -4,7 +4,7 @@ export default class extends Controller {
   static targets = ["startDate", "endDate", "output", "petSelect", "price", "totalPrice"];
   connect() {
     const petPhotoDisplay = document.getElementById("petPhoto");
-    petPhotoDisplay.classList.add("d-none")
+
 
   }
 
@@ -41,11 +41,9 @@ export default class extends Controller {
       petNameDisplay.textContent = selectedPetName;
     }
 
-    if (petPhotoURL) {
+
       petPhotoDisplay.src = petPhotoURL;
-      petPhotoDisplay.classList.remove("d-none");
-    } else {
-      petPhotoDisplay.classList.add("d-none");
-    }
+      
+
   }
 }
