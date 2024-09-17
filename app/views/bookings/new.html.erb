@@ -18,21 +18,21 @@
           <div class="row">
             <div class="col-md-6 form-group">
               <%= form.label :start_date %>
-              <%= form.date_field :start_date, class: "form-control", id: "start-date", data: { target: "hello.startDate", action: "input->hello#calculateDays" }, min: Date.today %>
+              <%= form.date_field :start_date, style: 'font-size: 14px;', class: "form-control", id: "start-date", data: { target: "hello.startDate", action: "input->hello#calculateDays" }, min: Date.today %>
             </div>
             <div class="col-md-6 form-group">
               <%= form.label :end_date%>
-              <%= form.date_field :end_date, class: "form-control", id: "end-date", data: { target: "hello.endDate", action: "input->hello#calculateDays" }, min: Date.today %>
+              <%= form.date_field :end_date,style: 'font-size: 14px;', class: "form-control", id: "end-date", data: { target: "hello.endDate", action: "input->hello#calculateDays" }, min: Date.today %>
             </div>
           </div>
 
           <!-- Pet selection -->
-          <div class="form-group"> <%= form.label :pet_id, class: "form-label" %> <select name="pet_id" id="pet_id" class="form-control" data-target="hello.petSelect" data-action="change->hello#updatePetName"> <option value="">Select a pet</option> <% Pet.where(user: current_user).each do |pet| %> <option value="<%= pet.id %>" data-photo="<%= cl_image_path(pet.photo.key) %>"> <%= pet.name %> </option> <% end %> </select> </div>
+          <div class="form-group"> <%= form.label :pet_id, class: "form-label" %> <select name="pet_id" id="pet_id" class="form-control"  style="font-size: 14px;" data-target="hello.petSelect" data-action="change->hello#updatePetName"> <option value="">Select a pet</option> <% Pet.where(user: current_user).each do |pet| %> <option value="<%= pet.id %>" data-photo="<%= cl_image_path(pet.photo.key) %>"> <%= pet.name %> </option> <% end %> </select> </div>
 
           <!-- Message -->
           <div class="form-group">
             <%= form.label :message %>
-            <%= form.text_area :message, class: "form-control"%>
+            <%= form.text_area :message, class: "form-control", style: 'font-size: 14px;'%>
           </div>
 
           <!-- Submit Button -->
