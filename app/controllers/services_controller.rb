@@ -1,9 +1,15 @@
 class ServicesController < ApplicationController
   # before_action :set_user
   before_action :set_service, only: %i[show edit update destroy]
+  before_action :set_services_and_bookings, only: %i[index requests]
+
   def index
-    @services = Service.where(user: current_user)
-    @bookings = @services.map(&:bookings).flatten
+  end
+
+  def requests
+    @bookings_pending = @bookings.reverse.select { |booking| booking.status == "pending" }
+    @bookings_confirmed = @bookings.reverse.select { |booking| booking.status == "confirmed" }
+    @bookings_reject = @bookings.reverse.select { |booking| booking.status == "rejected" }
   end
 
   def landing
@@ -69,5 +75,10 @@ class ServicesController < ApplicationController
 
   def service_params
     params.require(:service).permit(:price, :description, :address, :specie, :restrictions, :house_description, :photo, :longitude, :latitude)
+  end
+
+  def set_services_and_bookings
+    @services = Service.where(user: current_user)
+    @bookings = @services.flat_map(&:bookings)
   end
 end

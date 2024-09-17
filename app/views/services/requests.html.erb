@@ -1,0 +1,77 @@
+<div class="bg-white py-5">
+  <div class="container">
+    <h1 class="mb-4">My hired services</h1>
+    <nav>
+			<div class="nav nav-tabs nav-tabs-custom mb-3" id="nav-tab" role="tablist">
+        <% list = [
+          {name: "Pending", slug: "pending", count: @bookings_pending.length },
+          {name: "Confirmed", slug: "confirmed", count: @bookings_confirmed.length },
+          {name: "Rejected", slug: "rejected", count: @bookings_reject.length }
+          ] %>
+
+        <% list.each_with_index do |item, index| %>
+           <% active = index == 0 ? 'active' : '' %>
+           <% aria_select = index == 0 ? 'true' : 'false' %>
+            <button
+              class="nav-link text-dark <%= active %>"
+              id="nav-<%= item[:slug] %>-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#nav-<%= item[:slug] %>"
+              type="button" role="tab"
+              aria-controls="nav-<%= item[:slug] %>"
+              aria-selected="<%= aria_select %>">
+                <%= item[:name] %> (<span class="counter"><%= item[:count] %></span>)</button>
+        <% end %>
+
+			</div>
+		</nav>
+    <div class="tab-content" id="nav-tabContent">
+			<div
+        class="tab-pane fade active show"
+        id="nav-pending" role="tabpanel" aria-labelledby="nav-pending-tab">
+        <div id="pending-bookings">
+          <% unless @bookings_pending.length.zero? %>
+            <div class="row">
+              <% @bookings_pending.each do |booking| %>
+                <div class="col-lg-6">
+                  <%= render 'bookings/booking', booking: booking %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+			</div>
+			<div
+        class="tab-pane fade"
+        id="nav-confirmed" role="tabpanel" aria-labelledby="nav-confirmed-tab">
+        <div id="confirmed-bookings">
+          <% unless @bookings_confirmed.length.zero? %>
+            <div class="row">
+              <% @bookings_confirmed.each do |booking| %>
+                <div class="col-lg-6">
+                  <%= render 'bookings/booking', booking: booking %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+			</div>
+			<div
+        class="tab-pane fade"
+        id="nav-rejected" role="tabpanel" aria-labelledby="nav-rejected-tab">
+        <div id="rejected-bookings">
+          <% unless @bookings_reject.length.zero? %>
+            <div class="row">
+              <% @bookings_reject.each do |booking| %>
+                <div class="col-lg-6">
+                  <%= render 'bookings/booking', booking: booking %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+			</div>
+		</div>
+
+  </div>
+</div>

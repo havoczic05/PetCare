@@ -74,7 +74,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_17_142713) do
     t.string "likes"
     t.string "dislikes"
     t.integer "age"
-    t.float "weight"
+    t.integer "weight"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
