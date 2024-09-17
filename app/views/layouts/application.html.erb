@@ -8,9 +8,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link rel="stylesheet" href="https://ga.jspm.io/npm:star-rating.js@4.3.0/dist/star-rating.css">
   </head>
 
   <body>
+
     <% unless current_page?(root_path) || current_page?('/users/sign_up') || current_page?('/users/sign_in') %>
       <%= render "shared/navbar" %>
     <% end %>
@@ -24,26 +26,27 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
   <script>
     <% if notice  %>
-      Swal.fire({
-        text: '<%= notice %>',
-        toast: true,
-        position: 'bottom-end',
-        icon: 'success',
-        timer: 5000,
-        timerProgressBar: true,
-        showConfirmButton: false,
-        showCloseButton: true
-      });
+         Swal.fire({
+            title: '<%= notice %>',
+            position: 'center',
+            width: '30%',
+            icon: 'success',
+            timer: 5000,
+            timerProgressBar: true,
+            showConfirmButton: false,
+
+          });
+
     <% elsif alert %>
       Swal.fire({
-        text: '<%= notice %>',
-        toast: true,
-        position: 'bottom-end',
+        title: '<%= notice %>',
+        position: 'center',
         icon: 'error',
+        width: '30%',
         timer: 5000,
         timerProgressBar: true,
         showConfirmButton: false,
-        showCloseButton: true
+
       });
     <% end %>
   </script>

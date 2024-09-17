@@ -3,7 +3,7 @@
     <div class="row g-0 justify-content-center align-items-stretch">
       <div class="col-md-5 d-flex flex-column rounded shadow bg-light p-4">
         <h2 class="fs-1 text-center ">Login</h2>
-        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { data: { turbo: "false" } }) do |f| %>
         <div class="form-inputs px-4 py-3 mx-5">
           <%= f.input :email,
                       required: false,

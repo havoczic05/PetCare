@@ -28,7 +28,7 @@ class ActivitiesController < ApplicationController
 
   def update
     if @activity.update(activity_params)
-      redirect_to @activity, notice: 'Activity was successfully updated.'
+      redirect_to booking_activities_path, notice: 'Activity was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
