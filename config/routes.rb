@@ -10,12 +10,15 @@ Rails.application.routes.draw do
 
   get "bookings", to: "bookings#index", as: :bookings
   get 'landing', to: 'services#landing'
+
   resources :bookings, only: [] do
+    resources :reviews, except: [:index]
     member do
       patch :accept
       patch :reject
     end
     resources :activities
   end
+
   resources :pets
 end
