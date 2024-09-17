@@ -1,4 +1,4 @@
-<div class="bg-white py-5" data-controller="tab-switch">
+<div class="bg-white py-5">
   <div class="container">
     <h1 class="mb-4">My hired services</h1>
     <nav>
@@ -20,7 +20,7 @@
               type="button" role="tab"
               aria-controls="nav-<%= item[:slug] %>"
               aria-selected="<%= aria_select %>">
-                <%= item[:name] %> (<%= item[:count] %>)</button>
+                <%= item[:name] %> (<span class="counter"><%= item[:count] %></span>)</button>
         <% end %>
 
 			</div>

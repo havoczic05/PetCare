@@ -55,18 +55,23 @@
   </div>
 
   <% if booking.status == "pending" %>
-    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 border-top p-3">
+    <div data-controller="tab-switch" class="d-flex flex-column flex-sm-row justify-content-center gap-3 border-top p-3">
       <%= button_to 'Confirm Booking',
         accept_booking_path(booking),
         method: :patch,
-        form: { data: { turbo_stream: true } },
+        data: {
+          turbo_action: "replace",
+          action: "turbo:submit-end->tab-switch#changeTab"
+        },
         class: 'btn btn-success rounded-pill px-4 py-2 text-white w-100' %>
 
         <%= button_to 'Reject Booking',
           reject_booking_path(booking),
           method: :patch,
-          data: { turbo_confirm: 'Are you sure?' },
-          form: { data: { turbo_stream: true } },
+          data: {
+            turbo_confirm: 'Are you sure?',
+            turbo_action: "replace",
+            action: "turbo:submit-end->tab-switch#changeTab" },
           class: 'btn btn-danger rounded-pill px-4 py-2 text-white w-100' %>
     </div>
   <% end %>

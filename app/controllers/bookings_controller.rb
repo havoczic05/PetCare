@@ -43,12 +43,8 @@ class BookingsController < ApplicationController
     @booking.update(status: "confirmed")
 
     respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.remove("booking_#{@booking.id}"),
-          turbo_stream.append("confirmed-bookings", partial: "bookings/booking", locals: { booking: @booking })
-        ]
-      end
+      format.turbo_stream { render "bookings/update_status" }
+      format.html { redirect_to some_path, notice: "Booking was successfully confirmed." }
     end
   end
 
@@ -57,12 +53,8 @@ class BookingsController < ApplicationController
     @booking.update(status: "rejected")
 
     respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.remove("booking_#{@booking.id}"),
-          turbo_stream.append("rejected-bookings", partial: "bookings/booking", locals: { booking: @booking })
-        ]
-      end
+      format.turbo_stream { render "bookings/update_status" }
+      format.html { redirect_to some_path, notice: "Booking was successfully rejected." }
     end
   end
 
