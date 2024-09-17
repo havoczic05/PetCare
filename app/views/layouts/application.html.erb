@@ -11,6 +11,13 @@
   </head>
 
   <body>
+    <%= turbo_frame_tag "flash" do %>
+      <% if notice %>
+        <div class="alert alert-success"><%= notice %></div>
+      <% elsif alert %>
+        <div class="alert alert-danger"><%= alert %></div>
+      <% end %>
+    <% end %>
     <% unless current_page?(root_path) || current_page?('/users/sign_up') || current_page?('/users/sign_in') %>
       <%= render "shared/navbar" %>
     <% end %>

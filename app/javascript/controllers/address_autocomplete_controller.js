@@ -7,15 +7,6 @@ export default class extends Controller {
   static targets = ["address"]
 
   connect() {
-    // document.addEventListener("DOMContentLoaded", () => {
-    //   this.geocoder = new MapboxGeocoder({
-    //     accessToken: this.apiKeyValue,
-    //     types: 'country,region,place,postcode,locality,neighborhood,address'
-    //   });
-    //   this.geocoder.addTo(this.element);
-    //   this.geocoder.on('result', event => this.#setInputValue(event));
-    //   this.geocoder.on('clear', event => this.#clearInputValue());
-    // })
     this.geocoder = new MapboxGeocoder({
         accessToken: this.apiKeyValue,
         types: 'country,region,place,postcode,locality,neighborhood,address'
