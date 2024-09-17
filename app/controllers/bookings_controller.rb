@@ -41,8 +41,10 @@ class BookingsController < ApplicationController
   def accept
     @booking = Booking.find(params[:id])
     @booking.update(status: "confirmed")
+
     respond_to do |format|
       format.turbo_stream { render "bookings/update_status" }
+      format.html { redirect_to some_path, notice: "Booking was successfully confirmed." }
     end
   end
 
@@ -52,6 +54,7 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream { render "bookings/update_status" }
+      format.html { redirect_to some_path, notice: "Booking was successfully rejected." }
     end
   end
 

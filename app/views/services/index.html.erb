@@ -49,14 +49,3 @@
 
   </div>
 </div>
-
-<div class="bg-white">
-  <div class="container pb-5">
-    <h1 class="text-center mb-4">My hired services</h1>
-    <div class="row">
-      <% @bookings.reverse.each do |booking| %>
-        <%= render 'bookings/booking', booking: booking %>
-      <% end %>
-    </div>
-  </div>
-</div>

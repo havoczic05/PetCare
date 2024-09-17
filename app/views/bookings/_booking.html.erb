@@ -1,61 +1,78 @@
-<div class="card-custom card bg-white shadow-lg mb-3 rounded-4" id="booking_<%= booking.id %>">
-  <div class="border-bottom">
+<div class="card-custom card bg-white shadow-lg mb-3 rounded-4 p-0" id="booking_<%= booking.id %>">
+  <div class="border-bottom p-3 d-flex flex-column flex-sm-row justify-content-between align-sm-items-center">
+
     <p class="m-0">
       <strong style="color: #FD8522">
         <%= booking.created_at.strftime("%B %d, %Y") %>
       </strong>
     </p>
+    <p class="m-0">
+      <strong>The service is </strong>
+      <%
+        def getClass(status)
+          return "text-warning" if status == "pending"
+
+          status == "confirmed" ? 'text-success' : 'text-danger'
+        end
+      %>
+      <strong class="<%= getClass(booking.status) %>">
+        <%= booking.status.upcase %>
+      </strong>
+    </p>
   </div>
-  <div class="card card-body bg-white">
-    <div class="row d-flex justify-content-between align-items-center">
-      <div class="col-3 d-flex justify-content-center align-items-center">
-        <%= cl_image_tag booking.service.photo.key, height: 200, width: 200, crop: :fill %>
+  <div class="card-body">
+    <div class="row g-3">
+      <div class="col-3 d-flex justify-content-center align-items-start">
+        <%= cl_image_tag booking.service.photo.key, class: "w-100" %>
       </div>
-      <div class="col-9 d-flex flex-column justify-content-center">
-        <p>
+      <div class="col-9 d-flex flex-column justify-content-center gap-2">
+        <p class="m-0">
           <strong><i class="fa-regular fa-user"></i>&nbsp; Hired by:</strong>
           <%= booking.pet.user.first_name %> <%= booking.pet.user.last_name %></p>
-        <p>
-          <strong><i class="fa-solid fa-paw"></i>&nbsp; To take care of:</strong>
+        <p class="m-0">
+          <strong>
+            <i class="fa-solid fa-paw"></i>&nbsp; To take care of:
+          </strong>
           <%= booking.pet.name %> (<%= booking.pet.specie %>)</p>
-        <p>"<%= booking.pet.description %>"</p>
-        <p>
+        <p class="m-0">
+          <strong>Price per day:</strong>
+          $<%= booking.service.price.to_f %></p>
+
+      </div>
+      <div class="col-12 d-flex flex-column justify-content-center gap-3">
+        <p class="m-0">
+          "<%= booking.pet.description %>"
+        </p>
+        <p class="m-0">
           <strong><i class="fa-regular fa-calendar"></i>&nbsp; From:</strong>
           <%= booking.start_date.strftime("%B %d, %Y") %><strong >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To:</strong> <%= booking.end_date.strftime("%B %d, %Y") %></p>
-        <p>
-          <strong>Price per day:</strong>
-          $<%= booking.service.price %></p>
-        <p>
+
+        <p class="m-0">
           <strong><i class="fa-solid fa-location-dot"></i>&nbsp; The address where you will provide the service in is: </strong><%= booking.service.address %></p>
-        <p>"<%= booking.message %>"</p>
-        <p><strong>The service is </strong>
-          <%
-            def getClass(status)
-              return "text-warning" if status == "pending"
-
-              status == "confirmed" ? 'text-success' : 'text-danger'
-            end
-          %>
-          <strong class="<%= getClass(booking.status) %>">
-            <%= booking.status.upcase %>
-          </strong>
-        </p>
-
-        <% if booking.status == "pending" %>
-          <div class="d-flex gap-3">
-            <%= button_to 'Confirm Booking',
-              accept_booking_path(booking),
-              method: :patch,
-              class: 'btn btn-success rounded-pill px-4 py-2 text-white' %>
-
-              <%= button_to 'Reject Booking',
-                reject_booking_path(booking),
-                method: :patch,
-                data: { turbo_confirm: 'Are you sure?' },
-                class: 'btn btn-danger rounded-pill px-4 py-2 text-white' %>
-          </div>
-        <% end %>
+        <p class="m-0">"<%= booking.message %>"</p>
       </div>
     </div>
   </div>
+
+  <% if booking.status == "pending" %>
+    <div data-controller="tab-switch" class="d-flex flex-column flex-sm-row justify-content-center gap-3 border-top p-3">
+      <%= button_to 'Confirm Booking',
+        accept_booking_path(booking),
+        method: :patch,
+        data: {
+          turbo_action: "replace",
+          action: "turbo:submit-end->tab-switch#changeTab"
+        },
+        class: 'btn btn-success rounded-pill px-4 py-2 text-white w-100' %>
+
+        <%= button_to 'Reject Booking',
+          reject_booking_path(booking),
+          method: :patch,
+          data: {
+            turbo_confirm: 'Are you sure?',
+            turbo_action: "replace",
+            action: "turbo:submit-end->tab-switch#changeTab" },
+          class: 'btn btn-danger rounded-pill px-4 py-2 text-white w-100' %>
+    </div>
+  <% end %>
 </div>

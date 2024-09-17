@@ -11,6 +11,8 @@ class ActivitiesController < ApplicationController
 
   def new
     @activity = Activity.new
+    @start_date = @booking.start_date
+    @end_date = @booking.end_date
   end
 
   def create
