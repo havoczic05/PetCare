@@ -1,9 +1,4 @@
-<div class="container my-5 booking-detail">
-
-  <%= link_to service_bookings_path(@service), class: "d-flex gap-2 align-items-center text-secondary text-decoration-none" do %>
-     <i class="fa-solid fa-chevron-left"></i>
-     <p class="m-0 fw-medium">Back to bookings</p>
-  <% end %>
+<div class="container mb-5 booking-detail">
 
   <div class="text-center d-flex flex-column justify-content-center align-items-center gap-3">
     <div class="icon-box">
@@ -15,7 +10,7 @@
     <p class="m-0 text-secondary">You need to wait for the caregiver to approve your service request. 🎉</p>
   </div>
 
-  <h2 class="m-0 fs-5 text-secondary">Booking details</h2>
+  <h2 class="m-0 fs-5 ">Booking details</h2>
 
   <div class="row g-4">
     <div class="col-md-7 col-lg-5">
@@ -24,28 +19,28 @@
         <div class="d-flex flex-column gap-3 p-3">
 
           <p class="m-0">
-            <span class="fw-medium fs-7 text-secondary">
+            <span class="fw-medium fs-7 ">
               <i class="fa-regular fa-calendar"></i>&nbsp; From:
             </span>
             <%= @booking.start_date.strftime("%B %d, %Y") %>
-            <span class="fw-medium fs-7 text-secondary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To:</span>
+            <span class="fw-medium fs-7 "> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To:</span>
             <%= @booking.end_date.strftime("%B %d, %Y") %>
           </p>
 
           <div>
-            <p class="fw-medium fs-7 text-secondary m-0">
+            <p class="fw-medium fs-7  m-0">
               <i class="fa-regular fa-comment"></i>&nbsp; Message: </p>
             <p class="m-0"><%= @booking.message %></p>
           </div>
 
           <div>
-            <p class="fw-medium fs-7 text-secondary m-0">
+            <p class="fw-medium fs-7  m-0">
               <i class="fa-solid fa-location-dot"></i>&nbsp; The address: </p>
             <p class="m-0"><%= @booking.service.address %></p>
           </div>
 
           <div>
-            <p class="fw-medium fs-7 text-secondary m-0">
+            <p class="fw-medium fs-7  m-0">
               <i class="fa-regular fa-credit-card"></i>&nbsp; Price per day: </p>
 
             <p class="m-0"><i class="fa-solid fa-dollar-sign"></i> <%= @booking.service.price.to_f  %></p>
@@ -75,20 +70,20 @@
           <div class="d-flex flex-wrap gap-3">
             <div class="card-box__invert">
               <p class="card-box__content"><%= @booking.pet.age %> years</p>
-              <p class="m-0 text-secondary fs-7">Age</p>
+              <p class="m-0  fs-7">Age</p>
             </div>
             <div class="card-box__invert">
               <p class="card-box__content"><%= @booking.pet.weight %> kg</p>
-              <p class="m-0 text-secondary fs-7">Weight</p>
+              <p class="m-0  fs-7">Weight</p>
             </div>
             <div class="card-box__invert">
               <p class="card-box__content"><%= @booking.pet.specie %></p>
-              <p class="m-0 text-secondary fs-7">Specie</p>
+              <p class="m-0  fs-7">Specie</p>
             </div>
           </div>
 
           <div>
-            <div class="d-flex gap-2 fw-medium fs-7 text-secondary align-items-center pb-1">
+            <div class="d-flex gap-2 fw-medium fs-7  align-items-center pb-1">
               <i class="fa-solid fa-heart"></i>
               <h6 class="m-0"> Likes </h6>
             </div>
@@ -96,7 +91,7 @@
           </div>
 
           <div>
-            <div class="d-flex gap-2 fw-medium fs-7 text-secondary align-items-center pb-1">
+            <div class="d-flex gap-2 fw-medium fs-7  align-items-center pb-1">
               <i class="fa-solid fa-heart-crack"></i>
               <h6 class="m-0 "> Dislikes</h6>
             </div>
@@ -112,7 +107,7 @@
         <div class="d-flex flex-column gap-3 p-3">
 
           <div>
-            <p class="fw-medium fs-7 text-secondary m-0">
+            <p class="fw-medium fs-7  m-0">
               <i class="fa-solid fa-user"></i>&nbsp; By: </p>
 
             <div class="d-flex align-items-center gap-2">
@@ -124,13 +119,13 @@
           </div>
 
           <div>
-            <p class="fw-medium fs-7 text-secondary m-0">
+            <p class="fw-medium fs-7  m-0">
               <i class="fa-solid fa-triangle-exclamation"></i>&nbsp; Restrictions: </p>
             <p class="m-0"><%= @booking.service.restrictions %></p>
           </div>
 
           <div>
-            <p class="fw-medium fs-7 text-secondary m-0">
+            <p class="fw-medium fs-7  m-0">
               <i class="fa-solid fa-house"></i>&nbsp; Place description: </p>
             <p class="m-0"><%= @booking.service.house_description %></p>
           </div>

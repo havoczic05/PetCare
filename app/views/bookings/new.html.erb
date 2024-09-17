@@ -29,7 +29,7 @@
           <!-- Pet selection -->
 
 
-            <select name="booking[pet_id]" id="pet_id" class="form-control" data-target="hello.petSelect" data-action="change->hello#updatePetName">
+            <select name="booking[pet_id]" id="pet_id" class="form-control mb-2" style='font-size: 14px;' data-target="hello.petSelect" data-action="change->hello#updatePetName">
               <option value="">Select a pet</option>
               <% Pet.where(user: current_user).each do |pet| %>
               <option value="<%= pet.id %>" data-photo="<%= cl_image_path(pet.photo.key) %>"> <%= pet.name %> </option>
@@ -39,8 +39,8 @@
 
 
           <!-- Message -->
-          <div class="form-group">
-            <%= form.label :message %>
+          <div class="form-group mt-2">
+            <%= form.label "Write a message for the pet sitter:", class: "mb-1 mt-2" %>
             <%= form.text_area :message, class: "form-control", style: 'font-size: 14px;'%>
           </div>
 

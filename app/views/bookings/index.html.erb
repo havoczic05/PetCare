@@ -1,9 +1,9 @@
 <div class="bg-white">
-  <div class="container pb-5">
-    <h1 class="text-center mb-4">Booked services for your pets</h1>
+  <div class="container pb-4">
+    <h1 class="my-4">Booked services for your pets</h1>
 
     <% @bookings.reverse.each do |booking| %>
-      <div class="card-custom card bg-white shadow-lg mb-3">
+      <div class="card-custom card bg-white shadow-lg my-3">
         <div class="card card-body" style="background-color: white;">
           <p class="m-0"><strong style="color: #FD8522"><%= booking.created_at.strftime("%d de %B del %Y") %></strong></p>
         </div>
@@ -19,12 +19,16 @@
               <p><strong>Price per day:</strong> $<%= booking.service.price %></p>
               <p><strong><i class="fa-solid fa-location-dot"></i>&nbsp; <%= booking.service.user.first_name %>'s address: </strong><%= booking.service.address %></p>
               <p><strong><i class="fa-solid fa-phone"></i>&nbsp; <%= booking.service.user.first_name %>'s phone number: </strong><%= booking.service.user.phone_number %></p>
-              <p><strong>Your service is </strong>
-                <strong class="<%= booking.status ? 'text-success' : 'text-warning' %>">
-                  <%= booking.status ? 'CONFIRMED' : 'PENDING' %>
-                </strong>
+              <p><strong>Your service </strong>
+                <% if booking.status == 'confirmed' %>
+                  <strong>is</strong><strong class="text-success"> CONFIRMED</strong>
+                <% elsif booking.status == 'pending' %>
+                  <strong>is</strong><strong class="text-warning"> PENDING</strong>
+                <% elsif booking.status == 'rejected' %>
+                  <strong>was</strong><strong class="text-danger"> REJECTED</strong>
+                <% end %>
               </p>
-              <% if booking.status %>
+              <% if booking.status == 'confirmed' %>
                 <div class="d-flex">
                   <%= link_to booking_activities_path(booking), class: 'btn p-2 me-3', style: 'background-color: #FD8522; color: white; width: auto; display: inline-block; padding: 5px 10px;' do %>
                     View pet's calendar
