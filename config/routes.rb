@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get "bookings", to: "bookings#index", as: :bookings
   get 'landing', to: 'services#landing'
+  get 'requests', to: 'services#requests'
   resources :bookings, only: [] do
     member do
       patch :accept

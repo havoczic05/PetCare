@@ -1,9 +1,12 @@
 <%= turbo_stream.replace "flash" do %>
-  <div class="alert alert-success">Booking was successfully <%= @booking.status %>.</div>
-<% end %>
-
-<%= turbo_stream.replace "booking_#{@booking.id}" do %>
-  <div id="booking_<%= @booking.id %>">
-    <%= render partial: 'bookings/booking', locals: { booking: @booking } %>
+  <div class="alert alert-success">
+    Booking was successfully <%= @booking.status %>.
   </div>
 <% end %>
+
+<%= turbo_stream.remove "booking_#{@booking.id}" %>
+<% status = @booking.status %>
+<%= turbo_stream.append
+  "#{status}-bookings",
+  partial: "bookings/booking",
+  locals: { booking: @booking } %>
