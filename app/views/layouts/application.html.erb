@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
@@ -14,12 +14,38 @@
     <% unless current_page?(root_path) || current_page?('/users/sign_up') || current_page?('/users/sign_in') %>
       <%= render "shared/navbar" %>
     <% end %>
-    <%= render "shared/flashes" %>
+    <%# <%= #render "shared/flashes" %>
 
     <main>
       <%= yield %>
     </main>
 
     <%= render "shared/footer" %>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
+  <script>
+    <% if notice  %>
+      Swal.fire({
+        text: '<%= notice %>',
+        toast: true,
+        position: 'bottom-end',
+        icon: 'success',
+        timer: 5000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        showCloseButton: true
+      });
+    <% elsif alert %>
+      Swal.fire({
+        text: '<%= notice %>',
+        toast: true,
+        position: 'bottom-end',
+        icon: 'error',
+        timer: 5000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        showCloseButton: true
+      });
+    <% end %>
+  </script>
   </body>
 </html>

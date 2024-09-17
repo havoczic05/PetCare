@@ -17,19 +17,19 @@ class PetsController < ApplicationController
     @pet.user = current_user
 
     if @pet.save
-      redirect_to "/pets", notice: 'Pet was successfully created.'
+      redirect_to "/pets", notice: "🎉 Pet#{@pet.name} was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    redirect_to pets_path, notice: 'Pet was successfully updated.' if @pet.update(pet_params)
+    redirect_to pets_path, notice: "🎉 #{@pet.name} was successfully updated." if @pet.update(pet_params)
   end
 
   def destroy
     @pet.destroy
-    flash[:notice] = 'Pet was deleted.'
+    flash[:notice] = "😔 #{@pet.name} was deleted."
     redirect_to pets_path
   end
 

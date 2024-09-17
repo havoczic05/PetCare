@@ -31,7 +31,7 @@ class ServicesController < ApplicationController
     @service = Service.new(service_params)
     @service.user_id = current_user.id
     if @service.save
-      redirect_to @service, notice: 'Service was successfully created.'
+      redirect_to @service, notice: '🎉 Your service was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -50,7 +50,7 @@ class ServicesController < ApplicationController
 
   def update
     if @service.update(service_params)
-      redirect_to @service, notice: 'Service was successfully updated.'
+      redirect_to @service, notice: '🎉 Your service was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -58,7 +58,7 @@ class ServicesController < ApplicationController
 
   def destroy
     @service.destroy!
-    redirect_to services_path, notice: 'Service was successfully deleted.'
+    redirect_to services_path, notice: '😔 Your service was successfully deleted.'
   end
 
   private
