@@ -2,8 +2,8 @@
   <%# SEARCH %>
   <div class="mb-4">
     <%= form_with url: landing_path, method: :get, class: "d-flex justify-content-center", data: { turbo_frame: "services_frame" } do %>
-      <%= text_field_tag :query, params[:query], class: "form-control me-2", placeholder: "Search by address", style: "max-width: 500px;" %>
-      <%= submit_tag "Search", class: "btn btn-warning" %>
+      <%= text_field_tag :query, params[:query], class: "form-control me-2", placeholder: "Search by address", style: "font-size: 14px; max-width: 500px;" %>
+      <%= submit_tag "Search", class: "btn text-white", style: "background-color: #FD8522" %>
     <% end %>
   </div>
   <%# SEARCH %>

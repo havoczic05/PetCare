@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { sessions: 'sessions' }
   root to: "pages#home"
   get "up" => "rails/health#show", as: :rails_health_check
   resources :users
@@ -12,11 +12,13 @@ Rails.application.routes.draw do
   get 'landing', to: 'services#landing'
   get 'requests', to: 'services#requests'
   resources :bookings, only: [] do
+    resources :reviews, except: [:index]
     member do
       patch :accept
       patch :reject
     end
     resources :activities
   end
+
   resources :pets
 end

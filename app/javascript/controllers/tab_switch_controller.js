@@ -19,7 +19,6 @@ export default class extends Controller {
   }
 
   updateCounter(target, action = "increment") {
-    console.log(action);
     const counter = document.querySelector(`#${target} .counter`)
     counter.innerHTML = this.validateNum(counter.innerHTML, action)
   }

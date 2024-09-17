@@ -1,0 +1,26 @@
+<div class="bg-white">
+  <div class="container p-4">
+    <div class="row g-0 justify-content-center align-items-stretch">
+      <div class="col-md-5 d-flex flex-column rounded shadow bg-light p-4">
+        <h2 class="mb-4 text-center">Create a review for:</h2>
+        <p class="text-center">
+            <%= cl_image_tag @booking.service.user.photo.key, class: "avatar", alt: "profile photo", crop: :fill, style: "object-fit: cover; height: 40px;" %>
+            <%= @booking.service.user.first_name %>
+            <%= @booking.service.user.last_name %>
+        </p>
+        <%= simple_form_for [@booking, @review] do |f| %>
+          <%= f.input :content, label: "Tell us more about your experience", label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+          <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: {controller: "star-rating"}} %>
+          <div class="d-flex justify-content-center">
+            <%= f.submit "Send Review", class: 'btn btn-warning text-white' %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-md-5 d-flex rounded shadow p-4" style="
+        background-image: url('https://i.pinimg.com/564x/76/e8/d8/76e8d8f770942c1153931b1182a400e7.jpg');
+        background-size: cover;
+        background-position: center;">
+      </div>
+    </div>
+  </div>
+</div>
