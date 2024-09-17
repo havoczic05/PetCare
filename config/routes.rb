@@ -8,8 +8,6 @@ Rails.application.routes.draw do
     resources :bookings
   end
 
-  # patch "bookings/:id", to: "bookings#accept_booking", as: :accept_booking
-  # patch "bookings/:id", to: "bookings#reject_booking", as: :reject_booking
   get "bookings", to: "bookings#index", as: :bookings
   get 'landing', to: 'services#landing'
   resources :bookings, only: [] do
