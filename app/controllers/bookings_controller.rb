@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_service, except: %i[accept_booking reject_booking index]
+  before_action :set_service, except: %i[accept reject index]
   before_action :set_booking, only: %i[show]
 
   def index
@@ -38,18 +38,21 @@ class BookingsController < ApplicationController
     @total_price = total_price(@booking)
   end
 
-  def accept_booking
-    puts "accept_booking"
+  def accept
     @booking = Booking.find(params[:id])
     @booking.update(status: "confirmed")
-    redirect_to services_path, notice: 'Booking was successfully accepted.'
+    respond_to do |format|
+      format.turbo_stream { render "bookings/update_status" }
+    end
   end
 
-  def reject_booking
-    puts "reject_booking"
+  def reject
     @booking = Booking.find(params[:id])
     @booking.update(status: "rejected")
-    redirect_to services_path, notice: 'Booking was successfully rejected.'
+
+    respond_to do |format|
+      format.turbo_stream { render "bookings/update_status" }
+    end
   end
 
   private
