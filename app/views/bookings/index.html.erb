@@ -28,9 +28,18 @@
                   <strong>was</strong><strong class="text-danger"> REJECTED</strong>
                 <% end %>
               </p>
+
               <% if booking.status == 'confirmed' %>
-                <div class="d-flex">
-                  <%= link_to booking_activities_path(booking), class: 'btn p-2 me-3', style: 'background-color: #FD8522; color: white; width: auto; display: inline-block; padding: 5px 10px;' do %>
+
+                <div class="d-flex gap-3">
+                  <% if current_user != @user%>
+                    <%= link_to "Chat with #{booking.service.user.first_name}",
+                    conversation_path(booking.pet.user.id,
+                    booking_id: booking.id),
+                    class: "btn btn-warning text-white",
+                    style: "background-color: #FD8522;" %>
+                  <% end %>
+                  <%= link_to booking_activities_path(booking), class: 'btn p-2', style: 'background-color: #FD8522; color: white; width: auto; display: inline-block; padding: 5px 10px;' do %>
                     View pet's calendar
                   <% end %>
                   <%= link_to new_booking_review_path(booking), class: 'btn p-2', style: 'background-color: #FD8522; color: white; width: auto; display: inline-block; padding: 5px 10px;' do %>

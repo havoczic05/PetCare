@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'landing', to: 'services#landing'
   get 'requests', to: 'services#requests'
   resources :bookings, only: [] do
+    resources :messages, only: [:create]
     resources :reviews, except: [:index]
     member do
       patch :accept
@@ -21,4 +22,5 @@ Rails.application.routes.draw do
   end
 
   resources :pets
+  get 'conversation/:id', to: 'conversations#show', as: :conversation
 end

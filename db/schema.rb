@@ -67,6 +67,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_17_142713) do
     t.index ["service_id"], name: "index_bookings_on_service_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.bigint "sender_id", null: false
+    t.bigint "receiver_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "booking_id"
+    t.index ["booking_id"], name: "index_messages_on_booking_id"
+    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
+  end
+
   create_table "pets", force: :cascade do |t|
     t.string "name"
     t.string "specie"
@@ -129,6 +141,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_17_142713) do
   add_foreign_key "activities", "bookings"
   add_foreign_key "bookings", "pets"
   add_foreign_key "bookings", "services"
+  add_foreign_key "messages", "bookings"
+  add_foreign_key "messages", "users", column: "receiver_id"
+  add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "pets", "users"
   add_foreign_key "reviews", "bookings"
   add_foreign_key "reviews", "users"
