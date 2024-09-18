@@ -21,9 +21,36 @@
                     <i class="fa-solid fa-pen-to-square"></i>
                   <% end %>
 
-                  <%= link_to service, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'px-3', style: 'color: #FD8522; font-size: 24px;'  do %>
-                    <i class="fa-solid fa-trash"></i>
-                  <% end %>
+
+                   <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      <i class="fa-solid fa-trash"></i>
+                   </button>
+
+
+                <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          ...
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <%= link_to service, data: { turbo_method: :delete}, class: 'px-3', style: 'color: #FD8522; font-size: 24px;'  do %>
+                            <span><strong>Delete</strong></span>
+                           <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <!-- Modal -->
+
+
+
                 </div>
           </div>
           <div class="card card-body"  style="background-color: white;">
