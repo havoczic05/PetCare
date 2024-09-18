@@ -22,9 +22,9 @@
                   <% end %>
 
 
-                   <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                   <%= link_to service, data: { turbo_method: :delete, bs_toggle: "modal", bs_target: "#exampleModal" }, class: 'px-3', style: 'color: #FD8522; font-size: 24px;'  do %>
                       <i class="fa-solid fa-trash"></i>
-                   </button>
+                    <% end %>
 
 
                 <!-- Modal -->
