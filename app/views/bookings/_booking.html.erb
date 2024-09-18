@@ -36,7 +36,7 @@
           <%= booking.pet.name %> (<%= booking.pet.specie %>)</p>
         <p class="m-0">
           <strong>Price per day:</strong>
-          $<%= booking.service.price.to_f %></p>
+          $<%= booking.service.price %></p>
 
       </div>
       <div class="col-12 d-flex flex-column justify-content-center gap-3">
@@ -77,7 +77,11 @@
   <% end %>
 
   <%# LINK_TO CHAT %>
-  <% if current_user != @user && booking.status == true %>
-    <%= link_to "Chat with #{booking.pet.user.first_name}", conversation_path(booking.pet.user.id, booking_id: booking.id), class: "btn btn-warning text-white" %>
-  <% end %>
+  <div class="p-3">
+    <% if current_user != user && booking.status == "confirmed" %>
+      <%= link_to "Chat with #{booking.pet.user.first_name}",
+      conversation_path(booking.pet.user.id, booking_id: booking.id),
+      class: "btn btn-warning text-white" %>
+    <% end %>
+  </div>
 </div>
