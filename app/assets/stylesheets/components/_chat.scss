@@ -1,0 +1,97 @@
+.chat-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fd8522;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+
+  span {
+    color: #007bff;
+    font-weight: 600;
+  }
+}
+
+.chat-container {
+  flex-direction: column;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border: 1px solid #e49617;
+  border-radius: 10px;
+  gap: 15px;
+}
+
+.chat-message {
+  // display: flex;
+  // align-items: flex-start; /* startline */
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  background-color: ead594; /* background messages */
+  transition: background-color 0.3s; /* transition */
+
+  &:hover {
+    background-color: #efece9;
+  }
+}
+
+
+.chat-message-sent {
+  width: 120px;
+  align-items: flex-end;
+  background-color: #aedfed; /* Sent messages color */
+  margin-left: auto;
+  padding: 1%; /* right line */
+  border: 2px solid #cec9c5; /* Color y grosor del borde */
+  border-radius: 12px; /* Esquinas redondeadas (opcional) */
+}
+
+.chat-message-receiver {
+  width: 90px;
+  align-items: flex-start;
+  background-color: #e2ecec; /* Sent messages color */
+  margin-left: auto; /* right line */
+
+
+}
+
+
+.chat-message-body {
+  max-width: 70%; /* message width */
+}
+
+.chat-message p {
+  margin: 0;
+  font-size: 1rem; /* Tamaño de fuente */
+}
+
+.chat-form {
+  margin-top: 20px; /* Espaciado superior */
+  padding: 10px;
+  background-color: #f8f9fa; /* Fondo del formulario */
+  border-top: 1px solid #e0e0e0; /* Borde superior */
+  border-radius: 8px; /* Bordes redondeados */
+}
+
+.input-group {
+  display: flex; /* Usar flexbox para alinear */
+  justify-content: space-between; /* Espacio entre el campo de entrada y el botón */
+}
+
+.input-group .form-control {
+  flex-grow: 1; /* Permitir que el campo de entrada crezca */
+  margin-right: 10px; /* Espaciado entre el campo de entrada y el botón */
+}
+
+.input-group .btn {
+  background-color: #fd8522; /* bottom color */
+  color: white; /* Font color */
+  border: none; /* Withour borders */
+  border-radius: 5px; /* Bordes redondeados */
+  transition: background-color 0.3s; /* transition */
+
+  &:hover {
+    background-color: #e5721b;
+  }
+}

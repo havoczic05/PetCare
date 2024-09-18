@@ -1,0 +1,36 @@
+<%= turbo_stream_from dom_id(@booking) %>
+
+  <div class="container mt-4">
+    <div class="row g-0 rounded-top-4 mb-4">
+      <div class="col-12">
+        <h1 class="chat-title">
+          <% if @receiver.present? %>
+            Conversation with <%= @receiver.first_name %>
+          <% else %>
+            Conversation empty
+          <% end %>
+        </h1>
+      </div>
+    </div>
+
+    <div class="chat-message">
+      <%= turbo_frame_tag "messages_#{@booking.id}" do %>
+        <% @messages.order(created_at: :asc).each do |message| %>
+          <div class= "<%= 'chat-message-sent' if message.sender == current_user %>">
+          <%# <div class="<%= message.sender == current_user ? 'chat-message-sent' : (message.receiver == current_user ? 'chat-message-receiver' : '') %>
+            <p class="mb-0">
+              <%= message.content %>
+            </p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <%= turbo_frame_tag "message_form" do %>
+      <%= simple_form_for([@booking, @message], remote: true, html: { data: { controller:"reset-form-chat" , action:"turbo:submit-end->reset-form-chat#reset" } ,class: "chat-form" }) do |f| %>
+        <%= f.input :content, input_html: { data: { target: "form.content" }, class: "form-control lg mb-2", autofocus: true, placeholder: "Type your message here..." } %>
+        <%= f.submit 'Send', id: 'submit_button', class: "btn btn-warning text-white" %>
+      <% end %>
+    <% end %>
+  </div>
+  <br>

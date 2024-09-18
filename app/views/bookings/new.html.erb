@@ -29,12 +29,15 @@
           <!-- Pet selection -->
 
 
-            <select name="booking[pet_id]" id="pet_id" class="form-control mb-2" style='font-size: 14px;' data-target="hello.petSelect" data-action="change->hello#updatePetName">
-              <option value="">Select a pet</option>
-              <% Pet.where(user: current_user).each do |pet| %>
+          <select name="booking[pet_id]"
+            id="pet_id" class="form-control mb-2 fs-7"
+            data-target="hello.petSelect"
+            data-action="change->hello#updatePetName">
+            <option value="">Select a pet</option>
+            <% Pet.where(user: current_user).each do |pet| %>
               <option value="<%= pet.id %>" data-photo="<%= cl_image_path(pet.photo.key) %>"> <%= pet.name %> </option>
-              <% end %>
-            </select>
+            <% end %>
+          </select>
 
 
 

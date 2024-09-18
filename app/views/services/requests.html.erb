@@ -34,7 +34,7 @@
             <div class="row">
               <% @bookings_pending.each do |booking| %>
                 <div class="col-lg-6">
-                  <%= render 'bookings/booking', booking: booking %>
+                  <%= render 'bookings/booking', booking: booking, user: @user %>
                 </div>
               <% end %>
             </div>
@@ -49,7 +49,7 @@
             <div class="row">
               <% @bookings_confirmed.each do |booking| %>
                 <div class="col-lg-6">
-                  <%= render 'bookings/booking', booking: booking %>
+                  <%= render 'bookings/booking', booking: booking, user: @user %>
                 </div>
               <% end %>
             </div>
@@ -64,7 +64,7 @@
             <div class="row">
               <% @bookings_reject.each do |booking| %>
                 <div class="col-lg-6">
-                  <%= render 'bookings/booking', booking: booking %>
+                  <%= render 'bookings/booking', booking: booking, user: @user %>
                 </div>
               <% end %>
             </div>

@@ -4,12 +4,17 @@ class ServicesController < ApplicationController
   before_action :set_services_and_bookings, only: %i[index requests]
 
   def index
+    @services = Service.where(user: current_user)
+    @bookings = @services.map(&:bookings).flatten
+    ## Get users
+    @users = User.all
   end
 
   def requests
     @bookings_pending = @bookings.reverse.select { |booking| booking.status == "pending" }
     @bookings_confirmed = @bookings.reverse.select { |booking| booking.status == "confirmed" }
     @bookings_reject = @bookings.reverse.select { |booking| booking.status == "rejected" }
+    @users = User.all
   end
 
   def landing

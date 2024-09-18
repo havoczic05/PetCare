@@ -5,6 +5,7 @@ class BookingsController < ApplicationController
 
   def index
     @bookings = Booking.joins(pet: :user).where(pets: { user_id: current_user.id })
+    @user = User.all
   end
 
   def new
@@ -29,9 +30,9 @@ class BookingsController < ApplicationController
 
   def total_price(booking)
     days = total_days(booking)
-    return booking.service.price.to_f if days.zero?
+    return booking.service.price if days.zero?
 
-    return (booking.service.price * total_days(booking)).to_f
+    return (booking.service.price * total_days(booking))
   end
 
   def show
