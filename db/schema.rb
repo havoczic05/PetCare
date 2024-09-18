@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_16_224124) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_17_142713) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_16_224124) do
     t.date "start_date"
     t.date "end_date"
     t.string "message"
-    t.boolean "status", default: false
+    t.string "status", default: "pending"
     t.bigint "pet_id", null: false
     t.bigint "service_id", null: false
     t.datetime "created_at", null: false
@@ -91,6 +91,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_16_224124) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_pets_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "content"
+    t.integer "rating"
+    t.bigint "user_id", null: false
+    t.bigint "booking_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_reviews_on_booking_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "services", force: :cascade do |t|
@@ -134,5 +145,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_16_224124) do
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "pets", "users"
+  add_foreign_key "reviews", "bookings"
+  add_foreign_key "reviews", "users"
   add_foreign_key "services", "users"
 end

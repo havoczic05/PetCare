@@ -1,0 +1,33 @@
+<div class="bg-white">
+  <div class="container p-4">
+    <div class="row g-0 justify-content-center align-items-stretch">
+
+      <div class="col-md-5 d-flex flex-column rounded shadow bg-light p-4">
+        <h1 class="mb-4 text-center">Edit this Activity</h1>
+        <%= simple_form_for([@booking, @activity]) do |form| %>
+          <%= form.input :booking_id, as: :hidden, input_html: { value: params[:booking_id] } %>
+
+          <%= form.input :name, label: "What's the name of the activity?", label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+
+          <%= form.input :description, as: :text, label: "Describe the activity", label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+
+          <%= form.input :start_time, as: :time, label: "What time does the activity start?", label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+
+          <%= form.input :end_time, as: :time, label: "What time does the activity end?", label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+
+          <%= form.input :date, as: :date, label: "When is the activity happening?", label_html: { class: 'form-label' }, input_html: { class: 'form-control', style: 'font-size: 14px;' } %>
+
+          <div class="form-group text-center d-grid">
+            <%= form.button :submit, class: 'btn btn-warning text-white' %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-md-5 d-flex rounded shadow p-4" style="
+        background-image: url('<%= asset_path 'play.jpg' %>');
+        background-size: cover;
+        background-position: center;">
+      </div>
+    </div>
+  </div>
+</div>

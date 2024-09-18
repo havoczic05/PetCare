@@ -1,10 +1,10 @@
 <div class="bg-white">
   <div class="container px-4 py-5">
     <div class="row g-0 justify-content-center align-items-stretch">
-      <div class="col-md-5 d-flex flex-column rounded shadow bg-light p-4">
+      <div class="col-md-6 col-lg-5 d-flex flex-column rounded shadow bg-light p-4">
         <h2 class="fs-1 text-center ">Login</h2>
-        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="form-inputs px-4 py-3 mx-5">
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { data: { turbo: "false" } }) do |f| %>
+        <div class="form-inputs px-lg-4 py-3 mx-lg-5">
           <%= f.input :email,
                       required: false,
                       autofocus: true,
@@ -14,15 +14,15 @@
                       input_html: { autocomplete: "current-password", style: 'font-size: 14px;'  } %>
           <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
         </div>
-        <div class="form-actions d-grid gap-2 px-4 mx-5">
-          <%= f.button :submit, "Log in", class: "btn btn-warning text-white" %>
+        <div class="form-actions d-grid gap-2 px-lg-4 mx-lg-5">
+          <%= f.button :submit, "Log in", class: "btn btn-warning text-white rounded-3" %>
         </div>
         <% end %>
-        <div class="button-group mt-4 mb-4 text-center">
+        <div class="button-group my-4 text-center">
           <%= render "devise/shared/links" %>
         </div>
       </div>
-      <div class="col-md-5 d-flex rounded shadow p-4" style="
+      <div class="col-md-4 col-lg-5 d-flex rounded shadow p-4" style="
         background-image: url('https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=600&w=1000');
         background-size: cover;
         background-position: center;">
