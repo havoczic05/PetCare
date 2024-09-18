@@ -26,9 +26,45 @@
               <%= link_to edit_pet_path(pet), class: 'card-box__btn' do %>
                 <i class="fa-solid fa-pen-to-square"></i>
               <% end %>
-              <%= button_to pet_path(pet), method: :delete, data: { confirm: 'Are you sure you want to delete this pet?' }, class: 'card-box__btn', form: { data: { turbo_confirm: 'Are you sure you want to delete this pet?' } } do %>
-                <i class="fa-solid fa-trash"></i>
-              <% end %>
+              <%= link_to pet, data: { turbo_method: :delete, bs_toggle: "modal", bs_target: "#petModal" }, class: 'px-3', style: 'color: #FD8522; font-size: 24px;'  do %>
+                      <i class="fa-solid fa-trash"></i>
+                    <% end %>
+
+
+
+<!-- Modal -->
+                  <div class="modal fade" id="petModal" tabindex="-1" aria-labelledby="petModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title text-center" id="petModalLabel">Are you sure?</h5>
+                          </div>
+                          <div class="modal-body">
+                            <strong><%= current_user.first_name %></strong> you're about to delete this service
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn rounded-pill btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <%= link_to pet, data: { turbo_method: :delete }, class: 'px-3', style: 'color: #FD8522; font-size: 24px;'  do %>
+                              <span class="btn rounded-pill btn-warning text-white">Delete</span>
+                            <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <!-- Modal -->
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             </div>
           </div>
