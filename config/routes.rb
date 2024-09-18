@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   get "bookings", to: "bookings#index", as: :bookings
   get 'landing', to: 'services#landing'
   resources :bookings, only: [] do
+    resources :messages, only: [:create]
     resources :activities
   end
   resources :pets
+  get 'conversation/:id', to: 'conversations#show', as: :conversation
 end

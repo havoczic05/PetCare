@@ -4,6 +4,8 @@ class ServicesController < ApplicationController
   def index
     @services = Service.where(user: current_user)
     @bookings = @services.map(&:bookings).flatten
+    ## Get users
+    @users = User.all
   end
 
   def landing

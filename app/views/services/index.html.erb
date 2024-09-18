@@ -72,6 +72,11 @@
                   <%= button_to 'Confirm Booking', accept_booking_path(booking), method: :patch, class: 'btn btn-success rounded-pill px-4 py-2 text-white' %>
                 </div>
               <% end %>
+              <div>
+              <% if current_user != @user && booking.status == true %>
+                <%= link_to "Chat with #{booking.pet.user.first_name}", conversation_path(booking.pet.user.id, booking_id: booking.id), class: "btn btn-warning text-white" %>
+              <% end %>
+              </div>
             </div>
           </div>
         </div>

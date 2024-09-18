@@ -1,0 +1,7 @@
+<div data-controller="reset-form-chat">
+  <%= simple_form_for([@booking, @message], remote: true, html: { class: "chat-form" }) do |f| %>
+    <%= f.input :content, input_html: { data: { target: "form.content" }, class: "form-control mb-2", autofocus: true } %>
+    <%= hidden_field_tag :conversation_id, params[:id] %>
+    <%= f.submit 'Send', id: 'submit_button', data: { target: "form.submit" }, class: "btn btn-primary" %>
+  <% end %>
+</div>

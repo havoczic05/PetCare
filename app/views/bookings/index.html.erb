@@ -24,6 +24,11 @@
                   <%= booking.status ? 'CONFIRMED' : 'PENDING' %>
                 </strong>
               </p>
+              <div>
+              <% if current_user != @user && booking.status == true %>
+                <%= link_to "Chat with #{booking.service.user.first_name}", conversation_path(booking.pet.user.id, booking_id: booking.id), class: "btn btn-warning text-white" %>
+              <% end %>
+              </div>
             </div>
           </div>
         </div>
