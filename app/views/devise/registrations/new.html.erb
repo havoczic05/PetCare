@@ -1,17 +1,21 @@
 <div class="bg-white">
   <div class="container p-4">
     <div class="row g-0 justify-content-center align-items-stretch">
-      <div class="col-md-5 d-flex flex-column rounded shadow bg-light p-4">
+      <div class="col-sm-6 col-md-6 col-lg-6 d-flex flex-column rounded shadow bg-light p-4">
         <h2 class="text-center mt-1 p-1">Sign up</h2>
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { data: { turbo: "false" } }) do |f| %>
         <%= f.error_notification %>
-          <div class="form-inputs py-1 mx-5">
-            <%= f.input :first_name,
-                        label: "Enter your first name",
-                        input_html: { autocomplete: "given-name", style: 'font-size: 14px;' } %>
-            <%= f.input :last_name,
-                        label: "Enter your last name",
-                        input_html: { autocomplete: "family-name", style: 'font-size: 14px;' } %>
+          <div class="form-inputs py-1 mx-md-5">
+            <div class="row">
+              <%= f.input :first_name,
+                          label: "Enter your first name",
+                          wrapper_html: { class: 'col-md-6' },
+                          input_html: { autocomplete: "given-name", class: "fs-7" } %>
+              <%= f.input :last_name,
+                          label: "Enter your last name",
+                          wrapper_html: { class: 'col-md-6' },
+                          input_html: { autocomplete: "family-name", class: "fs-7" } %>
+            </div>
             <%= f.input :photo, required: true, as: :file, input_html: { style: 'font-size: 14px;' } %>
             <%= f.input :phone_number,
                         input_html: { autocomplete: "phone_number", style: 'font-size: 14px;' } %>
@@ -51,7 +55,7 @@
           </div>
         <% end %>
       </div>
-      <div class="col-md-5 d-flex rounded shadow p-4" style="
+      <div class="col-sm-4 col-md-6 col-lg-6 d-flex rounded shadow p-4" style="
         background-image: url('https://i.pinimg.com/564x/c6/28/b0/c628b0a1f142ead4ca8c93292c5e10b6.jpg');
         background-size: cover;
         background-position: center;">
