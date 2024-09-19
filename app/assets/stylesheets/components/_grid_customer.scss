@@ -1,0 +1,11 @@
+.container-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 30px;
+}
+
+@media (max-width: 992px) {
+  .container-section {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
