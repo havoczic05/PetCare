@@ -88,7 +88,10 @@
 
   <%# LINK_TO CHAT %>
   <% if current_user != @user && booking.status == "confirmed" %>
-    <div class="px-3 pb-3 d-flex justify-content-end" data-controller="tooltip">
+    <div class="px-3 pb-3 d-flex justify-content-end gap-3" data-controller="tooltip">
+      <%= link_to booking_activities_path(booking), class: 'rounded-circle px-2 py-1 text-white bg-secondary bg-opacity-75 fs-5', data: { action: "click->tooltip#hiddenTooltip", tooltip_target: "tooltip", bs_toggle: "tooltip", bs_title: "View pet's calendar"} do %>
+          <i class="fa-regular fa-calendar-days"></i>
+        <% end %>
       <%= link_to conversation_path(booking.pet.user.id, booking_id: booking.id), class: "rounded-circle px-2 py-1 text-white bg-orange bg-opacity-75 fs-5", data: { bs_toggle: "tooltip", bs_title: "Chat with #{booking.pet.user.first_name}" }  do %>
         <i class="fa-regular fa-comments"></i>
       <% end %>
