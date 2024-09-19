@@ -7,7 +7,7 @@
       {name: "Bookings", route: "/bookings"}
       ] %>
     <div class="d-flex justify-content-between w-100">
-      <% active_class = current_page?("/landing") ? 'text-orange' : '' %>
+      <% active_class = current_page?("/landing") ? 'text-warning' : '' %>
       <%= link_to "/", class: "navbar-brand #{active_class}", style: "width: 150px" do %>
         <%= render "shared/logo"  %>
       <% end %>
@@ -39,7 +39,7 @@
         </ul>
       <% else %>
         <div>
-          <%= link_to "Login", new_user_session_path, class: "btn btn-orange text-white" %>
+          <%= link_to "Login", new_user_session_path, class: "btn btn-warning text-white" %>
         </div>
       <% end %>
     </div>

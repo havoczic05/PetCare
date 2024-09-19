@@ -4,12 +4,12 @@
   .icon-box {
     width: 110px;
     height: 110px;
-    @extend .bg-orange.bg-opacity-25.rounded-circle.d-flex.justify-content-center.align-items-center;
+    @extend .bg-warning.bg-opacity-25.rounded-circle.d-flex.justify-content-center.align-items-center;
 
     &__context {
       width: 80px;
       height: 80px;
-      @extend .bg-orange.bg-opacity-75.text-white.rounded-circle.d-flex.justify-content-center.align-items-center.fs-2;
+      @extend .bg-warning.bg-opacity-75.text-white.rounded-circle.d-flex.justify-content-center.align-items-center.fs-2;
     }
   }
 }

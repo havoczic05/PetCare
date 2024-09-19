@@ -2,14 +2,12 @@ class ConversationsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-
     @receiver = User.find(params[:id])
     @booking = Booking.find(params[:booking_id])
 
     @current_user = current_user
     @pet_owner = @booking.pet.user
     @pet_sitter = @booking.service.user
-
 
     if current_user == @pet_owner
       @receiver = @pet_sitter

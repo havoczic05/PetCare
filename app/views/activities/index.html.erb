@@ -18,7 +18,7 @@
             <% end %>
           </tr>
 
-          <tr class="<%= index.even? ? 'bg-orange' : '' %>" style="--column-count: <%= dates_row.length %>;">
+          <tr class="<%= index.even? ? 'bg-warning' : '' %>" style="--column-count: <%= dates_row.length %>;">
             <% dates_row.each do |date| %>
               <td>
                 <% activities_for_day = @activities[date] || [] %>
