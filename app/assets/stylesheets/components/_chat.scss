@@ -38,23 +38,29 @@
 
 
 .chat-message-sent {
-  width: 120px;
+  color: white;
+  max-width: 45%;
+  padding: 5px 10px;
   align-items: flex-end;
-  background-color: #aedfed; /* Sent messages color */
+  background-color: #8069FF;
   margin-left: auto;
-  padding: 1%; /* right line */
-  border: 2px solid #cec9c5; /* Color y grosor del borde */
-  border-radius: 12px; /* Esquinas redondeadas (opcional) */
+  border-radius: 12px;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .chat-message-receiver {
-  width: 90px;
-  align-items: flex-start;
-  background-color: #e2ecec; /* Sent messages color */
-  margin-left: auto; /* right line */
-
-
+  color: white;
+  max-width: 45%;
+  padding: 5px 10px;
+  background-color: #9E9EFF;
+  border-radius: 12px;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
+
 
 
 .chat-message-body {
