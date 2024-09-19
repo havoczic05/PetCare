@@ -81,7 +81,8 @@
     <% if current_user != user && booking.status == "confirmed" %>
       <%= link_to "Chat with #{booking.pet.user.first_name}",
       conversation_path(booking.pet.user.id, booking_id: booking.id),
-      class: "btn btn-warning text-white" %>
+      class: "btn text-white",
+      style: "background-color: #fd8522"%>
     <% end %>
   </div>
 </div>
