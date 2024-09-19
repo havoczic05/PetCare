@@ -1,9 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import "bootstrap";
-// import {Tooltip} from "bootstrap";
-
 export default class extends Controller {
-  // static targets = ["tooltip", "tooltip2", "tooltip3"];
   static targets = ["tooltip"]
 
   connect() {
