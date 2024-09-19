@@ -1,7 +1,7 @@
+<%= turbo_stream_from dom_id(@booking) %>
 <div class="row shadow border justify-content-center mb-4 mx-auto " style="max-width: 800px; ">
 
-    <%= turbo_stream_from dom_id(@booking) %>
-
+    <%# TITLE CONVERSATION %>
     <div class="border p-3 text-center text-white" style="background-color: #fd8522;">
       <h3 class="my-2">
         <%= cl_image_tag @receiver.photo.key, class: "avatar", alt: "dropdown menu", crop: :fill, style: "object-fit: cover; height: 40px;" %>
@@ -9,6 +9,7 @@
       </h3>
     </div>
 
+    <%# CHAT %>
     <div class=" border p-3">
       <%= turbo_frame_tag "messages_#{@booking.id}" do %>
         <% @messages.order(created_at: :asc).each do |message| %>
@@ -34,6 +35,10 @@
         <% end %>
       <% end %>
 
+    </div>
+
+    <%# FORM %>
+    <div>
       <%= turbo_frame_tag "message_form" do %>
         <%= simple_form_for([@booking, @message], remote: true, html: { data: { controller:"reset-form-chat" , action:"turbo:submit-end->reset-form-chat#reset" }, class: "chat-form" }) do |f| %>
           <%= f.input :content, label: false, input_html: { data: { target: "form.content" }, class: "form-control lg mb-2", style: 'font-size: 14px;', autofocus: true, placeholder: "Type your message here..." } %>
@@ -41,5 +46,4 @@
         <% end %>
       <% end %>
     </div>
-
 </div>
