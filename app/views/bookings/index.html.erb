@@ -1,11 +1,11 @@
 <div class="bg-white">
   <div class="container pb-4">
     <h1 class="my-4">Booked services for your <span class="fw-bold text-orange">Pets</span></h1>
-    <div class="row">
+    <div class="container-section">
       <% @bookings.reverse.each do |booking| %>
-        <div class="col-lg-6">
+        <%# <div class="col-lg-6"> %>
           <%= render 'bookings/booking_card', booking: booking %>
-        </div>
+        <%# </div> %>
       <% end %>
     </div>
   </div>
