@@ -1,62 +1,75 @@
 
 <div class="show-container mx-4 mt-2 d-flex flex-column gap-5">
-  <div class="row shadow-custom rounded-custom">
-    <div class="col-lg-6 p-3 d-flex justify-content-center align-items-start">
-      <%= cl_image_tag @service.photo.key, crop: :fill, alt: "Service Image", class: "rounded-4", style: "width: 80%; height: auto; max-height: 250px; object-fit: cover;" %>
-    </div>
-
-    <div class="col-lg-6 py-3 px-2 d-flex flex-column justify-content-between details-section">
-      <header>
-        <h2 class="fs-3 text-center mb-2 fw-bold service-title"><%= @service.user.first_name %>'s Pet Sitting Service</h2>
-      </header>
-
-      <section class="d-flex justify-content-center align-items-center mb-2 user-info">
-        <div class="d-flex align-items-center justify-content-center mx-2">
-          <%= cl_image_tag @service.user.photo.key, class: "rounded-circle me-1", width: "30px", height: "30px" %>
-          <p class="fs-7 m-0 user-name text-center"><%= @service.user.first_name %> <%= @service.user.last_name %></p>
-        </div>
-        <div class="d-flex align-items-center justify-content-center mx-2 rating-info">
-          <span class=" fs-7 me-1 fw-bold text-center">Rating:</span>
-          <span class="rating fs-7 text-center">4.8</span>
-        </div>
-      </section>
-
-      <section class="text-center mb-4">
-        <span class="badge-custom ">Top 10 Rated</span>
-      </section>
-
-      <footer class="text-center d-flex justify-content-center align-items-center mt-3">
-        <h4 class="m-0 fw-bold price">
-          <%= number_to_currency(@service.price) %>
-          <span class="fs-6 text-muted">/day</span>
-          </h4>
-
-        <% unless @service.user == current_user %>
-          <%= link_to 'Book Now', new_service_booking_path(@service), class: 'btn btn-warning btn-sm px-3 text-white book-btn', style: 'margin-left: 10px;' %>
-        <% end %>
-      </footer>
-    </div>
+  <div class="row shadow-custom w-75">
+  <!-- Imagen a la izquierda -->
+  <div class="col-lg-8 d-flex justify-content-center align-items-start">
+    <%= cl_image_tag @service.photo.key, crop: :fill, alt: "Service Image", class: "rounded-4 img-fluid w-100", style: "max-height: 300px; object-fit: cover;" %>
   </div>
-  <div class="container">
-    <div class="row justify-content-md-center gap-4">
 
-      <section class="col-3 detail-info pe-5 bg-light">
-        <h5 class="fw-bold section-title"><i class="fa-solid fa-circle-up me-1"></i>House Info</h5>
-        <ul class="list-unstyled description" style="font-size: .8rem;">
-          <li><i class="fa-solid fa-location-dot icon-custom"></i><strong>Address:</strong> <%= @service.address %></li>
-          <li><i class="fa-solid fa-book icon-custom"></i><strong>Description:</strong> <%= @service.house_description %></li>
-        </ul>
-      </section>
+  <!-- Detalles a la derecha -->
+  <div class="col-lg-4 py-3 px-2 d-flex flex-column justify-content-between details-section">
+    <header>
+      <h2 class="fs-3 text-center mb-2 fw-bold service-title"><%= @service.user.first_name %>'s Pet Sitting Service</h2>
+    </header>
 
-      <section class="col-3 detail-info pe-5 bg-light">
-        <h5 class="fw-bold section-title"><i class="fa-solid fa-circle-up me-1"></i>Service Description</h5>
-        <p class="description" style="font-size: .8rem;"><%= @service.description %></p>
-      </section>
+    <!-- Información del usuario y calificación -->
+    <section class="d-flex justify-content-center align-items-center mb-2 user-info">
+      <div class="d-flex align-items-center justify-content-center mx-2">
+        <%= cl_image_tag @service.user.photo.key, class: "rounded-circle me-1", width: "30px", height: "30px" %>
+        <p class="fs-7 m-0 user-name text-center"><%= @service.user.first_name %> <%= @service.user.last_name %></p>
+      </div>
+      <div class="d-flex align-items-center justify-content-center mx-2 rating-info">
+        <span class=" fs-7 me-1 fw-bold text-center">Rating:</span>
+        <span class="rating fs-7 text-center">4.8</span>
+      </div>
+    </section>
 
-      <section class="col-3 detail-info pe-5 bg-light">
-        <h5 class="fw-bold section-title"><i class="fa-solid fa-circle-up me-1"></i>Service Restrictions</h5>
-        <p class="description" style="font-size: .8rem;"><%= @service.restrictions %></p>
-      </section>
+    <!-- Insignia "Top 10 Rated" -->
+    <section class="text-center mb-4">
+      <span class="badge-custom">Top 10 Rated</span>
+    </section>
+
+    <!-- Precio y botón centrados -->
+    <footer class="text-center d-flex flex-column justify-content-center align-items-center mt-3">
+      <h4 class="m-0 fw-bold price">
+        <%= number_to_currency(@service.price) %>
+        <span class="fs-6 text-muted">/day</span>
+      </h4>
+      <% unless @service.user == current_user %>
+        <%= link_to 'Book Now', new_service_booking_path(@service), class: 'btn btn-warning btn-sm px-3 text-white book-btn mt-3' %>
+      <% end %>
+    </footer>
+  </div>
+</div>
+
+<!-- Sección de información debajo de la tarjeta -->
+<div class="container mt-4">
+  <div class="row justify-content-center gap-4">
+
+    <!-- House Info -->
+    <section class="col-lg-3 col-md-6 detail-info bg-light rounded-3 p-3">
+      <h5 class="fw-bold section-title mb-4 text-center"><i class="fa-solid fa-circle-up me-1"></i>House Info</h5>
+      <ul class="list-unstyled description" style="font-size: .8rem;">
+        <li><i class="fa-solid fa-location-dot icon-custom"></i><strong> Address:</strong> <%= @service.address %></li><br>
+        <li><i class="fa-solid fa-book icon-custom"></i><strong> Description:</strong> <%= @service.house_description %></li>
+      </ul>
+    </section>
+
+    <!-- Service Description -->
+    <section class="col-lg-3 col-md-6 detail-info bg-light rounded-3 p-3">
+      <h5 class="fw-bold section-title mb-4 text-center"><i class="fa-solid fa-circle-up me-1"></i>Service Description</h5>
+      <p class="description" style="font-size: .8rem;"><%= @service.description %></p>
+    </section>
+
+    <!-- Service Restrictions -->
+    <section class="col-lg-3 col-md-6 detail-info bg-light rounded-3 p-3">
+      <h5 class="fw-bold section-title mb-4 text-center"><i class="fa-solid fa-circle-up me-1"></i>Service Restrictions</h5>
+      <p class="description" style="font-size: .8rem;"><%= @service.restrictions %></p>
+    </section>
+
+
+
+
         <div class="col-10 px-4">
           <div style="height: 400px;" class="w-full rounded-4"
             data-controller="map"

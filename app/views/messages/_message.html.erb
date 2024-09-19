@@ -1,10 +1,23 @@
-<div class="d-flex justify-content-end">
-  <div class="chat-message chat-message-sent">
-    <p class="mb-0">
-      <%= message.content %>
-      <br>
-    </p>
-  </div>
-</div>
+          <% if message.sender == @current_user %>
+            <div class="d-flex mb-2 align-items-start">
+              <div class="chat-message-sent me-2">
+                <p class="p-0 m-0">
+                  <%= message.content %>
+                </p>
+              </div>
+              <%= cl_image_tag @current_user.photo.key, class: "avatar", alt: "#{message.sender.first_name}'s profile picture", style: "object-fit: cover; height: 40px; width: 40px; margin-right: 10px;" %>
+            </div>
+          <% else %>
+            <div class="d-flex mb-2 align-items-start">
+              <div class="chat-message-sent me-2">
+                <p class="p-0 m-0">
+                  <%= message.content %>
+                </p>
+              </div>
+              <%= cl_image_tag message.sender.photo.key, class: "avatar", alt: "#{message.sender.first_name}'s profile picture", style: "object-fit: cover; height: 40px; width: 40px; margin-right: 10px;" %>
+            </div>
+          <% end %>
+
+
 <%# Scrool del mouse abajo %>
 <%# mitad en cada div %>

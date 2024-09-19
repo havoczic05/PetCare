@@ -1,5 +1,5 @@
 <div class="col-md-6">
-  <div class="card-container">
+  <div class="card-container h-100">
     <div class="row g-0 bg-warning bg-opacity-25 rounded-top-4">
       <% if pet.photo && pet.photo.key.present? %>
         <div class="col-md-4 rounded-start-4 d-none d-md-block" style="
@@ -15,7 +15,7 @@
       <div class="col-md-8">
         <div class="card-body d-flex flex-column gap-3">
           <div class="d-flex flex-wrap justify-content-between align-items-center">
-            <h4 class="card-title m-0 d-none d-md-block"><%= pet.name %></h4>
+            <h4 class="card-title m-0 d-none d-md-block flex-grow-1 text-center"><%= pet.name %></h4>
             <div class="d-flex gap-2 d-md-none">
               <% if pet.photo && pet.photo.key.present? %>
                 <%= cl_image_tag pet.photo.key, class: "card-box__thumbnail", alt: "#{pet.name}", crop: :fill %>
@@ -26,7 +26,7 @@
               <%= link_to edit_pet_path(pet), class: 'card-box__btn' do %>
                 <i class="fa-solid fa-pen-to-square"></i>
               <% end %>
-              <%= link_to pet, data: { turbo_method: :delete, bs_toggle: "modal", bs_target: "#petModal" }, class: 'px-3', style: 'color: #FD8522; font-size: 24px;'  do %>
+              <%= link_to pet, data: { turbo_method: :delete, bs_toggle: "modal", bs_target: "#petModal" }, class: 'px-3 text-orange', style: 'font-size: 20px;'  do %>
                 <i class="fa-solid fa-trash"></i>
               <% end %>
 
@@ -69,7 +69,7 @@
             </div>
           </div>
 
-          <div class="d-flex flex-wrap gap-3">
+          <div class="d-flex flex-wrap gap-3 justify-content-center">
             <div class="card-box">
               <p class="card-box__content"><%= pet.age %> years</p>
               <p class="card-box__title">Age</p>
