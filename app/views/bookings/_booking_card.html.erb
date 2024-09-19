@@ -1,0 +1,85 @@
+<div class="card-custom card bg-white shadow-lg rounded-4 my-3">
+  <div class="border-bottom p-3 d-flex flex-column flex-sm-row justify-content-between align-sm-items-center">
+    <p class="m-0 text-orange fs-7 fw-medium">
+      <%= booking.created_at.strftime("%B %d, %Y") %>
+    </p>
+     <p class="m-0">
+      <span class="fw-medium">The service is </span>
+      <%
+        def getClass(status)
+          return "text-warning" if status == "pending"
+
+          status == "confirmed" ? 'text-success' : 'text-danger'
+        end
+      %>
+      <strong class="<%= getClass(booking.status) %>">
+        <%= booking.status.upcase %>
+      </strong>
+    </p>
+  </div>
+  <div class="card-body bg-white">
+    <div class="row g-3">
+      <div class="col-4 d-flex justify-content-start">
+        <%= cl_image_tag booking.service.photo.key, class: "w-100", style: "object-fit: contain;", crop: :fill %>
+      </div>
+      <div class="col-8 d-flex flex-column justify-content-center gap-3">
+        <p class="m-0">
+          <span class="fw-bold text-secondary">
+            <%= booking.service.user.first_name %>
+            <%= booking.service.user.last_name %>
+          </span>
+          is taking care of <%= booking.pet.name %>
+        </p>
+
+        <p class="m-0">
+          <span class="fw-bold fs-7 text-secondary">Price per day:</span>
+          $<%= booking.service.price %></p>
+
+        <p class="m-0">
+          <span class="fw-bold fs-7 text-secondary">
+            <i class="fa-solid fa-phone"></i>&nbsp;
+            <%= booking.service.user.first_name %>'s phone:
+          </span>
+          <%= booking.service.user.phone_number %>
+        </p>
+
+      </div>
+      <div class="col-12 d-flex flex-column justify-content-center gap-3">
+        <p class="m-0 lh-base">"<%= booking.service.description %>"</p>
+        <p class="m-0">
+          <span class="fw-bold fs-7 text-secondary">
+            <i class="fa-regular fa-calendar"></i>
+          &nbsp; From:</span>
+          <%= booking.start_date.strftime("%B %d, %Y") %>
+          <span class="fw-bold fs-7 text-secondary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To:</span>
+          <%= booking.end_date.strftime("%B %d, %Y") %>
+        </p>
+        <p class="m-0 lh-base">
+          <span class="fw-bold fs-7 text-secondary d-block pb-1">
+            <i class="fa-solid fa-location-dot"></i>&nbsp;
+            <%= booking.service.user.first_name %>'s address:
+          </span>
+          <%= booking.service.address %></p>
+      </div>
+    </div>
+  </div>
+  <% if booking.status == 'confirmed' %>
+    <div class="d-flex flex-column flex-sm-row justify-content-end gap-3 border-top p-3">
+      <div class="d-flex gap-3" data-controller="tooltip">
+        <% if current_user != @user %>
+          <%# LINK_TO CHAT %>
+          <%= link_to conversation_path(booking.pet.user.id,
+          booking_id: booking.id), class: "rounded-circle px-2 py-1 text-white bg-orange bg-opacity-75 fs-5", data: { action: "click->tooltip#hiddenTooltip", tooltip_target: "tooltip", bs_toggle: "tooltip", bs_title: "Chat with #{booking.service.user.first_name}" }  do %>
+            <i class="fa-regular fa-comments"></i>
+          <% end %>
+        <% end %>
+        <%= link_to booking_activities_path(booking), class: 'rounded-circle px-2 py-1 text-white bg-secondary bg-opacity-75 fs-5', data: { action: "click->tooltip#hiddenTooltip", tooltip_target: "tooltip", bs_toggle: "tooltip", bs_title: "View pet's calendar"} do %>
+          <i class="fa-regular fa-calendar-days"></i>
+        <% end %>
+        <%= link_to new_booking_review_path(booking), class: 'rounded-circle px-2 py-1 text-white bg-primary bg-opacity-75 fs-5', data: { action: "click->tooltip#hiddenTooltip", tooltip_target: "tooltip", bs_toggle: "tooltip", bs_title: "Create a review for this service" } do %>
+          <i class="fa-solid fa-paw"></i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
