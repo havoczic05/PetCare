@@ -1,4 +1,5 @@
 <div data-controller="reset-form-chat">
+<h2>ESTE NO ES NECESARiO</h2>
   <%= simple_form_for([@booking, @message], remote: true, html: { class: "chat-form" }) do |f| %>
     <%= f.input :content, input_html: { data: { target: "form.content" }, class: "form-control mb-2", autofocus: true } %>
     <%= hidden_field_tag :conversation_id, params[:id] %>
