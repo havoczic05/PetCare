@@ -1,56 +1,12 @@
 <div class="bg-white">
   <div class="container pb-4">
-    <h1 class="my-4">Booked services for your <span class="fw-bold" style= 'color: #FD8522'>Pets</span></h1>
-
-    <% @bookings.reverse.each do |booking| %>
-      <div class="card-custom card bg-white shadow-lg my-3">
-        <div class="card card-body" style="background-color: white;">
-          <p class="m-0"><strong style="color: #FD8522"><%= booking.created_at.strftime("%d de %B del %Y") %></strong></p>
+    <h1 class="my-4">Booked services for your <span class="fw-bold text-orange">Pets</span></h1>
+    <div class="row">
+      <% @bookings.reverse.each do |booking| %>
+        <div class="col-lg-6">
+          <%= render 'bookings/booking_card', booking: booking %>
         </div>
-        <div class="card card-body" style="background-color: white;">
-          <div class="row d-flex justify-content-between align-items-center">
-            <div class="col-3 d-flex justify-content-center align-items-center">
-              <%= cl_image_tag booking.service.photo.key, height: 200, width: 200, crop: :fill %>
-            </div>
-            <div class="col-9 d-flex flex-column justify-content-center">
-              <p><strong><i class="fa-regular fa-calendar"></i>&nbsp; From:</strong> <%= booking.start_date.strftime("%d de %B del %Y") %><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To:</strong> <%= booking.end_date.strftime("%d de %B del %Y") %></p>
-              <p><%= booking.service.user.first_name %> <%= booking.service.user.last_name %> is taking care of <%= booking.pet.name %></p>
-              <p>"<%= booking.service.description %>"</p>
-              <p><strong>Price per day:</strong> $<%= booking.service.price %></p>
-              <p><strong><i class="fa-solid fa-location-dot"></i>&nbsp; <%= booking.service.user.first_name %>'s address: </strong><%= booking.service.address %></p>
-              <p><strong><i class="fa-solid fa-phone"></i>&nbsp; <%= booking.service.user.first_name %>'s phone number: </strong><%= booking.service.user.phone_number %></p>
-              <p><strong>Your service </strong>
-                <% if booking.status == 'confirmed' %>
-                  <strong>is</strong><strong class="text-success"> CONFIRMED</strong>
-                <% elsif booking.status == 'pending' %>
-                  <strong>is</strong><strong class="text-warning"> PENDING</strong>
-                <% elsif booking.status == 'rejected' %>
-                  <strong>was</strong><strong class="text-danger"> REJECTED</strong>
-                <% end %>
-              </p>
-
-              <% if booking.status == 'confirmed' %>
-
-                <div class="d-flex gap-3">
-                  <% if current_user != @user%>
-                    <%= link_to "Chat with #{booking.service.user.first_name}",
-                    conversation_path(booking.pet.user.id,
-                    booking_id: booking.id),
-                    class: "btn btn-warning text-white",
-                    style: "background-color: #FD8522;" %>
-                  <% end %>
-                  <%= link_to booking_activities_path(booking), class: 'btn p-2', style: 'background-color: #FD8522; color: white; width: auto; display: inline-block; padding: 5px 10px;' do %>
-                    View pet's calendar
-                  <% end %>
-                  <%= link_to new_booking_review_path(booking), class: 'btn p-2', style: 'background-color: #FD8522; color: white; width: auto; display: inline-block; padding: 5px 10px;' do %>
-                    Create a review for this service
-                  <% end %>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

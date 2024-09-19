@@ -26,7 +26,7 @@
     background-color: #ffffff;
   }
   .dropdown-item.active, .dropdown-item:active {
-    @extend .text-orange.bg-orange.bg-opacity-25;
+    @extend .text-warning.bg-warning.bg-opacity-25;
   }
 }
 .cursor-pointer {
