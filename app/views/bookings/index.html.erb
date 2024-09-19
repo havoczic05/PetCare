@@ -3,9 +3,7 @@
     <h1 class="my-4">Booked services for your <span class="fw-bold text-orange">Pets</span></h1>
     <div class="container-section">
       <% @bookings.reverse.each do |booking| %>
-        <%# <div class="col-lg-6"> %>
-          <%= render 'bookings/booking_card', booking: booking %>
-        <%# </div> %>
+        <%= render 'bookings/booking_card', booking: booking %>
       <% end %>
     </div>
   </div>
