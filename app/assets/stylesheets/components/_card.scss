@@ -14,13 +14,13 @@
       @extend .rounded-4.py-2.px-3.text-center.border-0.bg-light;
     }
     &__title {
-      @extend .m-0.text-orange.fs-7;
+      @extend .m-0.text-warning.fs-7;
     }
     &__content {
       @extend .m-0.fw-medium.pb-1;
     }
     &__btn {
-      @extend .text-orange.fs-5.border-0.bg-transparent;
+      @extend .text-warning.fs-5.border-0.bg-transparent;
 
       &:hover {
         @extend .text-opacity-75;

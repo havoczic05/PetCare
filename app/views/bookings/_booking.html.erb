@@ -1,13 +1,10 @@
 <div class="card-custom card bg-white shadow-lg mb-3 rounded-4 p-0" id="booking_<%= booking.id %>">
   <div class="border-bottom p-3 d-flex flex-column flex-sm-row justify-content-between align-sm-items-center">
-
-    <p class="m-0">
-      <strong style="color: #FD8522">
-        <%= booking.created_at.strftime("%B %d, %Y") %>
-      </strong>
+    <p class="m-0 text-orange fs-7 fw-medium">
+      <%= booking.created_at.strftime("%B %d, %Y") %>
     </p>
     <p class="m-0">
-      <strong>The service is </strong>
+      <span class="fw-medium">The service is </span>
       <%
         def getClass(status)
           return "text-warning" if status == "pending"
@@ -27,15 +24,17 @@
       </div>
       <div class="col-9 d-flex flex-column justify-content-center gap-2">
         <p class="m-0">
-          <strong><i class="fa-regular fa-user"></i>&nbsp; Hired by:</strong>
+          <span class="fw-bold fs-7 text-secondary">
+            <i class="fa-regular fa-user"></i>
+            &nbsp; Hired by:</span>
           <%= booking.pet.user.first_name %> <%= booking.pet.user.last_name %></p>
         <p class="m-0">
-          <strong>
+          <span class="fw-bold fs-7 text-secondary">
             <i class="fa-solid fa-paw"></i>&nbsp; To take care of:
-          </strong>
+          </span>
           <%= booking.pet.name %> (<%= booking.pet.specie %>)</p>
         <p class="m-0">
-          <strong>Price per day:</strong>
+          <span class="fw-bold fs-7 text-secondary">Price per day:</span>
           $<%= booking.service.price %></p>
 
       </div>
@@ -44,12 +43,21 @@
           "<%= booking.pet.description %>"
         </p>
         <p class="m-0">
-          <strong><i class="fa-regular fa-calendar"></i>&nbsp; From:</strong>
-          <%= booking.start_date.strftime("%B %d, %Y") %><strong >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To:</strong> <%= booking.end_date.strftime("%B %d, %Y") %></p>
+          <span class="fw-bold fs-7 text-secondary">
+            <i class="fa-regular fa-calendar"></i>&nbsp; From:
+          </span>
+          <%= booking.start_date.strftime("%B %d, %Y") %>
+          <span class="fw-bold fs-7 text-secondary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To:</span>
+          <%= booking.end_date.strftime("%B %d, %Y") %>
+        </p>
 
-        <p class="m-0">
-          <strong><i class="fa-solid fa-location-dot"></i>&nbsp; The address where you will provide the service in is: </strong><%= booking.service.address %></p>
-        <p class="m-0">"<%= booking.message %>"</p>
+        <p class="m-0 lh-base">
+          <span class="fw-bold fs-7 text-secondary d-block pb-1">
+            <i class="fa-solid fa-location-dot"></i>&nbsp; The address where you will provide the service in is:
+          </span>
+          <%= booking.service.address %>
+        </p>
+        <p class="m-0 lh-base">"<%= booking.message %>"</p>
       </div>
     </div>
   </div>
@@ -77,12 +85,11 @@
   <% end %>
 
   <%# LINK_TO CHAT %>
-  <div class="p-3">
-    <% if current_user != user && booking.status == "confirmed" %>
-      <%= link_to "Chat with #{booking.pet.user.first_name}",
-      conversation_path(booking.pet.user.id, booking_id: booking.id),
-      class: "btn text-white",
-      style: "background-color: #fd8522"%>
-    <% end %>
-  </div>
+  <% if current_user != user && booking.status == "confirmed" %>
+    <div class="px-3 pb-3 d-flex justify-content-end" data-controller="tooltip">
+      <%= link_to conversation_path(booking.pet.user.id, booking_id: booking.id), class: "rounded-circle px-2 py-1 text-white bg-orange bg-opacity-75 fs-5", data: { bs_toggle: "tooltip", bs_title: "Chat with #{booking.pet.user.first_name}" }  do %>
+        <i class="fa-regular fa-comments"></i>
+      <% end %>
+    </div>
+  <% end %>
 </div>

@@ -42,4 +42,4 @@ $border-radius-xxl:           1rem;
 // Override other variables below!
 
 // Merge the maps
-$theme-colors: map-merge($theme-colors, ( "orange": $orange ));
+$theme-colors: map-merge($theme-colors, ( "orange": $orange-primary ));
