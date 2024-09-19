@@ -1,6 +1,6 @@
 class Pet < ApplicationRecord
   belongs_to :user
-  has_one_attached :photo, presence: true
+  has_one_attached :photo
   has_many :bookings, dependent: :destroy
   validates :name, presence: true, length: { in: 2..20 }
   validates :specie, inclusion: { in: %w[Dog Cat Rodent Bird Reptile Others] }, presence: true

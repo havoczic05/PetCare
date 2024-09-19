@@ -3,11 +3,11 @@
     <div class="text-orange my-3" style="width: 100px">
       <%= render "shared/logo" %>
     </div>
-    <h1><strong>If animals could talk,</strong></h1>
-    <h1><strong>they'd talk about us!</strong></h1>
+    <h1 class="fw-bold "><strong>If animals could talk,</strong></h1>
+    <h1 class="fw-bold"><strong>they'd talk about us!</strong></h1>
     <p class="mt-4 mb-5">Join the largest network of pet sitters in Latin America.</p>
-    <a class="btn btn-dark" href="<%= new_user_registration_path %>">Sign Up</a>
-    <a class="btn btn-secondary ms-2" href="<%= new_user_session_path %>">Login</a>
+    <a class="btn btn-info text-white btn-lg px-5 text-white rounded-pill" href="<%= new_user_registration_path %>">Sign Up</a>
+    <a class="btn btn-warning text-white btn-lg px-5 rounded-pill ms-2" href="<%= new_user_session_path %>">Login</a>
   </div>
 </div>
 
@@ -16,55 +16,64 @@
     <div class="d-flex flex-column gap-5 my-5">
       <div class="text-center d-flex flex-column gap-5">
         <h2 class="m-0">What do you need to be a pet sitter?</h2>
-        <div class="row">
-          <div class="col-6 col-md-3">
+        <div class="row mb-2">
+          <div class="col-6 col-md-3 shadow-sm mx-0">
             <i class="fa-regular fa-id-card" style="font-size: 50px; color: #FD8522;"></i>
-            <h5 class="mt-2"><strong>Be of age</strong></h5>
+            <h5 class="m-3"><strong>Be of age</strong></h5>
             <p>You must be at least 18 years old.</p>
           </div>
 
-          <div class="col-6 col-md-3">
+          <div class="col-6 col-md-3 shadow-sm mx-0">
             <i class="fa-solid fa-house-user" style="font-size: 50px; color: #FD8522;"></i>
-            <h5 class="mt-2"><strong>Photos of your space</strong></h5>
+            <h5 class="m-3"><strong>Photos of your space</strong></h5>
             <p>Take photos of your tidy and spacious space.</p>
           </div>
 
-          <div class="col-6 col-md-3">
+          <div class="col-6 col-md-3 shadow-sm mx-0">
             <i class="fa-regular fa-circle-question" style="font-size: 50px; color: #FD8522;"></i>
-            <h5 class="mt-2"><strong>Contact information</strong></h5>
+            <h5 class="m-3"><strong>Contact information</strong></h5>
             <p>You need an active cell phone where we can communicate.</p>
           </div>
 
-          <div class="col-6 col-md-3">
+          <div class="col-6 col-md-3 shadow-sm mx-0">
             <i class="fa-regular fa-user" style="font-size: 50px; color: #FD8522;"></i>
-            <h5 class="mt-2"><strong>Proof of identity</strong></h5>
+            <h5 class="m-3"><strong>Proof of identity</strong></h5>
             <p>It can be your INE, Passport or driver's license.</p>
           </div>
         </div>
       </div>
 
-      <div class="mx-auto">
-        <div class="row justify-content-around gy-5 g-sm-2">
-          <div class="col-12 col-sm-6 col-md-5">
-            <div class="card-home border rounded shadow-sm">
-              <img src="<%= asset_path('review2.jpg') %>" class="card-img-top" alt="...">
-              <div class="card-body p-4">
-                <p class="card-text text-justify">Being a pet sitter has given me many learnings and also company for both me and my dog. We enjoyed time with the pets and getting to know them as if they were my own for a few days.</p>
-                <p class="text-end"><span class="fw-medium">Andrea</span> - Mexico City</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-md-5">
-            <div class="card-home border rounded shadow-sm">
-              <img src="<%= asset_path('review3.jpg') %>" class="card-img-top" alt="...">
-              <div class="card-body p-4">
-                <p class="card-text text-justify">Finding the perfect caregiver was a breeze. My dog was well-cared for, and I felt confident knowing he was in good hands. Highly recommend <strong style="color: #FD8522">PetCare</strong> for anyone seeking trustworthy pet sitters.</p>
-                <p class="text-end"><span class="fw-medium">Juan</span> - Guadalajara</p>
-              </div>
-            </div>
-          </div>
+       <div class="container my-5">
+    <!-- Primera fila: Imagen a la izquierda, texto a la derecha -->
+    <div class="row align-items-center mb-4">
+      <div class="col-12 col-md-6">
+        <div class="border rounded custom-card">
+          <img src="<%= asset_path('review2.jpg') %>" class="img-fluid" alt="Imagen 1">
         </div>
       </div>
+      <div class="col-12 col-md-6">
+        <p class="custom-text">
+          Being a pet sitter has given me many learnings and also company for both me and my dog. We enjoyed time with the pets and getting to know them as if they were my own for a few days.
+        </p>
+        <p class="text-end"><span class="fw-medium">Andrea</span> - Mexico City</p>
+      </div>
+    </div>
+
+    <!-- Segunda fila: Texto a la izquierda, imagen a la derecha -->
+    <div class="row align-items-center">
+      <div class="col-12 col-md-6 order-md-2">
+        <div class="border rounded custom-card">
+          <img src="<%= asset_path('review3.jpg') %>" class="img-fluid" alt="Imagen 2">
+        </div>
+      </div>
+      <div class="col-12 col-md-6 order-md-1">
+        <p class="custom-text">
+          Finding the perfect caregiver was a breeze. My dog was well-cared for, and I felt confident knowing he was in good hands. Highly recommend <strong style="color: #FD8522">PetCare</strong> for anyone seeking trustworthy pet sitters.
+        </p>
+        <p class="text-end"><span class="fw-medium">Juan</span> - Guadalajara</p>
+      </div>
+    </div>
+  </div>
 
       <div class="text-center d-flex flex-column gap-5">
         <h2 class="m-0">How does it work?</h2>
