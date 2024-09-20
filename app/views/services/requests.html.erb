@@ -4,9 +4,9 @@
     <nav>
 			<div class="nav nav-tabs nav-tabs-custom mb-3" id="nav-tab" role="tablist">
         <% list = [
-          {name: "Pending", slug: "pending", count: @bookings_pending.length },
-          {name: "Confirmed", slug: "confirmed", count: @bookings_confirmed.length },
-          {name: "Rejected", slug: "rejected", count: @bookings_reject.length }
+          {name: "Pending", slug: "pending"},
+          {name: "Confirmed", slug: "confirmed"},
+          {name: "Rejected", slug: "rejected" }
           ] %>
 
         <% list.each_with_index do |item, index| %>
@@ -20,7 +20,7 @@
               type="button" role="tab"
               aria-controls="nav-<%= item[:slug] %>"
               aria-selected="<%= aria_select %>">
-                <%= item[:name] %> (<span class="counter"><%= item[:count] %></span>)</button>
+                <%= item[:name] %></button>
         <% end %>
 
 			</div>
