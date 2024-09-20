@@ -8,9 +8,7 @@
 <% status = @booking.status %>
 
 <%= turbo_stream.append "#{status}-bookings" do %>
-  <div class="row g-3">
-    <div class="col-lg-6">
-      <%= render partial: "bookings/booking", locals: { booking: @booking } %>
-    </div>
+  <div class="container-section gap-3">
+    <%= render partial: "bookings/booking", locals: { booking: @booking } %>
   <div>
 <% end %>
